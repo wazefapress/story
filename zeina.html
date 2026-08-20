@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>مغامرة النحلة زينة - قصة واقعية تفاعلية</title>
+  
+  <!-- Bootstrap 5 RTL CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.rtl.min.css">
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+  <!-- Google Fonts: Tajawal -->
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@500;700;900&display=swap" rel="stylesheet">
+
+  <style>
+    html, body {
+      height: 100%;
+      height: 100dvh;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      font-family: 'Tajawal', sans-serif;
+      background: linear-gradient(135deg, #111827 0%, #3f2e00 100%);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .app-header {
+      flex: 0 0 auto;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(5px);
+      border-bottom: 2px solid #e9ecef;
+      z-index: 10;
+    }
+
+    .brand-title {
+      font-size: clamp(1rem, 2vh, 1.25rem);
+      font-weight: 800;
+      color: #b5838d;
+    }
+
+    .app-main {
+      flex: 1 1 auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 8px;
+      overflow: hidden;
+    }
+
+    .story-card {
+      width: 100%;
+      max-width: 850px;
+      height: 100%;
+      max-height: 100%;
+      display: flex;
+      flex-direction: column;
+      border-radius: 20px;
+      border: 3px solid #fff;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+      background: rgba(255, 255, 255, 0.98);
+      overflow: hidden;
+    }
+
+    .card-header-compact {
+      flex: 0 0 auto;
+      padding: 8px 12px;
+      background: rgba(255, 255, 255, 0.9);
+      border-bottom: 1px solid #f0f0f0;
+    }
+
+    .progress {
+      height: 8px;
+      border-radius: 10px;
+    }
+
+    .image-container {
+      flex: 1 1 auto;
+      min-height: 120px;
+      position: relative;
+      overflow: hidden;
+      margin: 8px 12px 0 12px;
+      border-radius: 15px;
+      background: #0b0c10;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: inset 0 0 25px rgba(0,0,0,0.6);
+    }
+
+    .image-container svg {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .content-container {
+      flex: 0 1 auto;
+      padding: 10px 15px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .scene-title {
+      font-size: clamp(1.1rem, 2.2vh, 1.5rem);
+      font-weight: 800;
+      color: #b5838d;
+      margin-bottom: 4px;
+    }
+
+    .scene-text {
+      font-size: clamp(0.9rem, 1.9vh, 1.25rem);
+      line-height: 1.5;
+      color: #374151;
+      margin-bottom: 0;
+      font-weight: 500;
+    }
+
+    .card-footer-compact {
+      flex: 0 0 auto;
+      padding: 8px 15px;
+      background: #f8f9fa;
+      border-top: 1px solid #eee;
+    }
+
+    .control-btn {
+      font-size: clamp(0.85rem, 1.6vh, 1.05rem);
+      border-radius: 50px;
+      padding: 6px 18px;
+    }
+
+    .app-footer {
+      flex: 0 0 auto;
+      background: rgba(255, 255, 255, 0.95);
+      border-top: 1px solid #e9ecef;
+      font-size: 0.85rem;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- TOP HEADER -->
+  <header class="app-header py-2 px-3 shadow-sm">
+    <div class="container-fluid d-flex justify-content-between align-items-center p-0">
+      <div class="brand-title d-flex align-items-center gap-2">
+        <span class="fs-4">🐝</span>
+<span>مغامرة النحلة زينة </span>
+      </div>
+
+      <div class="d-flex align-items-center gap-2">
+     
+        <button id="btnShare" class="btn btn-sm btn-primary rounded-pill px-3 d-flex align-items-center gap-1">
+          <i class="bi bi-share-fill"></i>
+          <span class="d-none d-sm-inline fw-bold">مشاركة</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN STORY VIEWPORT -->
+  <main class="app-main">
+    <div class="card story-card">
+      
+      <div class="card-header-compact">
+        <div class="d-flex justify-content-between align-items-center mb-1">
+          <span id="sceneBadge" class="badge bg-warning text-dark px-3 py-1 rounded-pill">المشهد 1 من 20</span>
+          <span id="progressText" class="small fw-bold text-secondary">5%</span>
+        </div>
+        <div class="progress">
+          <div id="storyProgress" class="progress-bar bg-warning progress-bar-striped progress-bar-animated" style="width: 5%;"></div>
+        </div>
+      </div>
+
+      <!-- Vector Professional Bee Art Container -->
+      <div id="imageContainer" class="image-container"></div>
+
+      <div class="content-container">
+        <h2 id="sceneTitle" class="scene-title">...</h2>
+        <p id="sceneText" class="scene-text">...</p>
+      </div>
+
+      <div class="card-footer-compact d-flex justify-content-between align-items-center gap-2">
+        <button id="btnPrev" class="btn btn-outline-warning text-dark control-btn">
+          <i class="bi bi-arrow-right"></i> السابق
+        </button>
+        <button id="btnRestart" class="btn btn-sm btn-light border text-secondary rounded-circle" style="width: 36px; height: 36px;" title="إعادة البدء">
+          <i class="bi bi-arrow-counterclockwise"></i>
+        </button>
+        <button id="btnNext" class="btn btn-warning text-dark fw-bold control-btn">
+          التالي <i class="bi bi-arrow-left"></i>
+        </button>
+      </div>
+
+    </div>
+  </main>
+
+  <footer class="app-footer py-2 px-3">
+    <div class="container-fluid d-flex justify-content-between align-items-center flex-wrap gap-2 p-0">
+      <div class="text-secondary small">
+        تم التصميم والتطوير بواسطة 
+        <a href="https://me.haythamzeidan.workers.dev/" class="text-decoration-none fw-bold text-warning">هيثم زيدان</a>
+      </div>
+    </div>
+  </footer>
+
+<!-- JavaScript Logic & Professional Bee Engine -->
+<script>
+  const storyData = [
+    { title: "1. قطرة العسل البللورية 🍯", text: "في صباح مشمس وجميل، كانت النحلة النشيطة زينة تطير فوق حقل عباد الشمس، فعثرت على قطرة عسل بللورية سحرية تنير ببريق ذهبي دافئ!" },
+    { title: "2. الاستعداد للرحلة 🎒", text: "تفحصت زينة القطرة بتركيز، ولاحظت أن لمعانها يشير نحو حديقة النجوم المخبأة، فجهزت حقيبتها الصغيرة وانطلقت." },
+    { title: "3. الطيران بين الأزهار 🌸", text: "بدأت زينة رحلتها محلقة بخفة بين الورود المتفتحة والفراشات الملونة، بينما كانت النسائم العليلة تداعب أجنحتها الرقيقة." },
+    { title: "4. صوت نداء حقيقي 🦋", text: "بينما كانت تطير، سمعت زينة صوتاً خافتاً يستعين بها قريباً من إحدى أوراق الشجر العريضة." },
+    { title: "5. لقاء الفراشة العالقة 🌼", text: "اقتربت زينة لتجد فراشة صغيرة علقت أجنحتها بغبار اللقاح الكثيف ولا تستطيع الطيران." },
+    { title: "6. مساعدة الأصدقاء 🤝", text: "بحكمة وسرعة، ساعدت زينة الفراشة بحذر على تنظيف أجنحتها حتى استعادت قدرتها على الطيران بحرية." },
+    { title: "7. هدية الفراشة السحرية ✨", text: "شكرت الفراشة زينة بامتنان شديد، وأهدتها مسحوقاً براقاً من غبار النجوم ليضيء لها عتمة الطرقات المظلمة." },
+    { title: "8. الوصول إلى الجدول الصافي 🌊", text: "تابعت زينة طيرانها حتى وصلت إلى جدول مائي عذب وجميل، وكان عليها عبوره لتكمل طريقها." },
+    { title: "9. عبور الماء بذكاء 🍃", text: "وضعت زينة غبار النجوم على ورقة زنبق ماء فصنعت طوفها الصغير، وعبرت الجدول بسلاسة وأمان تام." },
+    { title: "10. ضفة الحديقة المعلقة 🌿", text: "وصلت زينة إلى الضفة المقابلة المليئة بالأعشاب الطازجة وأخذت استراحة قصيرة مستمتعة بجمال الطبيعة." },
+    { title: "11. الخنفساء الحكيمة تالا 🐞", text: "التقت هناك بالخنفساء الحكيمة تالا التي قالت لها بابتسامة: لن تجتازي بوابة الحديقة حتى تحلّي لغزي." },
+    { title: "12. لغز الخنفساء الذكي 🤔", text: "سألت تالا: ما هو الشيء الذي يمنح الحياة للزهور ويصنع أحلّى الأغذية دون أن يملك أنابيب؟ فقالت زينة بثقة: إنها النحلة!" },
+    { title: "13. مفتاح البوابة الذهبي 🔑", text: "أعجبت الخنفساء بإجابة زينة الذكية وقدمت لها مفتاحاً ذهبياً صغيراً يفتح باب الحديقة المخبأة." },
+    { title: "14. بوابة الحديقة العتيقة 🚪", text: "وصلت زينة إلى البوابة الحجرية القديمة، أدخلت المفتاح الذهبي ودار القفل بانسيابية تامة." },
+    { title: "15. دخول حديقة النجوم المخبأة 🌟", text: "انفتح الباب ببطء ليكشف عن جنة سحرية متوهجة بأزهار نادرة لا تنمو في أي مكان آخر." },
+    { title: "16. صندوق الكنز العتيق 📦", text: "في وسط الحديقة، وجدت زينة صندوقاً خشبياً مزخرفاً ينبعث منه ضوء دافئ وساحر." },
+    { title: "17. مفاجأة الكنز الحقيقي 🌻", text: "فتحته زينة لتكتشف أنه مليء بأجود حبوب اللقاح وبذور الزهور النادرة التي تفيد كل خلية النحل!" },
+    { title: "18. دعوة الأصدقاء للاحتفال 🎉", text: "أدركت زينة أن الكنز الحقيقي هو مشاركة الخير، فدعت الفراشة والخنفساء وباقي الحشرات للاحتفال." },
+    { title: "19. العودة عند الغروب 🌅", text: "عادت زينة مع أصدقائها إلى الخلية وهم يغنون أناشيد الفرح تحت ألوان الغروب البرتقالية والأرجوانية." },
+    { title: "20. أحلام سعيدة يا زينة 🌙", text: "دخلت زينة قاعتها الدافئة داخل الخلية، أغمضت عينيها بارتياح وقالت: العطاء يصنع أجمل الحكايات." }
+  ];
+
+  const beeDefs = `
+    <defs>
+      <!-- تدرج احترافي لخطوط النحلة (أصفر وأسود ذهبي) -->
+      <radialGradient id="beeBody" cx="50%" cy="50%" r="50%">
+        <stop offset="0%" stop-color="#ffb703"/>
+        <stop offset="70%" stop-color="#fb8500"/>
+        <stop offset="100%" stop-color="#9d0208"/>
+      </radialGradient>
+      <linearGradient id="beeWing" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0%" stop-color="#ffffff" stop-opacity="0.8"/>
+        <stop offset="100%" stop-color="#90e0ef" stop-opacity="0.6"/>
+      </linearGradient>
+    </defs>
+  `;
+
+  // نحلة واقعية واحترافية تماماً (جسم مخطط، أجنحة شفافة، عيون لامعة، هوائيات)
+  const realisticBee = (x, y, scale = 1, pose = "fly", flip = 1) => {
+    let wingTransform = pose === "fly" ? "transform='rotate(-15 10 -5)'" : "";
+
+    return `
+      <g transform="translate(${x},${y}) scale(${scale * flip}, ${scale})">
+        <!-- الأجنحة الشفافة الرقيقة -->
+        <ellipse cx="2" cy="-14" rx="8" ry="14" fill="url(#beeWing)" stroke="#adb5bd" stroke-width="0.8" ${wingTransform}/>
+        <ellipse cx="12" cy="-12" rx="6" ry="11" fill="url(#beeWing)" stroke="#adb5bd" stroke-width="0.8"/>
+        
+        <!-- الجسم الخلفي المخطط بالأسود والأصفر -->
+        <ellipse cx="-15" cy="4" rx="16" ry="11" fill="url(#beeBody)" stroke="#3a2010" stroke-width="1.2" transform="rotate(-15 -15 4)"/>
+        <!-- خطوط البطن السوداء -->
+        <path d="M-22,0 Q-18,4 -14,8 M-15,-2 Q-11,2 -7,6 M-8,-4 Q-4,0 0,4" stroke="#111" stroke-width="2.5" fill="none"/>
+
+        <!-- منطقة الصدر -->
+        <circle cx="2" cy="0" r="10" fill="#bc6c25" stroke="#3a2010" stroke-width="1.2"/>
+        
+        <!-- الرأس والعين الكبيرة اللامعة -->
+        <circle cx="13" cy="-1" r="7" fill="#ffb703" stroke="#3a2010" stroke-width="1.2"/>
+        <ellipse cx="15" cy="-2" rx="3" ry="4" fill="#111"/>
+        <circle cx="16" cy="-3" r="1" fill="#fff"/>
+        
+        <!-- الهوائيات الصغيرة الحساسة -->
+        <path d="M17,-6 Q22,-12 25,-10" fill="none" stroke="#3a2010" stroke-width="1.2" stroke-linecap="round"/>
+        <path d="M16,-4 Q21,-9 23,-6" fill="none" stroke="#3a2010" stroke-width="1.2" stroke-linecap="round"/>
+      </g>
+    `;
+  };
+
+  // فراشة صغيرة ملونة
+  const cuteButterfly = (x, y, scale = 1, flip = 1) => `
+    <g transform="translate(${x},${y}) scale(${scale * flip}, ${scale})">
+      <ellipse cx="0" cy="0" rx="3" ry="12" fill="#333"/>
+      <path d="M0,-5 Q-20,-25 -10,5 Q-25,15 0,10 Z" fill="#f72585" opacity="0.9"/>
+      <path d="M0,-5 Q20,-25 10,5 Q25,15 0,10 Z" fill="#7209b7" opacity="0.9"/>
+    </g>
+  `;
+
+  // خنفساء صغيرة
+  const cuteLadybug = (x, y, scale = 1, flip = 1) => `
+    <g transform="translate(${x},${y}) scale(${scale * flip}, ${scale})">
+      <ellipse cx="0" cy="5" rx="14" ry="11" fill="#d90429" stroke="#333" stroke-width="1.5"/>
+      <line x1="0" y1="-6" x2="0" y2="16" stroke="#333" stroke-width="1.5"/>
+      <circle cx="-5" cy="2" r="2" fill="#111"/>
+      <circle cx="6" cy="8" r="2" fill="#111"/>
+      <circle cx="-6" cy="11" r="1.5" fill="#111"/>
+      <circle cx="5" cy="2" r="1.5" fill="#111"/>
+      <circle cx="10" cy="-2" r="6" fill="#333"/>
+    </g>
+  `;
+
+  function generateBeeStorySVG(index) {
+    const sceneNum = index + 1;
+    let sceneContent = "";
+
+    switch(sceneNum) {
+      case 1: // قطرة العسل البللورية فوق حقل عباد الشمس
+        sceneContent = `
+          <rect width="800" height="500" fill="#90e0ef"/>
+          <circle cx="700" cy="90" r="70" fill="#ffb703" opacity="0.8"/>
+          <path d="M0,370 Q400,310 800,370 L800,500 L0,500 Z" fill="#55a630"/>
+          <!-- قطرة العسل البللورية -->
+          <g transform="translate(470, 360)">
+            <path d="M0,-20 Q15,0 0,20 Q-15,0 0,-20 Z" fill="#ffb703" stroke="#ffd700" stroke-width="2"/>
+            <circle cx="-3" cy="-5" r="3" fill="#fff" opacity="0.8"/>
+          </g>
+          ${realisticBee(320, 340, 1.2, "fly")}
+        `;
+        break;
+
+      case 2: // الحقيبة الوردية
+        sceneContent = `
+          <rect width="800" height="500" fill="#fefae0"/>
+          <rect x="100" y="280" width="600" height="220" fill="#dda15e" stroke="#bc6c25" stroke-width="3"/>
+          <rect x="220" y="190" width="130" height="140" rx="15" fill="#f72585" stroke="#3a0ca3" stroke-width="3"/>
+          <rect x="250" y="230" width="70" height="50" rx="5" fill="#48cae4"/>
+          ${realisticBee(410, 260, 1.25, "fly")}
+        `;
+        break;
+
+      case 3: // بين الأزهار الملونة
+        sceneContent = `
+          <rect width="800" height="500" fill="#70e000"/>
+          <circle cx="150" cy="400" r="28" fill="#ff5964"/>
+          <circle cx="280" cy="420" r="32" fill="#ffb703"/>
+          <circle cx="600" cy="380" r="28" fill="#7209b7"/>
+          <path d="M0,380 Q400,320 800,380 L800,500 L0,500 Z" fill="#38b000"/>
+          ${realisticBee(380, 320, 1.2, "fly")}
+        `;
+        break;
+
+      case 4: // صوت النداء خلف الشجيرة
+        sceneContent = `
+          <rect width="800" height="500" fill="#4ea8de"/>
+          <path d="M80,500 L180,100 L280,500 Z" fill="#1b4332"/>
+          <path d="M350,500 C350,260 800,260 800,500 Z" fill="#0b090a"/>
+          ${realisticBee(220, 370, 1.2, "fly")}
+          <text x="510" y="220" font-size="50" fill="#fff" font-weight="bold">مساعدة...!</text>
+        `;
+        break;
+
+      case 5: // الفراشة العالقة
+        sceneContent = `
+          <rect width="800" height="500" fill="#52b788"/>
+          <path d="M0,390 Q400,330 800,390 L800,500 L0,500 Z" fill="#2d6a4f"/>
+          ${cuteButterfly(490, 390, 1.5)}
+          ${realisticBee(270, 360, 1.2, "fly")}
+        `;
+        break;
+
+      case 6: // مساعدة الفراشة
+        sceneContent = `
+          <rect width="800" height="500" fill="#74c69d"/>
+          <path d="M0,390 Q400,330 800,390 L800,500 L0,500 Z" fill="#40916c"/>
+          ${realisticBee(340, 350, 1.2, "fly")}
+          ${cuteButterfly(480, 360, 1.3, -1)}
+        `;
+        break;
+
+      case 7: // هدية غبار النجوم البراق
+        sceneContent = `
+          <rect width="800" height="500" fill="#95d5b2"/>
+          <path d="M0,390 Q400,330 800,390 L800,500 L0,500 Z" fill="#52b788"/>
+          <!-- غبار النجوم -->
+          <circle cx="420" cy="280" r="15" fill="#ffd700" opacity="0.6"/>
+          <circle cx="440" cy="260" r="8" fill="#fff"/>
+          ${realisticBee(260, 350, 1.2, "fly")}
+          ${cuteButterfly(550, 330, 1.2, -1)}
+        `;
+        break;
+
+      case 8: // الوصول إلى الجدول الصافي
+        sceneContent = `
+          <rect width="800" height="500" fill="#2d6a4f"/>
+          <path d="M220,0 Q420,250 120,500 L800,500 L800,0 Z" fill="#48cae4"/>
+          ${realisticBee(100, 360, 1.2, "fly")}
+        `;
+        break;
+
+      case 9: // عبور الجدول على ورقة زنبق الماء
+        sceneContent = `
+          <rect width="800" height="500" fill="#0077b6"/>
+          <circle cx="400" cy="250" r="140" fill="#90e0ef" opacity="0.3"/>
+          <path d="M300,320 Q400,280 500,320 Q400,360 300,320 Z" fill="#38b000" stroke="#1b4332" stroke-width="2"/>
+          ${realisticBee(380, 260, 1.1, "fly")}
+        `;
+        break;
+
+      case 10: // الضفة الأخرى
+        sceneContent = `
+          <rect width="800" height="500" fill="#0096c7"/>
+          <path d="M0,300 Q400,250 800,300 L800,500 L0,500 Z" fill="#55a630"/>
+          ${realisticBee(400, 300, 1.3, "fly")}
+        `;
+        break;
+
+      case 11: // لقاء الخنفساء تالا
+        sceneContent = `
+          <rect width="800" height="500" fill="#52b788"/>
+          <path d="M0,370 Q400,310 800,370 L800,500 L0,500 Z" fill="#40916c"/>
+          ${realisticBee(220, 350, 1.2, "fly")}
+          ${cuteLadybug(580, 390, 1.5, -1)}
+        `;
+        break;
+
+      case 12: // لغز الخنفساء
+        sceneContent = `
+          <rect width="800" height="500" fill="#40916c"/>
+          ${realisticBee(200, 350, 1.2, "fly")}
+          ${cuteLadybug(600, 390, 1.5, -1)}
+          <g transform="translate(400, 180)">
+            <rect x="-60" y="-20" width="120" height="40" rx="10" fill="#fff"/>
+            <text x="0" y="5" font-size="18" fill="#000" text-anchor="middle">إنها النحلة!</text>
+          </g>
+        `;
+        break;
+
+      case 13: // المفتاح الذهبي
+        sceneContent = `
+          <rect width="800" height="500" fill="#74c69d"/>
+          ${realisticBee(240, 350, 1.2, "fly")}
+          <g transform="translate(420, 250)">
+            <circle cx="0" cy="0" r="16" fill="none" stroke="#ffd700" stroke-width="4"/>
+            <rect x="14" y="-3" width="35" height="6" fill="#ffd700"/>
+          </g>
+        `;
+        break;
+
+      case 14: // بوابة الحديقة المخبأة
+        sceneContent = `
+          <rect width="800" height="500" fill="#1b4332"/>
+          <path d="M120,500 L400,60 L680,500 Z" fill="#2d6a4f"/>
+          <path d="M300,500 L300,330 A100,100 0 0,1 500,330 L500,500 Z" fill="#0b090a"/>
+          <path d="M300,500 L300,330 A100,100 0 0,1 500,330 L500,500 Z" fill="#ffd700" opacity="0.3"/>
+          ${realisticBee(210, 400, 1.1, "fly")}
+        `;
+        break;
+
+      case 15: // داخل الحديقة السحرية المتوهجة
+        sceneContent = `
+          <rect width="800" height="500" fill="#3a0ca3"/>
+          <circle cx="200" cy="380" r="45" fill="#4cc9f0"/>
+          <circle cx="600" cy="350" r="55" fill="#f72585"/>
+          ${realisticBee(380, 380, 1.2, "fly")}
+        `;
+        break;
+
+      case 16: // صندوق الكنز المضيء
+        sceneContent = `
+          <rect width="800" height="500" fill="#240046"/>
+          <g transform="translate(350, 330)">
+            <circle cx="50" cy="0" r="130" fill="#ffd700" opacity="0.2"/>
+            <rect x="-30" y="20" width="160" height="90" rx="10" fill="#582f0e" stroke="#ffd700" stroke-width="4"/>
+            <path d="M-30,20 Q50,-40 130,20 Z" fill="#7f4f24" stroke="#ffd700" stroke-width="4"/>
+          </g>
+          ${realisticBee(190, 400, 1.2, "fly")}
+        `;
+        break;
+
+      case 17: // حبوب اللقاح والزهور النادرة
+        sceneContent = `
+          <rect width="800" height="500" fill="#3c096c"/>
+          <g transform="translate(350, 280)">
+            <rect x="-20" y="50" width="140" height="70" rx="5" fill="#582f0e" stroke="#ffd700" stroke-width="3"/>
+            <circle cx="30" cy="30" r="12" fill="#ffd700"/>
+            <circle cx="70" cy="25" r="10" fill="#ff5964"/>
+          </g>
+          ${realisticBee(210, 380, 1.2, "fly")}
+        `;
+        break;
+
+      case 18: // الاحتفال مع الأصدقاء
+        sceneContent = `
+          <rect width="800" height="500" fill="#ffb703"/>
+          <path d="M0,390 Q400,330 800,390 L800,500 L0,500 Z" fill="#fb8500"/>
+          ${realisticBee(340, 370, 1.2, "fly")}
+          ${cuteButterfly(580, 360, 1.3, -1)}
+          ${cuteLadybug(200, 400, 1.2)}
+        `;
+        break;
+
+      case 19: // رحلة العودة عند الغروب
+        sceneContent = `
+          <rect width="800" height="500" fill="#e76f51"/>
+          <circle cx="400" cy="240" r="95" fill="#ffb703"/>
+          <path d="M0,390 Q400,310 800,390 L800,500 L0,500 Z" fill="#1f2937"/>
+          ${realisticBee(400, 320, 1.2, "fly")}
+        `;
+        break;
+
+      case 20: // أحلام سعيدة في الخلية الدافئة
+        sceneContent = `
+          <rect width="800" height="500" fill="#111827"/>
+          <circle cx="680" cy="100" r="45" fill="#f8f9fa"/>
+          <!-- قرص العسل السداسي الدافئ للخلية -->
+          <polygon points="350,280 450,280 500,350 450,420 350,420 300,350" fill="#dda15e" stroke="#bc6c25" stroke-width="3"/>
+          ${realisticBee(400, 340, 1.1, "fly")}
+          <text x="400" y="220" font-size="28" fill="#90e0ef" font-family="sans-serif">Zzz...</text>
+        `;
+        break;
+    }
+
+    return `<svg viewBox="0 0 800 500" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">${beeDefs}${sceneContent}</svg>`;
+  }
+
+  let currentIndex = 0;
+  const sceneTitle = document.getElementById("sceneTitle");
+  const sceneText = document.getElementById("sceneText");
+  const imageContainer = document.getElementById("imageContainer");
+  const sceneBadge = document.getElementById("sceneBadge");
+  const storyProgress = document.getElementById("storyProgress");
+  const progressText = document.getElementById("progressText");
+  const btnPrev = document.getElementById("btnPrev");
+  const btnNext = document.getElementById("btnNext");
+  const btnRestart = document.getElementById("btnRestart");
+  const btnShare = document.getElementById("btnShare");
+
+  let deferredPrompt = null;
+
+  function renderScene(index) {
+    currentIndex = index;
+    const scene = storyData[currentIndex];
+    
+    sceneTitle.innerText = scene.title;
+    sceneText.innerText = scene.text;
+    imageContainer.innerHTML = generateBeeStorySVG(currentIndex);
+
+    const progressPercent = Math.round(((currentIndex + 1) / storyData.length) * 100);
+    sceneBadge.innerText = `المشهد ${currentIndex + 1} من ${storyData.length}`;
+    storyProgress.style.width = `${progressPercent}%`;
+    progressText.innerText = `${progressPercent}%`;
+
+    btnPrev.disabled = currentIndex === 0;
+    if (currentIndex === storyData.length - 1) {
+      btnNext.innerHTML = 'النهاية 🎉';
+      btnNext.classList.replace('btn-warning', 'btn-success');
+    } else {
+      btnNext.innerHTML = 'التالي <i class="bi bi-arrow-left"></i>';
+      btnNext.classList.replace('btn-success', 'btn-warning');
+    }
+  }
+
+  btnNext.onclick = () => {
+    if (currentIndex < storyData.length - 1) renderScene(currentIndex + 1);
+    else renderScene(0);
+  };
+  btnPrev.onclick = () => { if (currentIndex > 0) renderScene(currentIndex - 1); };
+  btnRestart.onclick = () => renderScene(0);
+
+  btnShare.onclick = async () => {
+    if (navigator.share) {
+      try {
+        await navigator.share({
+          title: 'قصة مغامرة النحلة زينة',
+          text: 'اقرأ قصة الأطفال التفاعلية الجديدة للنحلة زينة!',
+          url: window.location.href,
+        });
+      } catch (err) {}
+    } else {
+      navigator.clipboard.writeText(window.location.href);
+      alert('تم النسخ بنجاح!');
+    }
+  };
+
+  
+
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowLeft') btnNext.click();
+    if (e.key === 'ArrowRight') btnPrev.click();
+  });
+
+  window.onload = () => renderScene(0);
+</script>
+</body>
+</html>

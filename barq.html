@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>مغامرة الحصان برق - قصة واقعية تفاعلية</title>
+  
+  <!-- Bootstrap 5 RTL CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.rtl.min.css">
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+  <!-- Google Fonts: Tajawal -->
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@500;700;900&display=swap" rel="stylesheet">
+
+  <style>
+    html, body {
+      height: 100%;
+      height: 100dvh;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      font-family: 'Tajawal', sans-serif;
+      background: linear-gradient(135deg, #3d2817 0%, #111827 100%);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .app-header {
+      flex: 0 0 auto;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(5px);
+      border-bottom: 2px solid #e9ecef;
+      z-index: 10;
+    }
+
+    .brand-title {
+      font-size: clamp(1rem, 2vh, 1.25rem);
+      font-weight: 800;
+      color: #b06528;
+    }
+
+    .app-main {
+      flex: 1 1 auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 8px;
+      overflow: hidden;
+    }
+
+    .story-card {
+      width: 100%;
+      max-width: 850px;
+      height: 100%;
+      max-height: 100%;
+      display: flex;
+      flex-direction: column;
+      border-radius: 20px;
+      border: 3px solid #fff;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+      background: rgba(255, 255, 255, 0.98);
+      overflow: hidden;
+    }
+
+    .card-header-compact {
+      flex: 0 0 auto;
+      padding: 8px 12px;
+      background: rgba(255, 255, 255, 0.9);
+      border-bottom: 1px solid #f0f0f0;
+    }
+
+    .progress {
+      height: 8px;
+      border-radius: 10px;
+    }
+
+    .image-container {
+      flex: 1 1 auto;
+      min-height: 120px;
+      position: relative;
+      overflow: hidden;
+      margin: 8px 12px 0 12px;
+      border-radius: 15px;
+      background: #0b0c10;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: inset 0 0 25px rgba(0,0,0,0.6);
+    }
+
+    .image-container svg {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .content-container {
+      flex: 0 1 auto;
+      padding: 10px 15px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .scene-title {
+      font-size: clamp(1.1rem, 2.2vh, 1.5rem);
+      font-weight: 800;
+      color: #b06528;
+      margin-bottom: 4px;
+    }
+
+    .scene-text {
+      font-size: clamp(0.9rem, 1.9vh, 1.25rem);
+      line-height: 1.5;
+      color: #374151;
+      margin-bottom: 0;
+      font-weight: 500;
+    }
+
+    .card-footer-compact {
+      flex: 0 0 auto;
+      padding: 8px 15px;
+      background: #f8f9fa;
+      border-top: 1px solid #eee;
+    }
+
+    .control-btn {
+      font-size: clamp(0.85rem, 1.6vh, 1.05rem);
+      border-radius: 50px;
+      padding: 6px 18px;
+    }
+
+    .app-footer {
+      flex: 0 0 auto;
+      background: rgba(255, 255, 255, 0.95);
+      border-top: 1px solid #e9ecef;
+      font-size: 0.85rem;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- TOP HEADER -->
+  <header class="app-header py-2 px-3 shadow-sm">
+    <div class="container-fluid d-flex justify-content-between align-items-center p-0">
+      <div class="brand-title d-flex align-items-center gap-2">
+        <span class="fs-4">🐴</span>
+<span>مغامرة الحصان برق</span>
+      </div>
+
+      <div class="d-flex align-items-center gap-2">
+   
+        <button id="btnShare" class="btn btn-sm btn-primary rounded-pill px-3 d-flex align-items-center gap-1">
+          <i class="bi bi-share-fill"></i>
+          <span class="d-none d-sm-inline fw-bold">مشاركة</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN STORY VIEWPORT -->
+  <main class="app-main">
+    <div class="card story-card">
+      
+      <div class="card-header-compact">
+        <div class="d-flex justify-content-between align-items-center mb-1">
+          <span id="sceneBadge" class="badge bg-warning text-dark px-3 py-1 rounded-pill">المشهد 1 من 20</span>
+          <span id="progressText" class="small fw-bold text-secondary">5%</span>
+        </div>
+        <div class="progress">
+          <div id="storyProgress" class="progress-bar bg-warning progress-bar-striped progress-bar-animated" style="width: 5%;"></div>
+        </div>
+      </div>
+
+      <!-- Vector Professional Horse Art Container -->
+      <div id="imageContainer" class="image-container"></div>
+
+      <div class="content-container">
+        <h2 id="sceneTitle" class="scene-title">...</h2>
+        <p id="sceneText" class="scene-text">...</p>
+      </div>
+
+      <div class="card-footer-compact d-flex justify-content-between align-items-center gap-2">
+        <button id="btnPrev" class="btn btn-outline-warning text-dark control-btn">
+          <i class="bi bi-arrow-right"></i> السابق
+        </button>
+        <button id="btnRestart" class="btn btn-sm btn-light border text-secondary rounded-circle" style="width: 36px; height: 36px;" title="إعادة البدء">
+          <i class="bi bi-arrow-counterclockwise"></i>
+        </button>
+        <button id="btnNext" class="btn btn-warning text-dark fw-bold control-btn">
+          التالي <i class="bi bi-arrow-left"></i>
+        </button>
+      </div>
+
+    </div>
+  </main>
+
+  <footer class="app-footer py-2 px-3">
+    <div class="container-fluid d-flex justify-content-between align-items-center flex-wrap gap-2 p-0">
+      <div class="text-secondary small">
+        تم التصميم والتطوير بواسطة 
+        <a href="https://me.haythamzeidan.workers.dev/" class="text-decoration-none fw-bold text-warning">هيثم زيدان</a>
+      </div>
+    </div>
+  </footer>
+
+<!-- JavaScript Logic & Professional Horse Engine -->
+<script>
+  const storyData = [
+    { title: "1. حلبة المرج الأخضر 🌾", text: "في صباح مشمس رائع، كان الحصان الأصيل برق يركض بحرية في المرج الواسع، فعثر على حذوة حصان ذهبية لامعة تحت شجرة السنديان!" },
+    { title: "2. الاستعداد للرحلة الكبرى 🎒", text: "تفحص برق الحذوة الذهبية بفضول، ولاحظ أنها تشير نحو وادي الأسرار العريق، فربط حقيبته الجلدية المتينة على ظهره وانطلق." },
+    { title: "3. الركض بين التلال ⛰️", text: "بدأ برق رحلته جارياً بقوة وثبات بين التلال الخضراء المترامية الأطراف، بينما كانت نسائم الصباح تداعب عرفه الأسود الطويل." },
+    { title: "4. صوت نداء متقطع 🐾", text: "بينما كان يعبر طرف الغابة، سمع برق صوتاً خافتاً يشبه الاستغاثة يأتي من خلف مجموعة من الصخور الكبيرة." },
+    { title: "5. لقاء الغزال الصغير 🦌", text: "اقترب برق بحذر ليرى غزالاً صغيراً علقت ساقه بين الجذوع المتشابكة ولا يستطيع الحركة." },
+    { title: "6. المساعدة والشهامة 🤝", text: "بحذر شديد وقوة لطيفة، استخدم برق حافره وساعد في إبعاد الجذوع حتى حرر الغزال الصغير وأعاده سالماً." },
+    { title: "7. هدية العجوز الحكيم 🪶", text: "ظهرت أم الغزال وشكرت الحصان برق بعمق، وأهدته ريشة صقر سحرية تضيء عتمة الطرقات المظلمة." },
+    { title: "8. الوصول إلى الوادي العريض 🌊", text: "تابع برق مسيره حتى وصل إلى مجرى مائي عريض وواسع، ولم يكن هناك جسر ظاهر للعبور." },
+    { title: "9. العبور ببراعة 🏊‍♂️", text: "استخدم برق قوته وشجاعته، وخاض المياه ببراعة وثبات حتى بلغ الضفة الأخرى للوادي بسلام." },
+    { title: "10. ضفة الوادي المزهرة 🌸", text: "وصل برق إلى الضفة المقابلة المغطاة بالورود البرية الملونة وأخذ استراحة قصيرة مستنشقاً الهواء العليل." },
+    { title: "11. النسر الحارس 🦅", text: "التقى هناك بنسر حكيم وقف على صخرة عالية وقال له بصوت رزين: لن تجتاز القمة حتى تحل لغزي." },
+    { title: "12. لغز الشجاعة 🤔", text: "سأله النسر: ما هو السلاح الأقوى الذي لا يُقهر بالحديد ولا يُهزم بالصعاب؟ فقال برق واثقاً: إنها الشجاعة والوفاء!" },
+    { title: "13. المفتاح البللوري 🔑", text: "ابتسم النسر لإجابة الحصان النبيلة وسلمه مفتاحاً بللورياً براقاً يفتح باب الوادي السحري." },
+    { title: "14. بوابة الوادي السحري 🚪", text: "صعد برق نحو الجبل ووصل إلى البوابة الحجرية الضخمة، أدخل المفتاح البللوري ودار القفل بانسيابية تامة." },
+    { title: "15. دخول الوادي المدهش ✨", text: "انفتح الباب ببطء ليكشف عن جنة خضراء متوهجة مليئة بالأشجار المثمرة والأعشاب النادرة." },
+    { title: "16. صندوق الكنز العتيق 📦", text: "في وسط الوادي، وجد برق صندوقاً خشبياً فاخراً مزخرفاً بالذهب وينبعث منه ضوء دافئ وساحر." },
+    { title: "17. مفاجأة الكنز الحقيقي 🍎", text: "فتح برق الصندوق.. ليكتشف أنه مليء بأشهى حبات التفاح الطازجة ووجبات الحبوب النقية!" },
+    { title: "18. دعوة الأصدقاء للاحتفال 🎉", text: "أدرك برق أن أجمل ما في الكنز هو مشاركته مع الجميع، فدعت الغزال وأمه وباقي الحيوانات للاحتفال." },
+    { title: "19. وقت الغروب الهادئ 🌅", text: "قضت الحيوانات وقتاً رائعاً بالمرح واللعب حتى غربت الشمس وصبغت السماء بألوان ساحرة." },
+    { title: "20. أحلام سعيدة يا برق 🌙", text: "عاد برق إلى مربضه الدافئ، أغمض عينيه بارتياح وقال: أروع مغامرة هي التي تصنعها بمحبة الآخرين." }
+  ];
+
+  const horseDefs = `
+    <defs>
+      <!-- تدرج احترافي لفراء الحصان (بني أصيل / كستنائي دافئ) -->
+      <radialGradient id="horseFur" cx="50%" cy="50%" r="50%">
+        <stop offset="0%" stop-color="#d48c46"/>
+        <stop offset="60%" stop-color="#b06528"/>
+        <stop offset="90%" stop-color="#7f4f24"/>
+        <stop offset="100%" stop-color="#582f0e"/>
+      </radialGradient>
+      <linearGradient id="horseMane" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#2b2d42"/>
+        <stop offset="100%" stop-color="#111827"/>
+      </linearGradient>
+    </defs>
+  `;
+
+  // حصان واقعي واحترافي تماماً (جسم قوي، عرف أسود طويل، رأس نبيل، أذنان منتصبتان، ذيل كثيف)
+  const realisticHorse = (x, y, scale = 1, pose = "run", flip = 1) => {
+    return `
+      <g transform="translate(${x},${y}) scale(${scale * flip}, ${scale})">
+        <!-- الذيل الكثيف الطويل -->
+        <path d="M-30,10 Q-65,30 -55,60 Q-45,45 -35,25 Z" fill="url(#horseMane)"/>
+        
+        <!-- الأرجل الخلفية القوية -->
+        <rect x="-22" y="20" width="9" height="30" rx="4" fill="#7f4f24" stroke="#3d2817" stroke-width="1"/>
+        <rect x="-10" y="22" width="8" height="28" rx="3" fill="#b06528" stroke="#3d2817" stroke-width="1"/>
+
+        <!-- الجسم العضلي الضخم للحصان -->
+        <ellipse cx="0" cy="12" rx="35" ry="20" fill="url(#horseFur)" stroke="#3d2817" stroke-width="1.5"/>
+        
+        <!-- الأرجل الأمامية -->
+        <rect x="15" y="20" width="8" height="30" rx="3" fill="#b06528" stroke="#3d2817" stroke-width="1"/>
+        <rect x="25" y="22" width="8" height="28" rx="3" fill="#7f4f24" stroke="#3d2817" stroke-width="1"/>
+
+        <!-- الصدر والرقبة النبيلة -->
+        <path d="M15,5 Q35,-15 32,-30 L22,-25 Q15,-10 5,5 Z" fill="url(#horseFur)" stroke="#3d2817" stroke-width="1.5"/>
+        
+        <!-- العرف الأسود على الرقبة -->
+        <path d="M18,-15 Q28,-22 25,-32 Q20,-20 12,-5 Z" fill="url(#horseMane)"/>
+
+        <!-- الرأس الواقعي -->
+        <polygon points="25,-30 48,-38 32,-20" fill="url(#horseFur)" stroke="#3d2817" stroke-width="1.2"/>
+        
+        <!-- الأذن المنتصبة -->
+        <polygon points="27,-35 24,-45 32,-36" fill="url(#horseFur)" stroke="#3d2817" stroke-width="1"/>
+
+        <!-- العين الذكية البراقة -->
+        <circle cx="36" cy="-30" r="2.5" fill="#111"/>
+        <circle cx="37" cy="-31" r="0.8" fill="#fff"/>
+        
+        <!-- الأنف والفم -->
+        <circle cx="46" cy="-34" r="2" fill="#3d2817"/>
+      </g>
+    `;
+  };
+
+  // غزال صغير لطيف
+  const cuteDeer = (x, y, scale = 1, flip = 1) => `
+    <g transform="translate(${x},${y}) scale(${scale * flip}, ${scale})">
+      <ellipse cx="0" cy="10" rx="14" ry="10" fill="#bc6c25" stroke="#3d2817" stroke-width="1"/>
+      <circle cx="10" cy="0" r="8" fill="#dda15e" stroke="#3d2817" stroke-width="1"/>
+      <path d="M12,-8 Q8,-18 15,-12" fill="none" stroke="#603813" stroke-width="2"/>
+      <circle cx="12" cy="-2" r="1.5" fill="#111"/>
+      <rect x="-8" y="18" width="3" height="12" rx="1.5" fill="#bc6c25"/>
+      <rect x="4" y="18" width="3" height="12" rx="1.5" fill="#bc6c25"/>
+    </g>
+  `;
+
+  function generateHorseStorySVG(index) {
+    const sceneNum = index + 1;
+    let sceneContent = "";
+
+    switch(sceneNum) {
+      case 1: // الحذوة الذهبية تحت الشجرة
+        sceneContent = `
+          <rect width="800" height="500" fill="#90e0ef"/>
+          <circle cx="700" cy="90" r="70" fill="#ffb703" opacity="0.8"/>
+          <path d="M60,500 L150,230 C90,140 70,70 210,45 C370,20 430,130 370,230 L430,500 Z" fill="#2d6a4f"/>
+          <path d="M110,500 C100,340 130,230 150,200" stroke="#3d2817" stroke-width="40" stroke-linecap="round"/>
+          <path d="M0,370 Q400,310 800,370 L800,500 L0,500 Z" fill="#55a630"/>
+          <!-- الحذوة الذهبية -->
+          <g transform="translate(470, 360)">
+            <path d="M-15,-10 Q0,-25 15,-10 Q20,10 10,15 Q0,5 -10,15 Q-20,10 -15,-10 Z" fill="#ffd700" stroke="#b8860b" stroke-width="2"/>
+          </g>
+          ${realisticHorse(300, 330, 1.2, "run")}
+        `;
+        break;
+
+      case 2: // الحقيبة الجلدية
+        sceneContent = `
+          <rect width="800" height="500" fill="#fefae0"/>
+          <rect x="100" y="280" width="600" height="220" fill="#dda15e" stroke="#bc6c25" stroke-width="3"/>
+          <rect x="220" y="190" width="130" height="140" rx="15" fill="#582f0e" stroke="#2b2d42" stroke-width="3"/>
+          <rect x="250" y="230" width="70" height="50" rx="5" fill="#bc6c25"/>
+          ${realisticHorse(400, 260, 1.25, "run")}
+        `;
+        break;
+
+      case 3: // الركض بين التلال
+        sceneContent = `
+          <rect width="800" height="500" fill="#52b788"/>
+          <path d="M0,380 Q400,280 800,380 L800,500 L0,500 Z" fill="#40916c"/>
+          <path d="M0,420 Q400,340 800,420 L800,500 L0,500 Z" fill="#2d6a4f"/>
+          ${realisticHorse(380, 340, 1.2, "run")}
+        `;
+        break;
+
+      case 4: // صوت النداء خلف الصخور
+        sceneContent = `
+          <rect width="800" height="500" fill="#40916c"/>
+          <path d="M300,500 C300,280 600,280 600,500 Z" fill="#6c757d"/>
+          ${realisticHorse(220, 360, 1.2, "run")}
+          <text x="510" y="220" font-size="50" fill="#fff" font-weight="bold">آه...!</text>
+        `;
+        break;
+
+      case 5: // الغزال الصغير العالق
+        sceneContent = `
+          <rect width="800" height="500" fill="#74c69d"/>
+          <path d="M0,390 Q400,330 800,390 L800,500 L0,500 Z" fill="#40916c"/>
+          ${cuteDeer(490, 390, 1.4)}
+          ${realisticHorse(260, 350, 1.2, "run")}
+        `;
+        break;
+
+      case 6: // مساعدة الغزال
+        sceneContent = `
+          <rect width="800" height="500" fill="#95d5b2"/>
+          <path d="M0,390 Q400,330 800,390 L800,500 L0,500 Z" fill="#52b788"/>
+          ${realisticHorse(320, 350, 1.2, "run")}
+          ${cuteDeer(500, 390, 1.2, -1)}
+        `;
+        break;
+
+      case 7: // هدية ريشة الصقر السحرية
+        sceneContent = `
+          <rect width="800" height="500" fill="#b7e4c7"/>
+          <path d="M0,390 Q400,330 800,390 L800,500 L0,500 Z" fill="#52b788"/>
+          <!-- ريشة صقر مضيئة -->
+          <g transform="translate(420, 260) rotate(-15) scale(1.5)">
+            <path d="M0,-25 Q15,-5 0,25 Q-15,-5 0,-25 Z" fill="#48cae4" stroke="#0077b6" stroke-width="1.5"/>
+          </g>
+          ${realisticHorse(250, 350, 1.2, "run")}
+          ${cuteDeer(570, 380, 1.2, -1)}
+        `;
+        break;
+
+      case 8: // الوادي العريض
+        sceneContent = `
+          <rect width="800" height="500" fill="#2d6a4f"/>
+          <path d="M220,0 Q420,250 120,500 L800,500 L800,0 Z" fill="#0077b6"/>
+          ${realisticHorse(100, 360, 1.2, "run")}
+        `;
+        break;
+
+      case 9: // العبور ببراعة
+        sceneContent = `
+          <rect width="800" height="500" fill="#0077b6"/>
+          <path d="M0,250 Q400,200 800,250 L800,500 L0,500 Z" fill="#03045e"/>
+          ${realisticHorse(380, 260, 1.2, "run")}
+        `;
+        break;
+
+      case 10: // الضفة المزهرة
+        sceneContent = `
+          <rect width="800" height="500" fill="#0096c7"/>
+          <path d="M0,300 Q400,250 800,300 L800,500 L0,500 Z" fill="#55a630"/>
+          <circle cx="200" cy="380" r="18" fill="#ff5964"/>
+          <circle cx="600" cy="400" r="20" fill="#ffb703"/>
+          ${realisticHorse(400, 320, 1.3, "run")}
+        `;
+        break;
+
+      case 11: // النسر الحارس
+        sceneContent = `
+          <rect width="800" height="500" fill="#40916c"/>
+          <path d="M0,370 Q400,310 800,370 L800,500 L0,500 Z" fill="#2d6a4f"/>
+          <path d="M550,500 L550,200 L580,200 L580,500 Z" fill="#3d2817"/>
+          <!-- نسر -->
+          <ellipse cx="565" cy="180" rx="14" ry="10" fill="#603813"/>
+          <circle cx="560" cy="175" r="3" fill="#ffb703"/>
+          ${realisticHorse(250, 370, 1.2, "run")}
+        `;
+        break;
+
+      case 12: // حل لغز الشجاعة
+        sceneContent = `
+          <rect width="800" height="500" fill="#2d6a4f"/>
+          ${realisticHorse(200, 370, 1.2, "run")}
+          <g transform="translate(400, 180)">
+            <rect x="-80" y="-20" width="160" height="40" rx="10" fill="#fff"/>
+            <text x="0" y="5" font-size="18" fill="#000" text-anchor="middle">الشجاعة والوفاء!</text>
+          </g>
+        `;
+        break;
+
+      case 13: // المفتاح البللوري
+        sceneContent = `
+          <rect width="800" height="500" fill="#52b788"/>
+          ${realisticHorse(240, 350, 1.2, "run")}
+          <g transform="translate(420, 250)">
+            <circle cx="0" cy="0" r="16" fill="none" stroke="#48cae4" stroke-width="4"/>
+            <rect x="14" y="-3" width="35" height="6" fill="#48cae4"/>
+          </g>
+        `;
+        break;
+
+      case 14: // بوابة الوادي السحري
+        sceneContent = `
+          <rect width="800" height="500" fill="#1b4332"/>
+          <path d="M120,500 L400,60 L680,500 Z" fill="#2d6a4f"/>
+          <path d="M300,500 L300,330 A100,100 0 0,1 500,330 L500,500 Z" fill="#0b090a"/>
+          <path d="M300,500 L300,330 A100,100 0 0,1 500,330 L500,500 Z" fill="#48cae4" opacity="0.3"/>
+          ${realisticHorse(210, 400, 1.1, "run")}
+        `;
+        break;
+
+      case 15: // داخل الوادي المدهش
+        sceneContent = `
+          <rect width="800" height="500" fill="#3a0ca3"/>
+          <circle cx="200" cy="380" r="45" fill="#4cc9f0"/>
+          <circle cx="600" cy="350" r="55" fill="#f72585"/>
+          ${realisticHorse(380, 380, 1.2, "run")}
+        `;
+        break;
+
+      case 16: // صندوق الكنز العتيق
+        sceneContent = `
+          <rect width="800" height="500" fill="#240046"/>
+          <g transform="translate(350, 330)">
+            <circle cx="50" cy="0" r="130" fill="#ffd700" opacity="0.2"/>
+            <rect x="-30" y="20" width="160" height="90" rx="10" fill="#582f0e" stroke="#ffd700" stroke-width="4"/>
+            <path d="M-30,20 Q50,-40 130,20 Z" fill="#7f4f24" stroke="#ffd700" stroke-width="4"/>
+          </g>
+          ${realisticHorse(190, 400, 1.2, "run")}
+        `;
+        break;
+
+      case 17: // تفاح طازج وحبوب
+        sceneContent = `
+          <rect width="800" height="500" fill="#3c096c"/>
+          <g transform="translate(350, 280)">
+            <rect x="-20" y="50" width="140" height="70" rx="5" fill="#582f0e" stroke="#ffd700" stroke-width="3"/>
+            <circle cx="30" cy="30" r="12" fill="#d90429"/>
+            <circle cx="70" cy="25" r="10" fill="#d90429"/>
+          </g>
+          ${realisticHorse(210, 380, 1.2, "run")}
+        `;
+        break;
+
+      case 18: // الاحتفال مع الأصدقاء
+        sceneContent = `
+          <rect width="800" height="500" fill="#ffb703"/>
+          <path d="M0,390 Q400,330 800,390 L800,500 L0,500 Z" fill="#fb8500"/>
+          ${realisticHorse(340, 370, 1.2, "run")}
+          ${cuteDeer(580, 400, 1.3, -1)}
+        `;
+        break;
+
+      case 19: // رحلة العودة عند الغروب
+        sceneContent = `
+          <rect width="800" height="500" fill="#e76f51"/>
+          <circle cx="400" cy="240" r="95" fill="#ffb703"/>
+          <path d="M0,390 Q400,310 800,390 L800,500 L0,500 Z" fill="#1f2937"/>
+          ${realisticHorse(400, 360, 1.2, "run")}
+        `;
+        break;
+
+      case 20: // أحلام سعيدة في المربض الدافئ
+        sceneContent = `
+          <rect width="800" height="500" fill="#111827"/>
+          <circle cx="680" cy="100" r="45" fill="#f8f9fa"/>
+          <!-- مربض الحصان الدافئ -->
+          <rect x="230" y="310" width="340" height="110" rx="15" fill="#582f0e"/>
+          <path d="M230,330 Q400,280 570,330 L570,420 L230,420 Z" fill="#3a0ca3"/>
+          ${realisticHorse(360, 335, 1, "run")}
+          <text x="400" y="220" font-size="28" fill="#90e0ef" font-family="sans-serif">Zzz...</text>
+        `;
+        break;
+    }
+
+    return `<svg viewBox="0 0 800 500" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">${horseDefs}${sceneContent}</svg>`;
+  }
+
+  let currentIndex = 0;
+  const sceneTitle = document.getElementById("sceneTitle");
+  const sceneText = document.getElementById("sceneText");
+  const imageContainer = document.getElementById("imageContainer");
+  const sceneBadge = document.getElementById("sceneBadge");
+  const storyProgress = document.getElementById("storyProgress");
+  const progressText = document.getElementById("progressText");
+  const btnPrev = document.getElementById("btnPrev");
+  const btnNext = document.getElementById("btnNext");
+  const btnRestart = document.getElementById("btnRestart");
+  const btnShare = document.getElementById("btnShare");
+
+  let deferredPrompt = null;
+
+  function renderScene(index) {
+    currentIndex = index;
+    const scene = storyData[currentIndex];
+    
+    sceneTitle.innerText = scene.title;
+    sceneText.innerText = scene.text;
+    imageContainer.innerHTML = generateHorseStorySVG(currentIndex);
+
+    const progressPercent = Math.round(((currentIndex + 1) / storyData.length) * 100);
+    sceneBadge.innerText = `المشهد ${currentIndex + 1} من ${storyData.length}`;
+    storyProgress.style.width = `${progressPercent}%`;
+    progressText.innerText = `${progressPercent}%`;
+
+    btnPrev.disabled = currentIndex === 0;
+    if (currentIndex === storyData.length - 1) {
+      btnNext.innerHTML = 'النهاية 🎉';
+      btnNext.classList.replace('btn-warning', 'btn-success');
+    } else {
+      btnNext.innerHTML = 'التالي <i class="bi bi-arrow-left"></i>';
+      btnNext.classList.replace('btn-success', 'btn-warning');
+    }
+  }
+
+  btnNext.onclick = () => {
+    if (currentIndex < storyData.length - 1) renderScene(currentIndex + 1);
+    else renderScene(0);
+  };
+  btnPrev.onclick = () => { if (currentIndex > 0) renderScene(currentIndex - 1); };
+  btnRestart.onclick = () => renderScene(0);
+
+  btnShare.onclick = async () => {
+    if (navigator.share) {
+      try {
+        await navigator.share({
+          title: 'قصة مغامرة الحصان برق',
+          text: 'اقرأ قصة الأطفال التفاعلية الجديدة للحصان برق!',
+          url: window.location.href,
+        });
+      } catch (err) {}
+    } else {
+      navigator.clipboard.writeText(window.location.href);
+      alert('تم النسخ بنجاح!');
+    }
+  };
+
+  
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowLeft') btnNext.click();
+    if (e.key === 'ArrowRight') btnPrev.click();
+  });
+
+  window.onload = () => renderScene(0);
+</script>
+</body>
+</html>

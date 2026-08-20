@@ -2,9 +2,8 @@
 <html lang="ar" dir="rtl" class="h-100">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     
-    <title>مكتبة القصص القصيرة</title>
     <!-- ========================================== -->
     <!--     وسوم SEO الخاصة بمحركات البحث (Google)   -->
     <!-- ========================================== -->
@@ -13,14 +12,13 @@
     <meta name="keywords" content="قصص قصيرة, قصص للأطفال, حكمة البستان, جوهر الأمانة, الخير والشر, سر السعادة, الصديق الحقيقي, قصص هادفة, أدب أطفال" />
     <meta name="author" content="هيثم زيدان" />
     <meta name="robots" content="index, follow" />
+    
     <!-- ========================================== -->
     <!--  وسوم SEO الخاصة بوسائل التواصل الاجتماعي (OG) -->
     <!-- ========================================== -->
-    <!-- Facebook, LinkedIn, WhatsApp, Telegram -->
     <meta property="og:type" content="website" />
     <meta property="og:title" content="مكتبة القصص القصيرة الهادفة | اقرأ أجمل الحكم والعبر" />
     <meta property="og:description" content="تصفح مجموعة رائعة ومختارة من القصص القصيرة الممتعة والهادفة للأطفال والكبار بأسلوب شيق ومبسط." />
-   
     <meta property="og:image" content="icon.png" />
     <meta property="og:site_name" content="مكتبة القصص القصيرة" />
     <meta property="og:locale" content="ar_AR" />
@@ -32,7 +30,7 @@
     <meta name="twitter:title" content="مكتبة القصص القصيرة الهادفة | اقرأ أجمل الحكم والعبر" />
     <meta name="twitter:description" content="تصفح مجموعة رائعة ومختارة من القصص القصيرة الممتعة والهادفة للأطفال والكبار." />
     <meta name="twitter:image" content="icon.png" />
-    <!-- ربط ملف الـ Manifest (أنشئ ملفاً باسم manifest.json بجانب الصفحة) -->
+    
     <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#0d6efd">
 
@@ -40,59 +38,91 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     
     <style>
-        html, body {
-            height: 100%;
-            margin: 0;
-            overflow: hidden;
+        body {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
             background-color: #f4f6f9;
-            font-family: sans-serif;
+            font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+            margin: 0;
         }
+        
+        main {
+            flex: 1 0 auto;
+        }
+
         .story-card {
             background: #ffffff;
             border-radius: 12px;
-            transition: 0.3s;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
             height: 100%;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            padding: 8px !important;
+            padding: 12px !important;
             border: 1px solid rgba(0,0,0,0.08);
         }
+
+        .story-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+
         .icon-box {
-            font-size: 1.5rem !important;
-            margin-bottom: 4px !important;
+            font-size: 1.75rem !important;
+            margin-bottom: 6px !important;
+            line-height: 1;
         }
+
         .card-title {
-            font-size: 0.85rem !important;
+            font-size: 0.9rem !important;
             margin-bottom: 4px !important;
+            text-align: center;
         }
+
         .read-text {
-            font-size: 0.7rem !important;
+            font-size: 0.75rem !important;
         }
+
+        /* شبكة متجاوبة مع جميع الشاشات */
         .row-cols-custom {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 8px;
+            gap: 12px;
+        }
+
+        @media (min-width: 576px) {
+            .row-cols-custom { grid-template-columns: repeat(3, 1fr); }
+        }
+        @media (min-width: 768px) {
+            .row-cols-custom { grid-template-columns: repeat(4, 1fr); }
+        }
+        @media (min-width: 992px) {
+            .row-cols-custom { grid-template-columns: repeat(6, 1fr); }
+        }
+
+        /* حماية الشريط السفلي في أجهزة iPhone الحديثة */
+        footer {
+            padding-bottom: calc(0.5rem + env(safe-area-inset-bottom));
         }
     </style>
 </head>
-<body class="d-flex flex-column h-100">
+<body>
 
     <!-- الشريط العلوي -->
-    <nav class="navbar navbar-dark bg-primary py-1 flex-shrink-0">
+    <nav class="navbar navbar-dark bg-primary py-2 sticky-top shadow-sm">
         <div class="container d-flex justify-content-between align-items-center">
-            <span class="navbar-brand fs-6"><i class="bi bi-book-half"></i> قصص قصيرة</span>
-            <div class="d-flex gap-1">
-                <button class="btn btn-light btn-sm py-0 px-2" onclick="sharePage()">مشاركة</button>
-                <!-- زر التثبيت (مخفي افتراضياً لحين توفر إمكانية التثبيت) -->
-                <button id="installBtn" class="btn btn-outline-light btn-sm py-0 px-2" style="display: none;">تثبيت</button>
+            <span class="navbar-brand fs-6 m-0"><i class="bi bi-book-half me-1"></i> قصص قصيرة</span>
+            <div class="d-flex gap-2">
+                <button class="btn btn-light btn-sm px-2" onclick="sharePage()">مشاركة</button>
+                <button id="installBtn" class="btn btn-outline-light btn-sm px-2" style="display: none;">تثبيت</button>
             </div>
         </div>
     </nav>
 
     <!-- المحتوى الرئيسي -->
-    <main class="container-fluid flex-grow-1 d-flex flex-column justify-content-center p-2">
+    <main class="container py-3">
         <div class="row-cols-custom">
             <div class="card story-card position-relative">
                 <div class="icon-box text-success"><i class="bi bi-tree-fill"></i></div>
@@ -119,57 +149,104 @@
                 <h5 class="card-title fw-bold"><a href="sadeeq.html" class="text-decoration-none text-dark stretched-link">الصديق الحقيقي</a></h5>
                 <span class="read-text text-muted">اقرأ القصة</span>
             </div>
+            <div class="card story-card position-relative">
+                <div class="icon-box">🐢</div>
+                <h5 class="card-title fw-bold"><a href="sul7afa2.html" class="text-decoration-none text-dark stretched-link">السلحفاء سلومة</a></h5>
+                <span class="read-text text-muted">اقرأ القصة</span>
+            </div>
+            <div class="card story-card position-relative">
+                <div class="icon-box">🐇</div>
+                <h5 class="card-title fw-bold"><a href="arnab.html" class="text-decoration-none text-dark stretched-link">الأرنب سمسم</a></h5>
+                <span class="read-text text-muted">اقرأ القصة</span>
+            </div>
+            <div class="card story-card position-relative">
+                <div class="icon-box">👸</div>
+                <h5 class="card-title fw-bold"><a href="layla.html" class="text-decoration-none text-dark stretched-link">الأميرة ليلى</a></h5>
+                <span class="read-text text-muted">اقرأ القصة</span>
+            </div>
+            <div class="card story-card position-relative">
+                <div class="icon-box">👦</div>
+                <h5 class="card-title fw-bold"><a href="zaid.html" class="text-decoration-none text-dark stretched-link">التلميذ زيد</a></h5>
+                <span class="read-text text-muted">اقرأ القصة</span>
+            </div>
+            <div class="card story-card position-relative">
+                <div class="icon-box">🦊</div>
+                <h5 class="card-title fw-bold"><a href="fares.html" class="text-decoration-none text-dark stretched-link">الثعلب فارس</a></h5>
+                <span class="read-text text-muted">اقرأ القصة</span>
+            </div>
+            <div class="card story-card position-relative">
+                <div class="icon-box">🐎</div>
+                <h5 class="card-title fw-bold"><a href="barq.html" class="text-decoration-none text-dark stretched-link">الحصان برق</a></h5>
+                <span class="read-text text-muted">اقرأ القصة</span>
+            </div>
+            <div class="card story-card position-relative">
+                <div class="icon-box">🐺</div>
+                <h5 class="card-title fw-bold"><a href="fawaz.html" class="text-decoration-none text-dark stretched-link">الذئب فواز</a></h5>
+                <span class="read-text text-muted">اقرأ القصة</span>
+            </div>
+            <div class="card story-card position-relative">
+                <div class="icon-box">🐱</div>
+                <h5 class="card-title fw-bold"><a href="lulu.html" class="text-decoration-none text-dark stretched-link">القطة لولو</a></h5>
+                <span class="read-text text-muted">اقرأ القصة</span>
+            </div>
+            <div class="card story-card position-relative">
+                <div class="icon-box">🐶</div>
+                <h5 class="card-title fw-bold"><a href="ra3d.html" class="text-decoration-none text-dark stretched-link">الكلب رعد</a></h5>
+                <span class="read-text text-muted">اقرأ القصة</span>
+            </div>
+            <div class="card story-card position-relative">
+                <div class="icon-box">👑</div>
+                <h5 class="card-title fw-bold"><a href="zeyad.html" class="text-decoration-none text-dark stretched-link">الملك زياد</a></h5>
+                <span class="read-text text-muted">اقرأ القصة</span>
+            </div>
+            <div class="card story-card position-relative">
+                <div class="icon-box">🐝</div>
+                <h5 class="card-title fw-bold"><a href="zeina.html" class="text-decoration-none text-dark stretched-link">النحلة زينة</a></h5>
+                <span class="read-text text-muted">اقرأ القصة</span>
+            </div>
         </div>
     </main>
 
     <!-- التذييل -->
-    <footer class="bg-dark text-white text-center py-1 flex-shrink-0">
-        <p class="m-0" style="font-size: 0.7rem;">تطوير وتصميم <span class="text-info fw-bold">هيثم زيدان</span> | <a href="https://github.com/wazefapress" class="text-light">GitHub</a></p>
+    <footer class="bg-dark text-white text-center py-2 flex-shrink-0">
+        <p class="m-0" style="font-size: 0.75rem;">تطوير وتصميم <span class="text-info fw-bold">هيثم زيدان</span> | <a href="https://github.com/wazefapress" class="text-light text-decoration-underline" target="_blank" rel="noopener">GitHub</a></p>
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script>
         function sharePage() { 
-            if (navigator.share) navigator.share({title: document.title, url: window.location.href}); 
+            if (navigator.share) {
+                navigator.share({title: document.title, url: window.location.href});
+            } else {
+                navigator.clipboard.writeText(window.location.href);
+                alert("تم نسخ رابط الصفحة!");
+            }
         }
 
-        // كود برمجة زر التثبيت (PWA Install Prompt)
         let deferredPrompt;
         const installBtn = document.getElementById('installBtn');
 
         window.addEventListener('beforeinstallprompt', (e) => {
-            // منع المتصفح من إظهار نافذة التثبيت التلقائية
             e.preventDefault();
-            // الاحتفاظ بالحدث لاستخدامه لاحقاً عند النقر على الزر
             deferredPrompt = e;
-            // إظهار زر التثبيت للمستخدم
             installBtn.style.display = 'inline-block';
 
             installBtn.addEventListener('click', () => {
-                // إخفاء الزر بعد النقر
                 installBtn.style.display = 'none';
-                // إظهار نافذة التثبيت
                 deferredPrompt.prompt();
-                // انتظار رد المستخدم على نافذة التثبيت
                 deferredPrompt.userChoice.then((choiceResult) => {
-                    if (choiceResult.outcome === 'accepted') {
-                        console.log('تم قبول تثبيت التطبيق');
-                    } else {
-                        console.log('تم إلغاء تثبيت التطبيق');
-                    }
                     deferredPrompt = null;
                 });
             });
         });
+
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('sw.js')
+                    .then((reg) => console.log('Service Worker registered successfully', reg))
+                    .catch((err) => console.log('Service Worker registration failed', err));
+            });
+        }
     </script>
-    <script>
-    if ('serviceWorker' in navigator) {
-        window.addEventListener('load', () => {
-            navigator.serviceWorker.register('sw.js')
-                .then((reg) => console.log('Service Worker registered successfully', reg))
-                .catch((err) => console.log('Service Worker registration failed', err));
-        });
-    }
-</script>
 </body>
 </html>

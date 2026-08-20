@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>مغامرة الأميرة ليلى - قصة واقعية تفاعلية</title>
+  
+  <!-- Bootstrap 5 RTL CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.rtl.min.css">
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+  <!-- Google Fonts: Tajawal -->
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@500;700;900&display=swap" rel="stylesheet">
+
+  <style>
+    html, body {
+      height: 100%;
+      height: 100dvh;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      font-family: 'Tajawal', sans-serif;
+      background: linear-gradient(135deg, #3a0ca3 0%, #111827 100%);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .app-header {
+      flex: 0 0 auto;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(5px);
+      border-bottom: 2px solid #e9ecef;
+      z-index: 10;
+    }
+
+    .brand-title {
+      font-size: clamp(1rem, 2vh, 1.25rem);
+      font-weight: 800;
+      color: #7209b7;
+    }
+
+    .app-main {
+      flex: 1 1 auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 8px;
+      overflow: hidden;
+    }
+
+    .story-card {
+      width: 100%;
+      max-width: 850px;
+      height: 100%;
+      max-height: 100%;
+      display: flex;
+      flex-direction: column;
+      border-radius: 20px;
+      border: 3px solid #fff;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+      background: rgba(255, 255, 255, 0.98);
+      overflow: hidden;
+    }
+
+    .card-header-compact {
+      flex: 0 0 auto;
+      padding: 8px 12px;
+      background: rgba(255, 255, 255, 0.9);
+      border-bottom: 1px solid #f0f0f0;
+    }
+
+    .progress {
+      height: 8px;
+      border-radius: 10px;
+    }
+
+    .image-container {
+      flex: 1 1 auto;
+      min-height: 120px;
+      position: relative;
+      overflow: hidden;
+      margin: 8px 12px 0 12px;
+      border-radius: 15px;
+      background: #0b0c10;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: inset 0 0 25px rgba(0,0,0,0.6);
+    }
+
+    .image-container svg {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .content-container {
+      flex: 0 1 auto;
+      padding: 10px 15px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .scene-title {
+      font-size: clamp(1.1rem, 2.2vh, 1.5rem);
+      font-weight: 800;
+      color: #7209b7;
+      margin-bottom: 4px;
+    }
+
+    .scene-text {
+      font-size: clamp(0.9rem, 1.9vh, 1.25rem);
+      line-height: 1.5;
+      color: #374151;
+      margin-bottom: 0;
+      font-weight: 500;
+    }
+
+    .card-footer-compact {
+      flex: 0 0 auto;
+      padding: 8px 15px;
+      background: #f8f9fa;
+      border-top: 1px solid #eee;
+    }
+
+    .control-btn {
+      font-size: clamp(0.85rem, 1.6vh, 1.05rem);
+      border-radius: 50px;
+      padding: 6px 18px;
+    }
+
+    .app-footer {
+      flex: 0 0 auto;
+      background: rgba(255, 255, 255, 0.95);
+      border-top: 1px solid #e9ecef;
+      font-size: 0.85rem;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- TOP HEADER -->
+  <header class="app-header py-2 px-3 shadow-sm">
+    <div class="container-fluid d-flex justify-content-between align-items-center p-0">
+      <div class="brand-title d-flex align-items-center gap-2">
+        <span class="fs-4">👑</span>
+<span>مغامرة الأميرة ليلى </span>
+      </div>
+
+      <div class="d-flex align-items-center gap-2">
+        <button id="btnShare" class="btn btn-sm btn-primary rounded-pill px-3 d-flex align-items-center gap-1">
+          <i class="bi bi-share-fill"></i>
+          <span class="d-none d-sm-inline fw-bold">مشاركة</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN STORY VIEWPORT -->
+  <main class="app-main">
+    <div class="card story-card">
+      
+      <div class="card-header-compact">
+        <div class="d-flex justify-content-between align-items-center mb-1">
+          <span id="sceneBadge" class="badge bg-primary px-3 py-1 rounded-pill" style="background-color: #7209b7 !important;">المشهد 1 من 20</span>
+          <span id="progressText" class="small fw-bold text-secondary">5%</span>
+        </div>
+        <div class="progress">
+          <div id="storyProgress" class="progress-bar progress-bar-striped progress-bar-animated" style="width: 5%; background-color: #7209b7;"></div>
+        </div>
+      </div>
+
+      <!-- Vector Professional Princess Art Container -->
+      <div id="imageContainer" class="image-container"></div>
+
+      <div class="content-container">
+        <h2 id="sceneTitle" class="scene-title">...</h2>
+        <p id="sceneText" class="scene-text">...</p>
+      </div>
+
+      <div class="card-footer-compact d-flex justify-content-between align-items-center gap-2">
+        <button id="btnPrev" class="btn btn-outline-primary control-btn" style="color: #7209b7; border-color: #7209b7;">
+          <i class="bi bi-arrow-right"></i> السابق
+        </button>
+        <button id="btnRestart" class="btn btn-sm btn-light border text-secondary rounded-circle" style="width: 36px; height: 36px;" title="إعادة البدء">
+          <i class="bi bi-arrow-counterclockwise"></i>
+        </button>
+        <button id="btnNext" class="btn text-white control-btn" style="background-color: #7209b7;">
+          التالي <i class="bi bi-arrow-left"></i>
+        </button>
+      </div>
+
+    </div>
+  </main>
+
+  <footer class="app-footer py-2 px-3">
+    <div class="container-fluid d-flex justify-content-between align-items-center flex-wrap gap-2 p-0">
+      <div class="text-secondary small">
+        تم التصميم والتطوير بواسطة 
+        <a href="https://me.haythamzeidan.workers.dev/" class="text-decoration-none fw-bold" style="color: #7209b7;">هيثم زيدان</a>
+      </div>
+    </div>
+  </footer>
+
+<!-- JavaScript Logic & Professional Princess Engine -->
+<script>
+  const storyData = [
+    { title: "1. الجواهر البللورية 💎", text: "في صباح مشرق بحديقة القصر، كانت الأميرة ليلى تتنزه بين الورود، فعثرت على تاج صغير مرصع بجواهر بللورية سحرية تنير ببريق دافئ!" },
+    { title: "2. الاستعداد للرحلة الملكية 🎒", text: "تفحصت ليلى التتاج بتركيز، ولاحظت نقشاً لخريطة سرية تقود نحو أبراج الحكمة المخبأة، فجهزت حقيبتها الملكية وانطلقت." },
+    { title: "3. السير بين أزهار القصر 🌸", text: "بدأت ليلى رحلتها ماشية بثقة بين الأزهار المتفتحة والفراشات الملونة، بينما كانت النسائم اللطيفة تداعب فستانها الملكي." },
+    { title: "4. صوت استغاثة خافت 🐾", text: "بينما كانت تسير بالقرب من النافورة القديمة، سمعت ليلى صوتاً خافتاً يشبه الاستغاثة يأتي من خلف الشجيرات الكثيفة." },
+    { title: "5. لقاء الأرنب الضائع 🐰", text: "اقتربت ليلى لترَ أرنباً صغيراً ضاع منه الطريق وأصبح خائفاً وحيداً." },
+    { title: "6. مساعدة الأصدقاء 🤝", text: "لم تتردد الأميرة الكريمة لحظة؛ بل مدت يدها بلطف وقادت الأرنب الصغير حتى أعادته سالماً إلى عائلته." },
+    { title: "7. هدية العائلة السحرية ✨", text: "شكرت عائلة الأرنب الأميرة ليلى بحرارة، وأهدوها قلادة براقة تضيء عتمة الطرقات المظلمة." },
+    { title: "8. الوصول إلى النهر العريض 🌊", text: "تابعت ليلى مسيرها حتى وصلت إلى نهر جاري ومياه صافية، ولم يكن هناك جسر مباشر للعبور." },
+    { title: "9. عبور الحجارة السحرية 🪨", text: "استخدمت ليلى ذكاءها وخطت بخفة وثبات على الحجارة البارزة وسط النهر حتى عبرت إلى الضفة الأخرى بأمان." },
+    { title: "10. الضفة المقابلة المزهرة 🌿", text: "وصلت الأميرة إلى الضفة المقابلة المغطاة بالأعشاب الطازجة والزهور النادرة واستنشقت عبيرها المنعش بسعادة." },
+    { title: "11. البومة الحكيمة 🦉", text: "التقت هناك ببومة حكيمة وقفت على فرع شجرة عتيقة وقالت لها بود: لن تجتازي الأبراج حتى تحلّي لغزي!" },
+    { title: "12. لغز النبل والقلب 🤔", text: "سألتها البومة: ما هو التاج الحقيقي الذي لا يحتاج إلى ذهب أو ماس لكي يزين الرأس؟ فقالت ليلى بثقة: إنه تاج التواضع وطيبة القلب!" },
+    { title: "13. مفتاح البرج العتيق 🔑", text: "أعجبت البومة بحكمة الأميرة وسلمتها مفتاحاً ذهبياً عتيقاً يفتح باب البرج السحري." },
+    { title: "14. صعود البرج المنيف 🏰", text: "صعدت ليلى درجات البرج الخشبي القديم حتى وصلت للباب العالي، وأدخلت المفتاح الذهبي فدار القفل بانسيابية تامة." },
+    { title: "15. فتح الباب والداخل المضيء ✨", text: "انفتح الباب ببطء ليكشف عن مكتبة ملكية قديمة مليئة بالكتب المضيئة واللفائف السحرية." },
+    { title: "16. صندوق الكنز الملكي 📦", text: "في منتصف الغرفة، وجدت ليلى صندوقاً ملكياً فاخراً ينبعث منه ضوء دافئ وجميل." },
+    { title: "17. مفاجأة الكنز الحقيقي 🎁", text: "فتحت ليلى الصندوق.. ليكتشف الجميع أنه مليء بأجمل قصص المعرفة والحلويات الشهية لتوزيعها على أطفال المملكة!" },
+    { title: "18. دعوة الأصدقاء للاحتفال 🎉", text: "أدركت ليلى أن الكنز الحقيقي هو نشر الفرحة، فدعت الأرنب والبومة وباقي سكان الغابة للاحتفال." },
+    { title: "19. وقت الغروب الهادئ 🌅", text: "قضت المجموعة وقتاً ممتعاً بالبهجة والمرح حتى غربت الشمس وصبغت السماء بألوان ساحرة." },
+    { title: "20. أحلام سعيدة يا ليلى 🌙", text: "عادت الأميرة إلى غرفتها بالقلعة الدافئة، أغمضت عينيها بارتياح وقالت: أجمل تيجان الحياة هي خدمة الآخرين ومحبتهم." }
+  ];
+
+  const princessDefs = `
+    <defs>
+      <!-- تدرج ملكي لفستان الأميرة وليلى -->
+      <radialGradient id="princessDress" cx="50%" cy="50%" r="50%">
+        <stop offset="0%" stop-color="#f72585"/>
+        <stop offset="60%" stop-color="#7209b7"/>
+        <stop offset="100%" stop-color="#3a0ca3"/>
+      </radialGradient>
+      <linearGradient id="princessHair" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#ffd166"/>
+        <stop offset="100%" stop-color="#f4a261"/>
+      </linearGradient>
+    </defs>
+  `;
+
+  // أميرة واقعية واحترافية (فستان ملكي، تاج ذهبي، شعر منسدل، ملامح لطيفة)
+  const realisticPrincess = (x, y, scale = 1, pose = "stand", flip = 1) => {
+    return `
+      <g transform="translate(${x},${y}) scale(${scale * flip}, ${scale})">
+        <!-- الفستان الملكي الواسع -->
+        <path d="M-22,15 Q0,45 22,15 L12,0 L-12,0 Z" fill="url(#princessDress)" stroke="#3a0ca3" stroke-width="1.5"/>
+        
+        <!-- الأذرع الرقيقة -->
+        <path d="M-12,5 L-22,15 M12,5 L22,15" fill="none" stroke="#fcd34d" stroke-width="3" stroke-linecap="round"/>
+
+        <!-- الجذع العلوي -->
+        <rect x="-10" y="-8" width="20" height="15" rx="4" fill="#fcd34d" stroke="#3a0ca3" stroke-width="1"/>
+
+        <!-- الشعر المنسدل الجميل -->
+        <path d="M-10,-12 Q0,-25 10,-12 Q14,5 8,10 Q0,15 -8,10 Q-14,5 -10,-12 Z" fill="url(#princessHair)"/>
+
+        <!-- الوجه -->
+        <circle cx="0" cy="-12" r="7" fill="#fde68a" stroke="#d97706" stroke-width="0.8"/>
+        <circle cx="-2" cy="-13" r="1.2" fill="#111"/>
+        <circle cx="2" cy="-13" r="1.2" fill="#111"/>
+        <path d="M-2,-9 Q0,-7 2,-9" fill="none" stroke="#d97706" stroke-width="0.8" stroke-linecap="round"/>
+
+        <!-- التاج الملكي الذهبي -->
+        <polygon points="-5,-19 -8,-25 0,-21 8,-25 5,-19" fill="#ffd700" stroke="#b8860b" stroke-width="1"/>
+      </g>
+    `;
+  };
+
+  // أرنب صغير لطيف
+  const cuteBunny = (x, y, scale = 1, flip = 1) => `
+    <g transform="translate(${x},${y}) scale(${scale * flip}, ${scale})">
+      <ellipse cx="0" cy="10" rx="14" ry="10" fill="#f8f9fa" stroke="#ccc" stroke-width="1"/>
+      <circle cx="10" cy="2" r="8" fill="#f8f9fa" stroke="#ccc" stroke-width="1"/>
+      <!-- الأذنان الطويلتان -->
+      <ellipse cx="7" cy="-10" rx="3" ry="10" fill="#f8f9fa" stroke="#ccc" stroke-width="1"/>
+      <ellipse cx="13" cy="-9" rx="3" ry="10" fill="#f8f9fa" stroke="#ccc" stroke-width="1"/>
+      <circle cx="13" cy="1" r="1.5" fill="#111"/>
+      <rect x="-8" y="18" width="3" height="10" rx="1.5" fill="#f8f9fa"/>
+      <rect x="4" y="18" width="3" height="10" rx="1.5" fill="#f8f9fa"/>
+    </g>
+  `;
+
+  function generatePrincessStorySVG(index) {
+    const sceneNum = index + 1;
+    let sceneContent = "";
+
+    switch(sceneNum) {
+      case 1: // الت تاج البللوري بحديقة القصر
+        sceneContent = `
+          <rect width="800" height="500" fill="#90e0ef"/>
+          <circle cx="700" cy="90" r="70" fill="#ffb703" opacity="0.8"/>
+          <path d="M0,370 Q400,310 800,370 L800,500 L0,500 Z" fill="#55a630"/>
+          <!-- التاج البللوري -->
+          <g transform="translate(470, 360)">
+            <polygon points="-12,-6 -18,-16 0,-10 18,-16 12,-6" fill="#ffd700" stroke="#7209b7" stroke-width="1.5"/>
+            <circle cx="0" cy="-10" r="3" fill="#f72585"/>
+          </g>
+          ${realisticPrincess(300, 325, 1.2, "stand")}
+        `;
+        break;
+
+      case 2: // الحقيبة الملكية
+        sceneContent = `
+          <rect width="800" height="500" fill="#fefae0"/>
+          <rect x="100" y="280" width="600" height="220" fill="#dda15e" stroke="#bc6c25" stroke-width="3"/>
+          <rect x="220" y="190" width="130" height="140" rx="15" fill="#7209b7" stroke="#3a0ca3" stroke-width="3"/>
+          <rect x="250" y="230" width="70" height="50" rx="5" fill="#f72585"/>
+          ${realisticPrincess(400, 265, 1.25, "stand")}
+        `;
+        break;
+
+      case 3: // السير بين الأزهار
+        sceneContent = `
+          <rect width="800" height="500" fill="#52b788"/>
+          <path d="M0,380 Q400,280 800,380 L800,500 L0,500 Z" fill="#40916c"/>
+          <circle cx="200" cy="420" r="22" fill="#f72585"/>
+          <circle cx="600" cy="400" r="25" fill="#ffd700"/>
+          ${realisticPrincess(380, 330, 1.2, "stand")}
+        `;
+        break;
+
+      case 4: // صوت النداء قرب النافورة
+        sceneContent = `
+          <rect width="800" height="500" fill="#40916c"/>
+          <path d="M300,500 C300,280 600,280 600,500 Z" fill="#6c757d"/>
+          ${realisticPrincess(220, 350, 1.2, "stand")}
+          <text x="510" y="220" font-size="50" fill="#fff" font-weight="bold">مساعدة...!</text>
+        `;
+        break;
+
+      case 5: // لقاء الأرنب الصغير
+        sceneContent = `
+          <rect width="800" height="500" fill="#74c69d"/>
+          <path d="M0,390 Q400,330 800,390 L800,500 L0,500 Z" fill="#40916c"/>
+          ${cuteBunny(490, 390, 1.4)}
+          ${realisticPrincess(260, 340, 1.2, "stand")}
+        `;
+        break;
+
+      case 6: // مساعدة الأرنب
+        sceneContent = `
+          <rect width="800" height="500" fill="#95d5b2"/>
+          <path d="M0,390 Q400,330 800,390 L800,500 L0,500 Z" fill="#52b788"/>
+          ${realisticPrincess(320, 340, 1.2, "stand")}
+          ${cuteBunny(500, 390, 1.2, -1)}
+        `;
+        break;
+
+      case 7: // هدية القلادة السحرية البراقة
+        sceneContent = `
+          <rect width="800" height="500" fill="#b7e4c7"/>
+          <path d="M0,390 Q400,330 800,390 L800,500 L0,500 Z" fill="#52b788"/>
+          <!-- قلادة براقة -->
+          <circle cx="330" cy="335" r="8" fill="#f72585" stroke="#ffd700" stroke-width="2"/>
+          ${realisticPrincess(320, 340, 1.2, "stand")}
+          ${cuteBunny(550, 380, 1.2, -1)}
+        `;
+        break;
+
+      case 8: // الوصول للنهر العريض
+        sceneContent = `
+          <rect width="800" height="500" fill="#2d6a4f"/>
+          <path d="M220,0 Q420,250 120,500 L800,500 L800,0 Z" fill="#0077b6"/>
+          ${realisticPrincess(100, 350, 1.2, "stand")}
+        `;
+        break;
+
+      case 9: // عبور الحجارة السحرية
+        sceneContent = `
+          <rect width="800" height="500" fill="#0077b6"/>
+          <ellipse cx="300" cy="350" rx="40" ry="20" fill="#6c757d" stroke="#343a40" stroke-width="2"/>
+          <ellipse cx="500" cy="280" rx="45" ry="22" fill="#6c757d" stroke="#343a40" stroke-width="2"/>
+          ${realisticPrincess(450, 230, 1.1, "stand")}
+        `;
+        break;
+
+      case 10: // الضفة المزهرة المقابلة
+        sceneContent = `
+          <rect width="800" height="500" fill="#0096c7"/>
+          <path d="M0,300 Q400,250 800,300 L800,500 L0,500 Z" fill="#55a630"/>
+          <circle cx="200" cy="380" r="18" fill="#ff5964"/>
+          <circle cx="600" cy="400" r="20" fill="#ffb703"/>
+          ${realisticPrincess(400, 310, 1.3, "stand")}
+        `;
+        break;
+
+      case 11: // البومة الحكيمة
+        sceneContent = `
+          <rect width="800" height="500" fill="#40916c"/>
+          <path d="M0,370 Q400,310 800,370 L800,500 L0,500 Z" fill="#2d6a4f"/>
+          <path d="M550,500 L550,200 L580,200 L580,500 Z" fill="#3d2817"/>
+          <!-- بومة حكيمة -->
+          <ellipse cx="565" cy="180" rx="14" ry="12" fill="#603813"/>
+          <circle cx="560" cy="175" r="4" fill="#ffd700"/>
+          ${realisticPrincess(250, 350, 1.2, "stand")}
+        `;
+        break;
+
+      case 12: // حل اللغز الملكي
+        sceneContent = `
+          <rect width="800" height="500" fill="#2d6a4f"/>
+          ${realisticPrincess(200, 350, 1.2, "stand")}
+          <g transform="translate(400, 180)">
+            <rect x="-100" y="-20" width="200" height="40" rx="10" fill="#fff"/>
+            <text x="0" y="5" font-size="16" fill="#000" text-anchor="middle">تاج التواضع وطيبة القلب!</text>
+          </g>
+        `;
+        break;
+
+      case 13: // المفتاح الذهبي
+        sceneContent = `
+          <rect width="800" height="500" fill="#52b788"/>
+          ${realisticPrincess(240, 340, 1.2, "stand")}
+          <g transform="translate(420, 250)">
+            <circle cx="0" cy="0" r="16" fill="none" stroke="#ffd700" stroke-width="4"/>
+            <rect x="14" y="-3" width="35" height="6" fill="#ffd700"/>
+          </g>
+        `;
+        break;
+
+      case 14: // صعود البرج العتيق
+        sceneContent = `
+          <rect width="800" height="500" fill="#3a0ca3"/>
+          <path d="M250,500 L400,100 L550,500 Z" fill="#7209b7"/>
+          <rect x="350" y="340" width="100" height="160" fill="#f72585"/>
+          ${realisticPrincess(220, 390, 1.1, "stand")}
+        `;
+        break;
+
+      case 15: // الداخل المضيء بالكتب السحرية
+        sceneContent = `
+          <rect width="800" height="500" fill="#7209b7"/>
+          <rect x="250" y="150" width="300" height="250" fill="#3a0ca3" rx="10"/>
+          ${realisticPrincess(380, 330, 1.2, "stand")}
+        `;
+        break;
+
+      case 16: // صندوق الكنز الملكي الفاخر
+        sceneContent = `
+          <rect width="800" height="500" fill="#240046"/>
+          <g transform="translate(350, 330)">
+            <circle cx="50" cy="0" r="130" fill="#ffd700" opacity="0.2"/>
+            <rect x="-30" y="20" width="160" height="90" rx="10" fill="#582f0e" stroke="#ffd700" stroke-width="4"/>
+            <path d="M-30,20 Q50,-40 130,20 Z" fill="#7f4f24" stroke="#ffd700" stroke-width="4"/>
+          </g>
+          ${realisticPrincess(190, 380, 1.2, "stand")}
+        `;
+        break;
+
+      case 17: // الكتب السحرية والحلويات
+        sceneContent = `
+          <rect width="800" height="500" fill="#48cae4"/>
+          <g transform="translate(350, 280)">
+            <rect x="-20" y="50" width="140" height="70" rx="5" fill="#582f0e" stroke="#ffd700" stroke-width="3"/>
+            <!-- كتاب -->
+            <rect x="15" y="25" width="40" height="25" fill="#f72585"/>
+          </g>
+          ${realisticPrincess(210, 370, 1.2, "stand")}
+        `;
+        break;
+
+      case 18: // الاحتفال مع الأصدقاء
+        sceneContent = `
+          <rect width="800" height="500" fill="#ffb703"/>
+          <path d="M0,390 Q400,330 800,390 L800,500 L0,500 Z" fill="#fb8500"/>
+          ${realisticPrincess(340, 350, 1.2, "stand")}
+          ${cuteBunny(580, 390, 1.3, -1)}
+        `;
+        break;
+
+      case 19: // رحلة العودة عند الغروب
+        sceneContent = `
+          <rect width="800" height="500" fill="#e76f51"/>
+          <circle cx="400" cy="240" r="95" fill="#ffb703"/>
+          <path d="M0,390 Q400,310 800,390 L800,500 L0,500 Z" fill="#1f2937"/>
+          ${realisticPrincess(400, 340, 1.2, "stand")}
+        `;
+        break;
+
+      case 20: // أحلام سعيدة بالقلعة
+        sceneContent = `
+          <rect width="800" height="500" fill="#111827"/>
+          <circle cx="680" cy="100" r="45" fill="#f8f9fa"/>
+          <!-- غرفة النوم الملكية -->
+          <rect x="230" y="310" width="340" height="110" rx="15" fill="#7209b7"/>
+          <path d="M230,330 Q400,280 570,330 L570,420 L230,420 Z" fill="#3a0ca3"/>
+          ${realisticPrincess(360, 325, 1, "stand")}
+          <text x="400" y="220" font-size="28" fill="#90e0ef" font-family="sans-serif">Zzz...</text>
+        `;
+        break;
+    }
+
+    return `<svg viewBox="0 0 800 500" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">${princessDefs}${sceneContent}</svg>`;
+  }
+
+  let currentIndex = 0;
+  const sceneTitle = document.getElementById("sceneTitle");
+  const sceneText = document.getElementById("sceneText");
+  const imageContainer = document.getElementById("imageContainer");
+  const sceneBadge = document.getElementById("sceneBadge");
+  const storyProgress = document.getElementById("storyProgress");
+  const progressText = document.getElementById("progressText");
+  const btnPrev = document.getElementById("btnPrev");
+  const btnNext = document.getElementById("btnNext");
+  const btnRestart = document.getElementById("btnRestart");
+  const btnShare = document.getElementById("btnShare");
+ 
+  let deferredPrompt = null;
+
+  function renderScene(index) {
+    currentIndex = index;
+    const scene = storyData[currentIndex];
+    
+    sceneTitle.innerText = scene.title;
+    sceneText.innerText = scene.text;
+    imageContainer.innerHTML = generatePrincessStorySVG(currentIndex);
+
+    const progressPercent = Math.round(((currentIndex + 1) / storyData.length) * 100);
+    sceneBadge.innerText = `المشهد ${currentIndex + 1} من ${storyData.length}`;
+    storyProgress.style.width = `${progressPercent}%`;
+    progressText.innerText = `${progressPercent}%`;
+
+    btnPrev.disabled = currentIndex === 0;
+    if (currentIndex === storyData.length - 1) {
+      btnNext.innerHTML = 'النهاية 🎉';
+      btnNext.classList.replace('text-white', 'text-dark');
+      btnNext.style.backgroundColor = '#ffd700';
+    } else {
+      btnNext.innerHTML = 'التالي <i class="bi bi-arrow-left"></i>';
+      btnNext.classList.replace('text-dark', 'text-white');
+      btnNext.style.backgroundColor = '#7209b7';
+    }
+  }
+
+  btnNext.onclick = () => {
+    if (currentIndex < storyData.length - 1) renderScene(currentIndex + 1);
+    else renderScene(0);
+  };
+  btnPrev.onclick = () => { if (currentIndex > 0) renderScene(currentIndex - 1); };
+  btnRestart.onclick = () => renderScene(0);
+
+  btnShare.onclick = async () => {
+    if (navigator.share) {
+      try {
+        await navigator.share({
+          title: 'قصة مغامرة الأميرة ليلى',
+          text: 'اقرأ قصة الأطفال التفاعلية الجديدة للأميرة ليلى!',
+          url: window.location.href,
+        });
+      } catch (err) {}
+    } else {
+      navigator.clipboard.writeText(window.location.href);
+      alert('تم النسخ بنجاح!');
+    }
+  };
+
+  
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowLeft') btnNext.click();
+    if (e.key === 'ArrowRight') btnPrev.click();
+  });
+
+  window.onload = () => renderScene(0);
+</script>
+</body>
+</html>

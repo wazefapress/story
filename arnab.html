@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>مغامرة الأرنب سمسم - تصميم أرنب واقعي جديد</title>
+  
+  <!-- Bootstrap 5 RTL CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.rtl.min.css">
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+  <!-- Google Fonts: Tajawal -->
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@500;700;900&display=swap" rel="stylesheet">
+
+  <style>
+    html, body {
+      height: 100%;
+      height: 100dvh;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      font-family: 'Tajawal', sans-serif;
+      background: linear-gradient(135deg, #111827 0%, #1f2937 100%);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .app-header {
+      flex: 0 0 auto;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(5px);
+      border-bottom: 2px solid #e9ecef;
+      z-index: 10;
+    }
+
+    .brand-title {
+      font-size: clamp(1rem, 2vh, 1.25rem);
+      font-weight: 800;
+      color: #1f2937;
+    }
+
+    .app-main {
+      flex: 1 1 auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 8px;
+      overflow: hidden;
+    }
+
+    .story-card {
+      width: 100%;
+      max-width: 850px;
+      height: 100%;
+      max-height: 100%;
+      display: flex;
+      flex-direction: column;
+      border-radius: 20px;
+      border: 3px solid #fff;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+      background: rgba(255, 255, 255, 0.98);
+      overflow: hidden;
+    }
+
+    .card-header-compact {
+      flex: 0 0 auto;
+      padding: 8px 12px;
+      background: rgba(255, 255, 255, 0.9);
+      border-bottom: 1px solid #f0f0f0;
+    }
+
+    .progress {
+      height: 8px;
+      border-radius: 10px;
+    }
+
+    .image-container {
+      flex: 1 1 auto;
+      min-height: 120px;
+      position: relative;
+      overflow: hidden;
+      margin: 8px 12px 0 12px;
+      border-radius: 15px;
+      background: #0b0c10;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: inset 0 0 25px rgba(0,0,0,0.6);
+    }
+
+    .image-container svg {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .content-container {
+      flex: 0 1 auto;
+      padding: 10px 15px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .scene-title {
+      font-size: clamp(1.1rem, 2.2vh, 1.5rem);
+      font-weight: 800;
+      color: #1f2937;
+      margin-bottom: 4px;
+    }
+
+    .scene-text {
+      font-size: clamp(0.9rem, 1.9vh, 1.25rem);
+      line-height: 1.5;
+      color: #374151;
+      margin-bottom: 0;
+      font-weight: 500;
+    }
+
+    .card-footer-compact {
+      flex: 0 0 auto;
+      padding: 8px 15px;
+      background: #f8f9fa;
+      border-top: 1px solid #eee;
+    }
+
+    .control-btn {
+      font-size: clamp(0.85rem, 1.6vh, 1.05rem);
+      border-radius: 50px;
+      padding: 6px 18px;
+    }
+
+    .app-footer {
+      flex: 0 0 auto;
+      background: rgba(255, 255, 255, 0.95);
+      border-top: 1px solid #e9ecef;
+      font-size: 0.85rem;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- TOP HEADER -->
+  <header class="app-header py-2 px-3 shadow-sm">
+    <div class="container-fluid d-flex justify-content-between align-items-center p-0">
+      <div class="brand-title d-flex align-items-center gap-2">
+        <span class="fs-4">🐇</span>
+<span>مغامرة الأرنب سمسم</span>
+      </div>
+
+      <div class="d-flex align-items-center gap-2">
+     
+        <button id="btnShare" class="btn btn-sm btn-primary rounded-pill px-3 d-flex align-items-center gap-1">
+          <i class="bi bi-share-fill"></i>
+          <span class="d-none d-sm-inline fw-bold">مشاركة</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN STORY VIEWPORT -->
+  <main class="app-main">
+    <div class="card story-card">
+      
+      <div class="card-header-compact">
+        <div class="d-flex justify-content-between align-items-center mb-1">
+          <span id="sceneBadge" class="badge bg-primary px-3 py-1 rounded-pill">المشهد 1 من 20</span>
+          <span id="progressText" class="small fw-bold text-secondary">5%</span>
+        </div>
+        <div class="progress">
+          <div id="storyProgress" class="progress-bar bg-warning progress-bar-striped progress-bar-animated" style="width: 5%;"></div>
+        </div>
+      </div>
+
+      <!-- Vector Professional Art Container -->
+      <div id="imageContainer" class="image-container"></div>
+
+      <div class="content-container">
+        <h2 id="sceneTitle" class="scene-title">...</h2>
+        <p id="sceneText" class="scene-text">...</p>
+      </div>
+
+      <div class="card-footer-compact d-flex justify-content-between align-items-center gap-2">
+        <button id="btnPrev" class="btn btn-outline-primary control-btn">
+          <i class="bi bi-arrow-right"></i> السابق
+        </button>
+        <button id="btnRestart" class="btn btn-sm btn-light border text-secondary rounded-circle" style="width: 36px; height: 36px;" title="إعادة البدء">
+          <i class="bi bi-arrow-counterclockwise"></i>
+        </button>
+        <button id="btnNext" class="btn btn-primary control-btn">
+          التالي <i class="bi bi-arrow-left"></i>
+        </button>
+      </div>
+
+    </div>
+  </main>
+
+  <footer class="app-footer py-2 px-3">
+    <div class="container-fluid d-flex justify-content-between align-items-center flex-wrap gap-2 p-0">
+      <div class="text-secondary small">
+        تم التصميم والتطوير بواسطة 
+        <a href="https://me.haythamzeidan.workers.dev/" class="text-decoration-none fw-bold text-primary">هيثم زيدان</a>
+      </div>
+    </div>
+  </footer>
+
+<!-- JavaScript Logic & Upgraded Realistic Rabbit Engine -->
+<script>
+  const storyData = [
+    { title: "1. الخريطة المنسية 🗺️", text: "في صباح يوم مشمس، كان الأرنب الصغير سمسم يلعب تحت شجرة البلوط، وفجأة وجد خريطة كنز قديمة ملفوفة برباط ذهبي!" },
+    { title: "2. الاستعداد للمغامرة 🎒", text: "حزم سمسم حقيبته الصغيرة، ووضع فيها تفاحة للقمة العيش ورضاعة ماء، وقرر أن يبدأ رحلته للبحث عن الكنز العجيب." },
+    { title: "3. دخول غابة العجائب 🌲", text: "خطا سمسم خطواته الأولى داخل الغابة الكثيفة. كانت الأشجار عالية جداً والعصافير تغني بأجمل الألحان لتررحب به." },
+    { title: "4. صوت بكاء حزين 🐦", text: "بينما كان يسير، سمع سمسم صوت بكاء خفيف خلف إحدى الشجيرات. اقترب ببطء ليرى ما الذي يحدث هناك." },
+    { title: "5. لقاء العصفور كوكو 🐥", text: "وجد سمسم العصفور الصغير كوكو يبكي لأنه سقط من عشه ولا يستطيع الطيران حتى الآن للعودة إلى والدته." },
+    { title: "6. اليد المساعدة 🤝", text: "لم يفكر سمسم مرتين! تسلق الشجرة بحرص وأعاد العصفور كوكو بأمان إلى عشه الدافئ بين إخوته." },
+    { title: "7. هدية العصفور 🪶", text: "ابتسمت أم العصفور وشكرت سمسم، وإهداءً لشهامته أعطته ريشة زرقاء سحرية تساعده عند الحاجة." },
+    { title: "8. الوصول إلى النهر 🌊", text: "تابع سمسم طريقه حتى وصل إلى النهر الهمّاس. كان الماء يتدفق بسرعة ولم يكن هناك جسر للعبور!" },
+    { title: "9. التفكير في حيلة 💡", text: "جلس سمسم يفكر.. ثم تذكر الريشة السحرية! وضعها على سطح الماء فتجمعت جذوع الأشجار لتصنع طوفاً صغيراً." },
+    { title: "10. عبور النهر بسلام 🚣", text: "ركب سمسم الطوف وركب معه نسيم الهواء اللطيف حتى وصل بأمان إلى الضفة الثانية من النهر." },
+    { title: "11. السلحفاة توتا الحكيمة 🐢", text: "على الضفة الأخرى، التقى سمسم بالسلحفاة الحكيمة توتا. قالت له: لن تمر حتى تجيب على لغزي اللطيف!" },
+    { title: "12. لغز السلحفاة 🤔", text: "سألت توتا: ما هو الشيء الذي يكبر كلما أطعمته، ويموت إذا سقيته ماءً؟ فكر سمسم وقال ضاحكاً: إنها النار!" },
+    { title: "13. المفتاح الفضي 🔑", text: "دهشت السلحفاة بذكاء سمسم، وقدمت له مفتاحاً فضياً لامعاً وقالت: هذا المفتاح يفتح باب مغارة البلور!" },
+    { title: "14. مدخل المغارة 🏔️", text: "وصل سمسم إلى الجبل الكبير ووجد باب المغارة. أدخل المفتاح الفضي ودار القفل ففتحت المغارة أبوابها." },
+    { title: "15. الفطر المضيء 🍄", text: "كانت المغارة مظلمة قليلاً، لكن فجأة أضاءت أنواع غريبة من الفطر المضيء باللون الأزرق والوردي لتنير له الطريق." },
+    { title: "16. صندوق الكنز العجيب 📦", text: "في منتصف المغارة، وجد سمسم صندوقاً خشبياً مزخرفاً بالذهب ينبعث منه ضوء دافئ براق!" },
+    { title: "17. مفاجأة الكنز! 🥕📚", text: "فتح سمسم الصندوق.. ولم يجد ذهباً أو جواهراً، بل وجد كتب قصص ممتعة وكثيراً من الجزر الذهبي اللذيذ!" },
+    { title: "18. دعوة الأصدقاء 🎉", text: "أدرك سمسم أن أجمل ما في الكنز هو مشاركته! فدعا كوكو العصفور والسلحفاة توتا وباقي الحيوانات للاحتفال." },
+    { title: "19. رحلة العودة عند الغروب 🌅", text: "عادت الحيوانات إلى منازلها وهي سعيدة وتقرأ قصصاً جميلة. وعاد سمسم إلى بيته مع اختفاء آخر أشعة للشمس." },
+    { title: "20. أحلام سعيدة يا بطل 🌙", text: "استلقى سمسم في سريره الدافئ ابتسم وقال: المشاركة هي الكنز الحقيقي! ثم أغمض عينيه ونام بسلام." }
+  ];
+
+  const proDefs = `
+    <defs>
+      <!-- تدرج احترافي لفراء الأرنب البري الرمادي/الفضي الجديد -->
+      <radialGradient id="newRabbitFur" cx="50%" cy="50%" r="50%">
+        <stop offset="0%" stop-color="#f0ebd8"/>
+        <stop offset="55%" stop-color="#c5bbc0"/>
+        <stop offset="85%" stop-color="#8d7d85"/>
+        <stop offset="100%" stop-color="#5c5258"/>
+      </radialGradient>
+      <linearGradient id="newEarInner" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#ffb703"/>
+        <stop offset="100%" stop-color="#ff758f"/>
+      </linearGradient>
+      <linearGradient id="proBirdFeather" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0%" stop-color="#dda15e"/>
+        <stop offset="50%" stop-color="#bc6c25"/>
+        <stop offset="100%" stop-color="#603813"/>
+      </linearGradient>
+      <linearGradient id="proRiver" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#48cae4"/>
+        <stop offset="50%" stop-color="#0077b6"/>
+        <stop offset="100%" stop-color="#03045e"/>
+      </linearGradient>
+    </defs>
+  `;
+
+  // شكل أرنب جديد كلياً: واقعي، انسيابي، بلون رمادي/فضي طبيعي مع تفاصيل دقيقة
+  const newRealisticRabbit = (x, y, scale = 1, pose = "sit", flip = 1) => {
+    let ears = '';
+    if (pose === "alert") {
+      ears = `
+        <path d="M10,-22 Q20,-85 30,-70 Q40,-55 18,-12" fill="url(#newRabbitFur)" stroke="#3a3237" stroke-width="1.2"/>
+        <path d="M14,-28 Q22,-78 27,-65 Q32,-52 16,-15" fill="url(#newEarInner)"/>
+      `;
+    } else if (pose === "curious") {
+      ears = `
+        <path d="M-10,-20 Q-35,-65 -45,-45 -55,-25 -10,-10" fill="url(#newRabbitFur)" stroke="#3a3237" stroke-width="1.2"/>
+        <path d="M-15,-22 Q-32,-58 -40,-42 -48,-25 -12,-12" fill="url(#newEarInner)"/>
+      `;
+    } else {
+      ears = `
+        <path d="M8,-22 Q16,-78 26,-65 Q36,-52 14,-12" fill="url(#newRabbitFur)" stroke="#3a3237" stroke-width="1.2"/>
+        <path d="M12,-26 Q18,-72 23,-60 Q28,-48 12,-15" fill="url(#newEarInner)"/>
+      `;
+    }
+
+    return `
+      <g transform="translate(${x},${y}) scale(${scale * flip}, ${scale})">
+        <!-- الأرجل الخلفية الطبيعية -->
+        <ellipse cx="-18" cy="20" rx="16" ry="11" fill="#5c5258" stroke="#3a3237" stroke-width="1.2"/>
+        <ellipse cx="-22" cy="25" rx="10" ry="6" fill="#8d7d85"/>
+        <!-- الجسم الانسيابي الطبيعي -->
+        <path d="M-32,12 Q-38,-18 -5,-25 Q25,-22 32,8 Q38,30 20,32 Q-15,35 -32,12 Z" fill="url(#newRabbitFur)" stroke="#3a3237" stroke-width="1.5"/>
+        <!-- منطقة البطن بلون فاتح واقعي -->
+        <path d="M-25,18 Q-5,32 15,22 Q5,28 -25,18 Z" fill="#f8f4ed" opacity="0.7"/>
+        <!-- الكتف والرأس -->
+        <ellipse cx="14" cy="-4" rx="16" ry="14" fill="url(#newRabbitFur)" stroke="#3a3237" stroke-width="1.5"/>
+        <!-- الخد -->
+        <path d="M18,-8 Q30,-5 32,5 Q32,14 20,12 Z" fill="url(#newRabbitFur)"/>
+        <!-- الأذنان -->
+        ${ears}
+        <!-- العين السوداء اللامعة المتميزة -->
+        <ellipse cx="20" cy="-7" rx="3.5" ry="4.5" fill="#111"/>
+        <circle cx="21.5" cy="-8.5" r="1.3" fill="#fff"/>
+        <circle cx="18.5" cy="-5.5" r="0.5" fill="#fff"/>
+        <!-- الأنف -->
+        <path d="M29,-1 Q33,-1 31,3 Q28,3 29,-1 Z" fill="#ff758f"/>
+        <!-- الشاربين -->
+        <path d="M31,3 L48,0 M31,5 L49,6 M31,7 L47,12" stroke="#c5bbc0" stroke-width="0.8" opacity="0.8"/>
+        <!-- الذيل القطني -->
+        <circle cx="-34" cy="10" r="8" fill="#fff" stroke="#e5e5e5" stroke-width="1"/>
+      </g>
+    `;
+  };
+
+  const proBird = (x, y, scale = 1, state = "normal", flip = 1) => `
+    <g transform="translate(${x},${y}) scale(${scale * flip}, ${scale})">
+      <path d="M-5,2 Q10,12 2,22 Q-10,18 -5,2 Z" fill="#4a2e18"/>
+      <ellipse cx="0" cy="5" rx="14" ry="10" fill="url(#proBirdFeather)" stroke="#3a2010" stroke-width="1"/>
+      <circle cx="10" cy="-2" r="8" fill="url(#proBirdFeather)" stroke="#3a2010" stroke-width="1"/>
+      <polygon points="16,-3 23,-1 16,2" fill="#e76f51" stroke="#3a2010" stroke-width="0.5"/>
+      <circle cx="11" cy="-4" r="1.5" fill="#111"/>
+      <circle cx="11.5" cy="-4.5" r="0.5" fill="#fff"/>
+      <path d="M-12,8 L-22,12 L-14,16 Z" fill="#3a2010"/>
+      <path d="M-2,15 L-4,25 M3,15 L1,25" stroke="#3a2010" stroke-width="1.2"/>
+      ${state === "crying" ? `<circle cx="10" cy="2" r="1.5" fill="#48cae4"/>` : ''}
+    </g>
+  `;
+
+  const proTurtle = (x, y, scale = 1, flip = 1) => `
+    <g transform="translate(${x},${y}) scale(${scale * flip}, ${scale})">
+      <ellipse cx="0" cy="5" rx="35" ry="22" fill="#283618" stroke="#38b000" stroke-width="2"/>
+      <ellipse cx="0" cy="3" rx="28" ry="16" fill="#606c38"/>
+      <path d="M0,-13 L0,19 M-15,-5 L15,-5 M-10,10 L10,10" stroke="#283618" stroke-width="1.5"/>
+      <ellipse cx="-38" cy="8" rx="10" ry="7" fill="#38b000" stroke="#283618" stroke-width="1"/>
+      <circle cx="-42" cy="6" r="1.5" fill="#111"/>
+      <rect x="-20" y="15" width="8" height="10" rx="3" fill="#38b000"/>
+      <rect x="12" y="15" width="8" height="10" rx="3" fill="#38b000"/>
+    </g>
+  `;
+
+  function generateProSVG(index) {
+    const sceneNum = index + 1;
+    let sceneContent = "";
+
+    switch(sceneNum) {
+      case 1:
+        sceneContent = `
+          <rect width="800" height="500" fill="#90e0ef"/>
+          <circle cx="700" cy="90" r="70" fill="#ffb703" opacity="0.8"/>
+          <path d="M60,500 L150,230 C90,140 70,70 210,45 C370,20 430,130 370,230 L430,500 Z" fill="#2d6a4f"/>
+          <path d="M110,500 C100,340 130,230 150,200" stroke="#3d2817" stroke-width="40" stroke-linecap="round"/>
+          <path d="M0,370 Q400,310 800,370 L800,500 L0,500 Z" fill="#55a630"/>
+          <g transform="translate(470, 360) rotate(-12)">
+            <rect x="0" y="0" width="105" height="70" rx="4" fill="#faedcd" stroke="#bc6c25" stroke-width="2.5"/>
+            <path d="M15,15 L90,55 M15,55 L90,15" stroke="#d4a373" stroke-width="2" stroke-dasharray="6"/>
+            <circle cx="52" cy="35" r="7" fill="#d90429"/>
+          </g>
+          ${newRealisticRabbit(320, 340, 1.2, "alert")}
+        `;
+        break;
+
+      case 2:
+        sceneContent = `
+          <rect width="800" height="500" fill="#fefae0"/>
+          <rect x="100" y="280" width="600" height="220" fill="#dda15e" stroke="#bc6c25" stroke-width="3"/>
+          <rect x="220" y="190" width="130" height="140" rx="15" fill="#606c38" stroke="#283618" stroke-width="3"/>
+          <circle cx="530" cy="270" r="20" fill="#ae2012"/>
+          <rect x="580" y="220" width="28" height="70" rx="8" fill="#0077b6"/>
+          ${newRealisticRabbit(410, 260, 1.25, "curious")}
+        `;
+        break;
+
+      case 3:
+        sceneContent = `
+          <rect width="800" height="500" fill="#081c15"/>
+          <polygon points="120,0 220,0 520,500 320,500" fill="#fff" opacity="0.08"/>
+          <path d="M-50,500 L140,40 L300,500 Z" fill="#1b4332"/>
+          <path d="M500,500 L660,20 L830,500 Z" fill="#1b4332"/>
+          <path d="M0,380 Q400,320 800,380 L800,500 L0,500 Z" fill="#2d6a4f"/>
+          ${newRealisticRabbit(380, 350, 1.1, "alert")}
+        `;
+        break;
+
+      case 4:
+        sceneContent = `
+          <rect width="800" height="500" fill="#1b4332"/>
+          <path d="M80,500 L180,100 L280,500 Z" fill="#081c15"/>
+          <path d="M350,500 C350,260 800,260 800,500 Z" fill="#0b090a"/>
+          ${newRealisticRabbit(220, 370, 1.2, "curious")}
+          <text x="510" y="220" font-size="55" fill="#caf0f8" font-family="sans-serif" font-weight="bold">...؟</text>
+        `;
+        break;
+
+      case 5:
+        sceneContent = `
+          <rect width="800" height="500" fill="#40916c"/>
+          <path d="M0,410 Q400,360 800,410 L800,500 L0,500 Z" fill="#2d6a4f"/>
+          ${proBird(490, 410, 1.5, "crying")}
+          ${newRealisticRabbit(270, 360, 1.2, "curious")}
+        `;
+        break;
+
+      case 6:
+        sceneContent = `
+          <rect width="800" height="500" fill="#52b788"/>
+          <path d="M130,0 L170,500 L210,500 L170,0 Z" fill="#3d2817"/>
+          <circle cx="170" cy="160" r="95" fill="#2d6a4f"/>
+          <path d="M140,160 C140,130 200,130 200,160 C200,180 140,180 140,160 Z" fill="#bc6c25"/>
+          <g transform="translate(140, 130)">
+            ${proBird(15, 15, 1, "normal")}
+          </g>
+          ${newRealisticRabbit(420, 370, 1.2, "alert")}
+        `;
+        break;
+
+      case 7:
+        sceneContent = `
+          <rect width="800" height="500" fill="#74c69d"/>
+          <path d="M0,390 Q400,330 800,390 L800,500 L0,500 Z" fill="#2d6a4f"/>
+          <g transform="translate(420, 250) rotate(-20) scale(1.6)">
+            <circle cx="0" cy="0" r="22" fill="#48cae4" opacity="0.4"/>
+            <path d="M0,-28 Q18,-10 0,28 Q-18,-10 0,-28 Z" fill="#0077b6" stroke="#90e0ef" stroke-width="1.5"/>
+            <path d="M0,-28 L0,28" stroke="#fff" stroke-width="2"/>
+          </g>
+          ${newRealisticRabbit(250, 350, 1.2, "curious")}
+          ${proBird(570, 330, 1.2, "normal", -1)}
+        `;
+        break;
+
+      case 8:
+        sceneContent = `
+          <rect width="800" height="500" fill="#2d6a4f"/>
+          <path d="M220,0 Q420,250 120,500 L800,500 L800,0 Z" fill="url(#proRiver)"/>
+          <path d="M300,100 Q360,140 270,190" fill="none" stroke="#caf0f8" stroke-width="3" opacity="0.7"/>
+          ${newRealisticRabbit(100, 360, 1.2, "alert")}
+        `;
+        break;
+
+      case 9:
+        sceneContent = `
+          <rect width="800" height="500" fill="url(#proRiver)"/>
+          <circle cx="400" cy="250" r="140" fill="#90e0ef" opacity="0.3"/>
+          <rect x="290" y="280" width="190" height="40" rx="8" fill="#bc6c25" stroke="#3d2817" stroke-width="2"/>
+          <rect x="310" y="265" width="150" height="40" rx="8" fill="#dda15e" stroke="#3d2817" stroke-width="2"/>
+          ${newRealisticRabbit(340, 230, 1.1, "alert")}
+        `;
+        break;
+
+      case 10:
+        sceneContent = `
+          <rect width="800" height="500" fill="#0077b6"/>
+          <path d="M0,290 Q400,250 800,290 L800,500 L0,500 Z" fill="#03045e"/>
+          <g transform="translate(320, 320)">
+            <rect x="0" y="20" width="200" height="35" rx="10" fill="#bc6c25" stroke="#3d2817" stroke-width="2"/>
+            ${newRealisticRabbit(100, -10, 1.2, "alert")}
+          </g>
+        `;
+        break;
+
+      case 11:
+        sceneContent = `
+          <rect width="800" height="500" fill="#40916c"/>
+          <path d="M0,370 Q400,310 800,370 L800,500 L0,500 Z" fill="#2d6a4f"/>
+          ${newRealisticRabbit(210, 350, 1.2, "curious")}
+          ${proTurtle(590, 400, 1.8, -1)}
+        `;
+        break;
+
+      case 12:
+        sceneContent = `
+          <rect width="800" height="500" fill="#2d6a4f"/>
+          ${newRealisticRabbit(190, 350, 1.2, "alert")}
+          ${proTurtle(610, 400, 1.8, -1)}
+          <g transform="translate(400, 190)">
+            <path d="M0,-50 Q-30,0 0,60 Q30,0 0,-50 Z" fill="#e76f51"/>
+            <path d="M0,-20 Q-15,10 0,40 Q15,10 0,-20 Z" fill="#f4a261"/>
+          </g>
+        `;
+        break;
+
+      case 13:
+        sceneContent = `
+          <rect width="800" height="500" fill="#52b788"/>
+          ${newRealisticRabbit(230, 350, 1.2, "alert")}
+          ${proTurtle(610, 400, 1.8, -1)}
+          <g transform="translate(420, 250)">
+            <circle cx="0" cy="0" r="18" fill="none" stroke="#e9ecef" stroke-width="5"/>
+            <rect x="15" y="-4" width="45" height="8" fill="#e9ecef"/>
+            <rect x="45" y="4" width="8" height="12" fill="#e9ecef"/>
+          </g>
+        `;
+        break;
+
+      case 14:
+        sceneContent = `
+          <rect width="800" height="500" fill="#212529"/>
+          <path d="M120,500 L400,70 L680,500 Z" fill="#343a40"/>
+          <path d="M300,500 L300,330 A100,100 0 0,1 500,330 L500,500 Z" fill="#0b090a"/>
+          <path d="M300,500 L300,330 A100,100 0 0,1 500,330 L500,500 Z" fill="#7209b7" opacity="0.4"/>
+          ${newRealisticRabbit(210, 400, 1.1, "curious")}
+        `;
+        break;
+
+      case 15:
+        sceneContent = `
+          <rect width="800" height="500" fill="#10002b"/>
+          <ellipse cx="250" cy="380" rx="55" ry="28" fill="#f72585"/>
+          <path d="M230,500 L230,380 L270,380 L270,500 Z" fill="#3a0ca3"/>
+          <ellipse cx="580" cy="350" rx="65" ry="32" fill="#4cc9f0"/>
+          <path d="M560,500 L560,350 L600,350 L600,500 Z" fill="#3a0ca3"/>
+          ${newRealisticRabbit(400, 390, 1.2, "alert")}
+        `;
+        break;
+
+      case 16:
+        sceneContent = `
+          <rect width="800" height="500" fill="#240046"/>
+          <g transform="translate(350, 330)">
+            <circle cx="50" cy="0" r="130" fill="#ffb703" opacity="0.2"/>
+            <rect x="-30" y="20" width="160" height="90" rx="10" fill="#582f0e" stroke="#ffb703" stroke-width="4"/>
+            <path d="M-30,20 Q50,-40 130,20 Z" fill="#7f4f24" stroke="#ffb703" stroke-width="4"/>
+            <circle cx="50" cy="30" r="10" fill="#ffb703"/>
+          </g>
+          ${newRealisticRabbit(190, 400, 1.2, "alert")}
+        `;
+        break;
+
+      case 17:
+        sceneContent = `
+          <rect width="800" height="500" fill="#3c096c"/>
+          <g transform="translate(350, 280)">
+            <rect x="-20" y="50" width="140" height="70" rx="5" fill="#582f0e" stroke="#ffb703" stroke-width="3"/>
+            <path d="M20,40 Q40,-10 60,40 Z" fill="#ffb703"/>
+            <path d="M60,30 Q80,-20 100,30 Z" fill="#fb8500"/>
+          </g>
+          ${newRealisticRabbit(210, 380, 1.2, "alert")}
+        `;
+        break;
+
+      case 18:
+        sceneContent = `
+          <rect width="800" height="500" fill="#ffb703"/>
+          <path d="M0,390 Q400,330 800,390 L800,500 L0,500 Z" fill="#fb8500"/>
+          ${newRealisticRabbit(340, 370, 1.2, "alert")}
+          ${proTurtle(590, 400, 1.5, -1)}
+          ${proBird(210, 360, 1.2, "normal")}
+        `;
+        break;
+
+      case 19:
+        sceneContent = `
+          <rect width="800" height="500" fill="#ae2012"/>
+          <circle cx="400" cy="240" r="95" fill="#ffb703"/>
+          <path d="M0,390 Q400,310 800,390 L800,500 L0,500 Z" fill="#1f2937"/>
+          ${newRealisticRabbit(400, 360, 1.2, "alert")}
+        `;
+        break;
+
+      case 20:
+        sceneContent = `
+          <rect width="800" height="500" fill="#111827"/>
+          <circle cx="680" cy="100" r="45" fill="#f8f9fa"/>
+          <rect x="230" y="310" width="340" height="110" rx="15" fill="#1f3a5f"/>
+          <rect x="250" y="270" width="90" height="60" rx="20" fill="#fff"/>
+          ${newRealisticRabbit(275, 275, 1, "alert")}
+          <path d="M230,330 Q400,280 570,330 L570,420 L230,420 Z" fill="#9b2226"/>
+          <text x="400" y="220" font-size="28" fill="#90e0ef" font-family="sans-serif">Zzz...</text>
+        `;
+        break;
+    }
+
+    return `<svg viewBox="0 0 800 500" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">${proDefs}${sceneContent}</svg>`;
+  }
+
+  let currentIndex = 0;
+  const sceneTitle = document.getElementById("sceneTitle");
+  const sceneText = document.getElementById("sceneText");
+  const imageContainer = document.getElementById("imageContainer");
+  const sceneBadge = document.getElementById("sceneBadge");
+  const storyProgress = document.getElementById("storyProgress");
+  const progressText = document.getElementById("progressText");
+  const btnPrev = document.getElementById("btnPrev");
+  const btnNext = document.getElementById("btnNext");
+  const btnRestart = document.getElementById("btnRestart");
+  const btnShare = document.getElementById("btnShare");
+ 
+  let deferredPrompt = null;
+
+  function renderScene(index) {
+    currentIndex = index;
+    const scene = storyData[currentIndex];
+    
+    sceneTitle.innerText = scene.title;
+    sceneText.innerText = scene.text;
+    imageContainer.innerHTML = generateProSVG(currentIndex);
+
+    const progressPercent = Math.round(((currentIndex + 1) / storyData.length) * 100);
+    sceneBadge.innerText = `المشهد ${currentIndex + 1} من ${storyData.length}`;
+    storyProgress.style.width = `${progressPercent}%`;
+    progressText.innerText = `${progressPercent}%`;
+
+    btnPrev.disabled = currentIndex === 0;
+    if (currentIndex === storyData.length - 1) {
+      btnNext.innerHTML = 'النهاية 🎉';
+      btnNext.classList.replace('btn-primary', 'btn-success');
+    } else {
+      btnNext.innerHTML = 'التالي <i class="bi bi-arrow-left"></i>';
+      btnNext.classList.replace('btn-success', 'btn-primary');
+    }
+  }
+
+  btnNext.onclick = () => {
+    if (currentIndex < storyData.length - 1) renderScene(currentIndex + 1);
+    else renderScene(0);
+  };
+  btnPrev.onclick = () => { if (currentIndex > 0) renderScene(currentIndex - 1); };
+  btnRestart.onclick = () => renderScene(0);
+
+  btnShare.onclick = async () => {
+    if (navigator.share) {
+      try {
+        await navigator.share({
+          title: 'قصة مغامرة الأرنب سمسم',
+          text: 'اقرأ قصة الأطفال برسوم واقعية محدثة!',
+          url: window.location.href,
+        });
+      } catch (err) {}
+    } else {
+      navigator.clipboard.writeText(window.location.href);
+      alert('تم النسخ بنجاح!');
+    }
+  };
+
+  
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowLeft') btnNext.click();
+    if (e.key === 'ArrowRight') btnPrev.click();
+  });
+
+  window.onload = () => renderScene(0);
+</script>
+</body>
+</html>

@@ -1,0 +1,542 @@
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>مغامرة التلميذ زيد - قصة واقعية تفاعلية</title>
+  
+  <!-- Bootstrap 5 RTL CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.rtl.min.css">
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+  <!-- Google Fonts: Tajawal -->
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@500;700;900&display=swap" rel="stylesheet">
+
+  <style>
+    html, body {
+      height: 100%;
+      height: 100dvh;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      font-family: 'Tajawal', sans-serif;
+      background: linear-gradient(135deg, #03045e 0%, #111827 100%);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .app-header {
+      flex: 0 0 auto;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(5px);
+      border-bottom: 2px solid #e9ecef;
+      z-index: 10;
+    }
+
+    .brand-title {
+      font-size: clamp(1rem, 2vh, 1.25rem);
+      font-weight: 800;
+      color: #0077b6;
+    }
+
+    .app-main {
+      flex: 1 1 auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 8px;
+      overflow: hidden;
+    }
+
+    .story-card {
+      width: 100%;
+      max-width: 850px;
+      height: 100%;
+      max-height: 100%;
+      display: flex;
+      flex-direction: column;
+      border-radius: 20px;
+      border: 3px solid #fff;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+      background: rgba(255, 255, 255, 0.98);
+      overflow: hidden;
+    }
+
+    .card-header-compact {
+      flex: 0 0 auto;
+      padding: 8px 12px;
+      background: rgba(255, 255, 255, 0.9);
+      border-bottom: 1px solid #f0f0f0;
+    }
+
+    .progress {
+      height: 8px;
+      border-radius: 10px;
+    }
+
+    .image-container {
+      flex: 1 1 auto;
+      min-height: 120px;
+      position: relative;
+      overflow: hidden;
+      margin: 8px 12px 0 12px;
+      border-radius: 15px;
+      background: #0b0c10;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: inset 0 0 25px rgba(0,0,0,0.6);
+    }
+
+    .image-container svg {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .content-container {
+      flex: 0 1 auto;
+      padding: 10px 15px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .scene-title {
+      font-size: clamp(1.1rem, 2.2vh, 1.5rem);
+      font-weight: 800;
+      color: #0077b6;
+      margin-bottom: 4px;
+    }
+
+    .scene-text {
+      font-size: clamp(0.9rem, 1.9vh, 1.25rem);
+      line-height: 1.5;
+      color: #374151;
+      margin-bottom: 0;
+      font-weight: 500;
+    }
+
+    .card-footer-compact {
+      flex: 0 0 auto;
+      padding: 8px 15px;
+      background: #f8f9fa;
+      border-top: 1px solid #eee;
+    }
+
+    .control-btn {
+      font-size: clamp(0.85rem, 1.6vh, 1.05rem);
+      border-radius: 50px;
+      padding: 6px 18px;
+    }
+
+    .app-footer {
+      flex: 0 0 auto;
+      background: rgba(255, 255, 255, 0.95);
+      border-top: 1px solid #e9ecef;
+      font-size: 0.85rem;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- TOP HEADER -->
+  <header class="app-header py-2 px-3 shadow-sm">
+    <div class="container-fluid d-flex justify-content-between align-items-center p-0">
+      <div class="brand-title d-flex align-items-center gap-2">
+        <span class="fs-4">🎒</span>
+<span>مغامرة التلميذ زيد </span>
+      </div>
+
+      <div class="d-flex align-items-center gap-2">
+        
+        <button id="btnShare" class="btn btn-sm btn-primary rounded-pill px-3 d-flex align-items-center gap-1">
+          <i class="bi bi-share-fill"></i>
+          <span class="d-none d-sm-inline fw-bold">مشاركة</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN STORY VIEWPORT -->
+  <main class="app-main">
+    <div class="card story-card">
+      
+      <div class="card-header-compact">
+        <div class="d-flex justify-content-between align-items-center mb-1">
+          <span id="sceneBadge" class="badge bg-primary px-3 py-1 rounded-pill">المشهد 1 من 20</span>
+          <span id="progressText" class="small fw-bold text-secondary">5%</span>
+        </div>
+        <div class="progress">
+          <div id="storyProgress" class="progress-bar bg-primary progress-bar-striped progress-bar-animated" style="width: 5%;"></div>
+        </div>
+      </div>
+
+      <!-- Vector Professional Student Art Container -->
+      <div id="imageContainer" class="image-container"></div>
+
+      <div class="content-container">
+        <h2 id="sceneTitle" class="scene-title">...</h2>
+        <p id="sceneText" class="scene-text">...</p>
+      </div>
+
+      <div class="card-footer-compact d-flex justify-content-between align-items-center gap-2">
+        <button id="btnPrev" class="btn btn-outline-primary control-btn">
+          <i class="bi bi-arrow-right"></i> السابق
+        </button>
+        <button id="btnRestart" class="btn btn-sm btn-light border text-secondary rounded-circle" style="width: 36px; height: 36px;" title="إعادة البدء">
+          <i class="bi bi-arrow-counterclockwise"></i>
+        </button>
+        <button id="btnNext" class="btn btn-primary control-btn">
+          التالي <i class="bi bi-arrow-left"></i>
+        </button>
+      </div>
+
+    </div>
+  </main>
+
+  <footer class="app-footer py-2 px-3">
+    <div class="container-fluid d-flex justify-content-between align-items-center flex-wrap gap-2 p-0">
+      <div class="text-secondary small">
+        تم التصميم والتطوير بواسطة 
+        <a href="https://me.haythamzeidan.workers.dev/" class="text-decoration-none fw-bold text-primary">هيثم زيدان</a>
+      </div>
+    </div>
+  </footer>
+
+<!-- JavaScript Logic & Professional Student Engine -->
+<script>
+  const storyData = [
+    { title: "1. الاستيقاظ مبكراً ☀️", text: "استيقظ التلميذ النشيط زيد مع شروق الشمس بنشاط وحيوية، مستعداً ليوم دراسي حافل بالمعرفة والتشويق." },
+    { title: "2. ترتيب الحقيبة المدرسية 🎒", text: "قام زيد بتنظيم دفاتره وكتبه وأدواته بعناية فائقة داخل حقيبته، فهو يؤمن بأن التنظيم هو أول درجات النجاح." },
+    { title: "3. الطريق إلى المدرسة 🛣️", text: "سار زيد بخطوات واثقة ونشيطة نحو مدرسة الحكمة، يستمتع بنسيم الصباح الجميل ويحيي جيرانه بأدب." },
+    { title: "4. دخول الفصل الدراسي 🏫", text: "دخل زيد إلى الفصل واختار مقعده الأمامي المعتاد، ووضع كتبه بنظام مستعداً لاستقبال دروسه." },
+    { title: "5. حصة الرياضيات الممتعة 🔢", text: "بدأت حصة الرياضيات، وتفاعل زيد بذكاء مع الأستاذ، وحل المعادلات المعقدة قبل الجميع بسرعة وبديهة." },
+    { title: "6. المشاركة الفعالة 🙋‍♂️", text: "رفع زيد يده بحماس للمشاركة في النقاش العلمي داخل الصف، فأثنى المعلم على استنتاجاته الذكية." },
+    { title: "7. تجربة مختبر العلوم 🧪", text: "انتقل الطلاب إلى المختبر، وبدأ زيد بحماس بإجراء تجربة تفاعل النباتات تحت إشراف المعلم." },
+    { title: "8. مساعدة الزملاء 🤝", text: "لاحظ زيد أن زميله يعاني صعوبة في فهم خطوات التجربة، فبادر بمساعدته بشرح مبسط ولطيف." },
+    { title: "9. وقت الفسحة المدرسية ⚽", text: "في وقت الفسحة، شارك زيد أصدقاءه لعبة كرة القدم في ساحة المدرسة، فالجسم السليم في العقل السليم." },
+    { title: "10. شغف القراءة في المكتبة 📚", text: "توجه زيد إلى مكتبة المدرسة الهادئة، وأخذ يطالع كتاباً مشوقاً عن تاريخ الاكتشافات العلمية." },
+    { title: "11. طرح التحدي البيئي 🌱", text: "طرح المعلم سؤالاً مفتوحاً وتحدياً صعباً حول حماية البيئة وإعادة التدوير، فعم الصمت لتفكير الجميع." },
+    { title: "12. لحظة الإلهام والابتكار 💡", text: "لمعت في رأس زيد فكرة عبقرية ومبتكرة لحل مشكلة النفايات المدرسية بطريقة ذكية." },
+    { title: "13. الشرح على السبورة 📋", text: "خرج زيد بكل ثقة إلى السبورة، ورسم خطة مشروعه المبتكر وشرحها بأسلوب ممتع ومقنع." },
+    { title: "14. تصفيق الحار والتشجيع 👏", text: "ضج الفصل بالتصفيق الحار إعجاباً بفكرة زيد الإبداعية وحلّه العملي المميز." },
+    { title: "15. التخطيط للمشروع بالمنزل 🛠️", text: "عاد زيد إلى منزله وبدأ فوراً بتجهيز أدواته البسيطة لتطبيق مشروعه العلمي على أرض الواقع." },
+    { title: "16. العمل الجاد والمثابرة ⏱️", text: "قضى زيد ساعات المساء يعمل بتركيز وإتقان، متجاوزاً كل الصعاب بشغف كبير." },
+    { title: "17. اكتمال النموذج المبتكر 🏆", text: "في الصباح التالي، كان النموذج العلمي لجهاز إعادة التدوير المنزلي جاهزاً ومبهراً." },
+    { title: "18. تكريم الإدارة المدرسية 🎖️", text: "أشاد مدير المدرسة بجهود زيد المتميزة، وكرمه أمام طابور الصباح تشجيعاً لنشاطه الفريد." },
+    { title: "19. الطموح المستمر 🚀", text: "لم يكتفِ زيد بهذا الإنجاز، بل بدأ يخطط بهمة وعزيمة لأفكار علمية مستقبلية جديدة." },
+    { title: "20. أحلام المستقبل المشرق 🌙", text: "خلد زيد إلى النوم بسلام وسعادة، وهو يحلم بيوم ينفع فيه وطنه بعلمه، فالتلميذ النشيط لا يعرف المستحيل." }
+  ];
+
+  const studentDefs = `
+    <defs>
+      <!-- تدرج احترافي لملابس التلميذ (أزرق زاهي وأنيق) -->
+      <radialGradient id="studentCloth" cx="50%" cy="50%" r="50%">
+        <stop offset="0%" stop-color="#48cae4"/>
+        <stop offset="60%" stop-color="#0077b6"/>
+        <stop offset="100%" stop-color="#03045e"/>
+      </radialGradient>
+      <linearGradient id="studentHair" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#3d2817"/>
+        <stop offset="100%" stop-color="#111"/>
+      </linearGradient>
+    </defs>
+  `;
+
+  // تلميذ نشيط واحترافي تماماً (ملابس مدرسية، حقيبة أنيقة، ملامح ذكية ومبتسمة)
+  const realisticStudent = (x, y, scale = 1, pose = "stand", flip = 1) => {
+    return `
+      <g transform="translate(${x},${y}) scale(${scale * flip}, ${scale})">
+        <!-- الحقيبة المدرسية على الظهر -->
+        <rect x="-18" y="-4" width="12" height="18" rx="3" fill="#e63946" stroke="#111" stroke-width="1"/>
+        
+        <!-- القميص والملابس المدرسية -->
+        <path d="M-18,15 Q0,40 18,15 L10,0 L-10,0 Z" fill="url(#studentCloth)" stroke="#111" stroke-width="1.5"/>
+        
+        <!-- الذراعان -->
+        <path d="M-10,5 L-18,18 M10,5 L18,18" fill="none" stroke="#fde68a" stroke-width="3" stroke-linecap="round"/>
+
+        <!-- الجذع العلوي -->
+        <rect x="-8" y="-8" width="16" height="15" rx="3" fill="#fde68a" stroke="#111" stroke-width="1"/>
+
+        <!-- الرأس والشعر الأنيق -->
+        <circle cx="0" cy="-13" r="8" fill="#fde68a" stroke="#d97706" stroke-width="0.8"/>
+        <path d="M-8,-16 Q0,-23 8,-16 Q6,-10 0,-10 Q-6,-10 -8,-16 Z" fill="url(#studentHair)"/>
+        
+        <!-- العينان الذكيتان -->
+        <circle cx="-2.5" cy="-14" r="1.2" fill="#111"/>
+        <circle cx="2.5" cy="-14" r="1.2" fill="#111"/>
+        <path d="M-2,-10 Q0,-8 2,-10" fill="none" stroke="#d97706" stroke-width="0.8" stroke-linecap="round"/>
+      </g>
+    `;
+  };
+
+  // صديق أو معلم مساعد
+  const schoolFriend = (x, y, scale = 1, flip = 1) => `
+    <g transform="translate(${x},${y}) scale(${scale * flip}, ${scale})">
+      <ellipse cx="0" cy="15" rx="14" ry="12" fill="#4ea8de" stroke="#333" stroke-width="1"/>
+      <circle cx="0" cy="2" r="9" fill="#fde68a" stroke="#333" stroke-width="1"/>
+      <circle cx="-3" cy="0" r="1" fill="#111"/>
+      <circle cx="3" cy="0" r="1" fill="#111"/>
+      <rect x="-8" y="27" width="4" height="12" rx="2" fill="#1d3557"/>
+      <rect x="4" y="27" width="4" height="12" rx="2" fill="#1d3557"/>
+    </g>
+  `;
+
+  function generateStudentStorySVG(index) {
+    const sceneNum = index + 1;
+    let sceneContent = "";
+
+    switch(sceneNum) {
+      case 1: // الاستيقاظ مع شروق الشمس
+        sceneContent = `
+          <rect width="800" height="500" fill="#caf0f8"/>
+          <circle cx="700" cy="90" r="70" fill="#ffb703" opacity="0.8"/>
+          <path d="M0,370 Q400,310 800,370 L800,500 L0,500 Z" fill="#90e0ef"/>
+          ${realisticStudent(300, 325, 1.2, "stand")}
+        `;
+        break;
+
+      case 2: // ترتيب الحقيبة المدرسية
+        sceneContent = `
+          <rect width="800" height="500" fill="#fefae0"/>
+          <rect x="100" y="280" width="600" height="220" fill="#dda15e" stroke="#bc6c25" stroke-width="3"/>
+          <rect x="220" y="190" width="130" height="140" rx="15" fill="#0077b6" stroke="#03045e" stroke-width="3"/>
+          <rect x="250" y="230" width="70" height="50" rx="5" fill="#fff"/>
+          ${realisticStudent(400, 265, 1.25, "stand")}
+        `;
+        break;
+
+      case 3: // الطريق إلى المدرسة
+        sceneContent = `
+          <rect width="800" height="500" fill="#ade8f4"/>
+          <path d="M0,380 Q400,280 800,380 L800,500 L0,500 Z" fill="#90e0ef"/>
+          <path d="M0,420 Q400,340 800,420 L800,500 L0,500 Z" fill="#00b4d8"/>
+          ${realisticStudent(380, 330, 1.2, "stand")}
+        `;
+        break;
+
+      case 4: // دخول الفصل الدراسي
+        sceneContent = `
+          <rect width="800" height="500" fill="#f8f9fa"/>
+          <rect x="250" y="250" width="300" height="150" fill="#dee2e6" stroke="#adb5bd" stroke-width="2"/>
+          ${realisticStudent(380, 300, 1.2, "stand")}
+        `;
+        break;
+
+      case 5: // حصة الرياضيات
+        sceneContent = `
+          <rect width="800" height="500" fill="#e9ecef"/>
+          <rect x="200" y="100" width="400" height="150" fill="#2b2d42" rx="10"/>
+          <text x="400" y="180" font-size="40" fill="#ffd700" text-anchor="middle">5x + 3 = 18</text>
+          ${realisticStudent(380, 350, 1.2, "stand")}
+        `;
+        break;
+
+      case 6: // المشاركة الفعالة
+        sceneContent = `
+          <rect width="800" height="500" fill="#f1faee"/>
+          ${realisticStudent(350, 350, 1.2, "stand")}
+          <!-- مؤشر اليد المرفوعة -->
+          <circle cx="360" cy="300" r="10" fill="#ffb703" opacity="0.6"/>
+        `;
+        break;
+
+      case 7: // تجربة مختبر العلوم
+        sceneContent = `
+          <rect width="800" height="500" fill="#caf0f8"/>
+          <g transform="translate(420, 330)">
+            <path d="M-15,30 L15,30 L10,0 L-10,0 Z" fill="#48cae4" stroke="#111" stroke-width="1.5"/>
+            <circle cx="0" cy="15" r="4" fill="#ff477e"/>
+          </g>
+          ${realisticStudent(300, 350, 1.2, "stand")}
+        `;
+        break;
+
+      case 8: // مساعدة الزملاء
+        sceneContent = `
+          <rect width="800" height="500" fill="#e2ece9"/>
+          ${realisticStudent(280, 350, 1.2, "stand")}
+          ${schoolFriend(500, 360, 1.2, -1)}
+        `;
+        break;
+
+      case 9: // وقت الفسحة المدرسية
+        sceneContent = `
+          <rect width="800" height="500" fill="#52b788"/>
+          <circle cx="400" cy="380" r="25" fill="#f8f9fa" stroke="#111" stroke-width="2"/>
+          ${realisticStudent(280, 330, 1.2, "stand")}
+        `;
+        break;
+
+      case 10: // شغف القراءة بالمكتبة
+        sceneContent = `
+          <rect width="800" height="500" fill="#fefae0"/>
+          <rect x="250" y="200" width="300" height="180" fill="#bc6c25" rx="5"/>
+          <rect x="280" y="260" width="80" height="50" fill="#f8f9fa"/>
+          ${realisticStudent(420, 330, 1.2, "stand")}
+        `;
+        break;
+
+      case 11: // طرح التحدي البيئي
+        sceneContent = `
+          <rect width="800" height="500" fill="#a8dadc"/>
+          ${realisticStudent(380, 350, 1.2, "stand")}
+          <text x="400" y="150" font-size="30" fill="#1d3557" font-weight="bold" text-anchor="middle">كيف نحمي بيئتنا؟</text>
+        `;
+        break;
+
+      case 12: // لحظة الإلهام والابتكار
+        sceneContent = `
+          <rect width="800" height="500" fill="#caf0f8"/>
+          <circle cx="400" cy="180" r="50" fill="#ffb703" opacity="0.8"/>
+          ${realisticStudent(380, 350, 1.2, "stand")}
+        `;
+        break;
+
+      case 13: // الشرح على السبورة
+        sceneContent = `
+          <rect width="800" height="500" fill="#f8f9fa"/>
+          <rect x="200" y="80" width="400" height="220" fill="#1b4332" rx="10"/>
+          <text x="400" y="180" font-size="24" fill="#fff" text-anchor="middle">مشروع تدوير النفايات</text>
+          ${realisticStudent(360, 350, 1.2, "stand")}
+        `;
+        break;
+
+      case 14: // التصفيق الحار والتشجيع
+        sceneContent = `
+          <rect width="800" height="500" fill="#e0fbfc"/>
+          ${realisticStudent(320, 350, 1.2, "stand")}
+          ${schoolFriend(520, 360, 1.2, -1)}
+          <circle cx="420" cy="220" r="15" fill="#ffb703" opacity="0.8"/>
+        `;
+        break;
+
+      case 15: // التخطيط للمشروع بالمنزل
+        sceneContent = `
+          <rect width="800" height="500" fill="#fefae0"/>
+          <rect x="300" y="300" width="200" height="100" fill="#dda15e" rx="5"/>
+          ${realisticStudent(380, 330, 1.2, "stand")}
+        `;
+        break;
+
+      case 16: // العمل الجاد والمثابرة
+        sceneContent = `
+          <rect width="800" height="500" fill="#d8e2dc"/>
+          <rect x="320" y="280" width="160" height="120" fill="#8d99ae" rx="5"/>
+          ${realisticStudent(380, 330, 1.2, "stand")}
+        `;
+        break;
+
+      case 17: // اكتمال النموذج المبتكر
+        sceneContent = `
+          <rect width="800" height="500" fill="#e8f5e9"/>
+          <rect x="350" y="260" width="100" height="140" fill="#52b788" rx="8"/>
+          ${realisticStudent(380, 330, 1.2, "stand")}
+        `;
+        break;
+
+      case 18: // تكريم الإدارة المدرسية
+        sceneContent = `
+          <rect width="800" height="500" fill="#fff3b0"/>
+          <circle cx="400" cy="220" r="60" fill="#ffb703" opacity="0.5"/>
+          ${realisticStudent(380, 330, 1.2, "stand")}
+          ${schoolFriend(520, 360, 1.2, -1)}
+        `;
+        break;
+
+      case 19: // الطموح المستمر
+        sceneContent = `
+          <rect width="800" height="500" fill="#caf0f8"/>
+          <path d="M350,300 L400,200 L450,300 Z" fill="#0077b6"/>
+          ${realisticStudent(380, 330, 1.2, "stand")}
+        `;
+        break;
+
+      case 20: // أحلام المستقبل المشرق
+        sceneContent = `
+          <rect width="800" height="500" fill="#111827"/>
+          <circle cx="680" cy="100" r="45" fill="#f8f9fa"/>
+          <!-- غرفة النوم الدافئة -->
+          <rect x="230" y="310" width="340" height="110" rx="15" fill="#03045e"/>
+          <path d="M230,330 Q400,280 570,330 L570,420 L230,420 Z" fill="#0077b6"/>
+          ${realisticStudent(360, 325, 1, "stand")}
+          <text x="400" y="220" font-size="28" fill="#90e0ef" font-family="sans-serif">Zzz...</text>
+        `;
+        break;
+    }
+
+    return `<svg viewBox="0 0 800 500" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">${studentDefs}${sceneContent}</svg>`;
+  }
+
+  let currentIndex = 0;
+  const sceneTitle = document.getElementById("sceneTitle");
+  const sceneText = document.getElementById("sceneText");
+  const imageContainer = document.getElementById("imageContainer");
+  const sceneBadge = document.getElementById("sceneBadge");
+  const storyProgress = document.getElementById("storyProgress");
+  const progressText = document.getElementById("progressText");
+  const btnPrev = document.getElementById("btnPrev");
+  const btnNext = document.getElementById("btnNext");
+  const btnRestart = document.getElementById("btnRestart");
+  const btnShare = document.getElementById("btnShare");
+  let deferredPrompt = null;
+
+  function renderScene(index) {
+    currentIndex = index;
+    const scene = storyData[currentIndex];
+    
+    sceneTitle.innerText = scene.title;
+    sceneText.innerText = scene.text;
+    imageContainer.innerHTML = generateStudentStorySVG(currentIndex);
+
+    const progressPercent = Math.round(((currentIndex + 1) / storyData.length) * 100);
+    sceneBadge.innerText = `المشهد ${currentIndex + 1} من ${storyData.length}`;
+    storyProgress.style.width = `${progressPercent}%`;
+    progressText.innerText = `${progressPercent}%`;
+
+    btnPrev.disabled = currentIndex === 0;
+    if (currentIndex === storyData.length - 1) {
+      btnNext.innerHTML = 'النهاية 🎉';
+      btnNext.classList.replace('btn-primary', 'btn-success');
+    } else {
+      btnNext.innerHTML = 'التالي <i class="bi bi-arrow-left"></i>';
+      btnNext.classList.replace('btn-success', 'btn-primary');
+    }
+  }
+
+  btnNext.onclick = () => {
+    if (currentIndex < storyData.length - 1) renderScene(currentIndex + 1);
+    else renderScene(0);
+  };
+  btnPrev.onclick = () => { if (currentIndex > 0) renderScene(currentIndex - 1); };
+  btnRestart.onclick = () => renderScene(0);
+
+  btnShare.onclick = async () => {
+    if (navigator.share) {
+      try {
+        await navigator.share({
+          title: 'قصة مغامرة التلميذ زيد',
+          text: 'اقرأ قصة الأطفال التفاعلية الجديدة للتلميذ زيد!',
+          url: window.location.href,
+        });
+      } catch (err) {}
+    } else {
+      navigator.clipboard.writeText(window.location.href);
+      alert('تم النسخ بنجاح!');
+    }
+  };
+
+  
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowLeft') btnNext.click();
+    if (e.key === 'ArrowRight') btnPrev.click();
+  });
+
+  window.onload = () => renderScene(0);
+</script>
+</body>
+</html>

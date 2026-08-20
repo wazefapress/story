@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>مغامرة الثعلب فارس - قصة واقعية تفاعلية</title>
+  
+  <!-- Bootstrap 5 RTL CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.rtl.min.css">
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+  <!-- Google Fonts: Tajawal -->
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@500;700;900&display=swap" rel="stylesheet">
+
+  <style>
+    html, body {
+      height: 100%;
+      height: 100dvh;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      font-family: 'Tajawal', sans-serif;
+      background: linear-gradient(135deg, #2b2d42 0%, #111827 100%);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .app-header {
+      flex: 0 0 auto;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(5px);
+      border-bottom: 2px solid #e9ecef;
+      z-index: 10;
+    }
+
+    .brand-title {
+      font-size: clamp(1rem, 2vh, 1.25rem);
+      font-weight: 800;
+      color: #e85d04;
+    }
+
+    .app-main {
+      flex: 1 1 auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 8px;
+      overflow: hidden;
+    }
+
+    .story-card {
+      width: 100%;
+      max-width: 850px;
+      height: 100%;
+      max-height: 100%;
+      display: flex;
+      flex-direction: column;
+      border-radius: 20px;
+      border: 3px solid #fff;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+      background: rgba(255, 255, 255, 0.98);
+      overflow: hidden;
+    }
+
+    .card-header-compact {
+      flex: 0 0 auto;
+      padding: 8px 12px;
+      background: rgba(255, 255, 255, 0.9);
+      border-bottom: 1px solid #f0f0f0;
+    }
+
+    .progress {
+      height: 8px;
+      border-radius: 10px;
+    }
+
+    .image-container {
+      flex: 1 1 auto;
+      min-height: 120px;
+      position: relative;
+      overflow: hidden;
+      margin: 8px 12px 0 12px;
+      border-radius: 15px;
+      background: #0b0c10;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: inset 0 0 25px rgba(0,0,0,0.6);
+    }
+
+    .image-container svg {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .content-container {
+      flex: 0 1 auto;
+      padding: 10px 15px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .scene-title {
+      font-size: clamp(1.1rem, 2.2vh, 1.5rem);
+      font-weight: 800;
+      color: #e85d04;
+      margin-bottom: 4px;
+    }
+
+    .scene-text {
+      font-size: clamp(0.9rem, 1.9vh, 1.25rem);
+      line-height: 1.5;
+      color: #374151;
+      margin-bottom: 0;
+      font-weight: 500;
+    }
+
+    .card-footer-compact {
+      flex: 0 0 auto;
+      padding: 8px 15px;
+      background: #f8f9fa;
+      border-top: 1px solid #eee;
+    }
+
+    .control-btn {
+      font-size: clamp(0.85rem, 1.6vh, 1.05rem);
+      border-radius: 50px;
+      padding: 6px 18px;
+    }
+
+    .app-footer {
+      flex: 0 0 auto;
+      background: rgba(255, 255, 255, 0.95);
+      border-top: 1px solid #e9ecef;
+      font-size: 0.85rem;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- TOP HEADER -->
+  <header class="app-header py-2 px-3 shadow-sm">
+    <div class="container-fluid d-flex justify-content-between align-items-center p-0">
+      <div class="brand-title d-flex align-items-center gap-2">
+        <span class="fs-4">🦊</span>
+<span>مغامرة الثعلب فارس</span>
+      </div>
+
+      <div class="d-flex align-items-center gap-2">
+        
+        <button id="btnShare" class="btn btn-sm btn-primary rounded-pill px-3 d-flex align-items-center gap-1">
+          <i class="bi bi-share-fill"></i>
+          <span class="d-none d-sm-inline fw-bold">مشاركة</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN STORY VIEWPORT -->
+  <main class="app-main">
+    <div class="card story-card">
+      
+      <div class="card-header-compact">
+        <div class="d-flex justify-content-between align-items-center mb-1">
+          <span id="sceneBadge" class="badge bg-warning text-dark px-3 py-1 rounded-pill">المشهد 1 من 20</span>
+          <span id="progressText" class="small fw-bold text-secondary">5%</span>
+        </div>
+        <div class="progress">
+          <div id="storyProgress" class="progress-bar bg-warning progress-bar-striped progress-bar-animated" style="width: 5%;"></div>
+        </div>
+      </div>
+
+      <!-- Vector Professional Fox Art Container -->
+      <div id="imageContainer" class="image-container"></div>
+
+      <div class="content-container">
+        <h2 id="sceneTitle" class="scene-title">...</h2>
+        <p id="sceneText" class="scene-text">...</p>
+      </div>
+
+      <div class="card-footer-compact d-flex justify-content-between align-items-center gap-2">
+        <button id="btnPrev" class="btn btn-outline-warning text-dark control-btn">
+          <i class="bi bi-arrow-right"></i> السابق
+        </button>
+        <button id="btnRestart" class="btn btn-sm btn-light border text-secondary rounded-circle" style="width: 36px; height: 36px;" title="إعادة البدء">
+          <i class="bi bi-arrow-counterclockwise"></i>
+        </button>
+        <button id="btnNext" class="btn btn-warning text-dark fw-bold control-btn">
+          التالي <i class="bi bi-arrow-left"></i>
+        </button>
+      </div>
+
+    </div>
+  </main>
+
+  <footer class="app-footer py-2 px-3">
+    <div class="container-fluid d-flex justify-content-between align-items-center flex-wrap gap-2 p-0">
+      <div class="text-secondary small">
+        تم التصميم والتطوير بواسطة 
+        <a href="https://me.haythamzeidan.workers.dev/" class="text-decoration-none fw-bold text-warning">هيثم زيدان</a>
+      </div>
+    </div>
+  </footer>
+
+<!-- JavaScript Logic & Professional Fox Engine -->
+<script>
+  const storyData = [
+    { title: "1. البوصلة السحرية 🧭", text: "في صباح خريفي هادئ، كان الثعلب الذكي فارس يبحث عن الطعام قرب الشجرة العتيقة، فوجد بوصلة ذهبية سحرية غامضة!" },
+    { title: "2. الاستعداد لرحلة الغابة 🎒", text: "تفحص فارس البوصلة بدهشة، ورأى مؤشرها يشير نحو أعماق الغابة المظلمة، فقرر الاستعداد وحزم حقيبته الجلدية." },
+    { title: "3. بين أشجار الصنوبر 🌲", text: "خطا فارس خطواته الأولى بين أشجار الصنوبر العالية، بينما كانت أوراق الشجر الحمراء والصفراء تتطاير حوله مع نسيم الخريف." },
+    { title: "4. صوت أنين حزين 🍂", text: "بينما كان يسير بحذر، سمع فارس صوتاً خافتاً يشبه الأنين قريباً من جذع شجرة مكسورة، فتوقف لينصت باهتمام." },
+    { title: "5. لقاء السنجوب الصغير 🐿️", text: "وجد فارس سنجوباً صغيراً يبكي ضائعاً بعد أن تشتت مخزون طعامه بالكامل تحت أوراق الشجر المتراكمة." },
+    { title: "6. المساعدة والتعاون 🤝", text: "لم يتردد فارس لحظة واحدة؛ استخدم ذكاءه وساعد السنجوب في جمع المكسرات المتناثرة وإعادتها إلى جحره الدافئ." },
+    { title: "7. هدية السنجاب 🪶", text: "شكر السنجوب الثعلب بحرارة، وأهداه ريشة بومة لامعة ستساعده في إنارة الظلام إذا احتتاجها في طريقه." },
+    { title: "8. وادي الضباب الكثيف 🌫️", text: "واصل فارس رحلته حتى وصل إلى وادي الضباب الكثيف، حيث كانت الرؤية شبه معدومة ويصعب تحديد المسار الصحيح." },
+    { title: "9. توهج الريشة السحرية ✨", text: "تذكر فارس هدية السنجاب، فأخرج ريشة البومة اللامعة، فتوهجت بضوء أزرق دافئ شق طريق الضباب وأنار له الدرب تماماً." },
+    { title: "10. الخروج للتل الذهبي ☀️", text: "عبر فارس الوادي بأمان وخرج إلى تل الأعشاب الذهبية المضيئة تحت ضوء الشمس الدافئة وسط الطبيعة الخلابة." },
+    { title: "11. البومة الحكيمة سهر 🦉", text: "التقى هناك بالبومة الحكيمة سهر التي كانت تنظر إليه من فوق غصن عال وقالت له باهتمام: لتعبر الجسر، يجب أن تجيب على لغزي." },
+    { title: "12. لغز البومة الحكيمة 🤔", text: "سألت سهر: ما هو الشيء الذي يملك عيوناً كثيرة لكنه لا يرى شيئاً أبداً؟ فكر فارس بذكاء وقال ضاحكاً: إنها شبكة الصيد!" },
+    { title: "13. المفتاح الكريستالي 🔑", text: "ابتسمت البومة لإجوبته الذكية وسلمته مفتاحاً كريستالياً براقاً وقالت: هذا المفتاح يفتح باب الحديقة السرية." },
+    { title: "14. باب الحديقة السرية 🚪", text: "وصل فارس إلى الباب الحجري الضخم المغطى بنبات اللبلاب، فأدخل المفتاح الكريستالي ودار القفل بانسيابية تامة." },
+    { title: "15. دخول الحديقة السحرية 🌸", text: "انفتح الباب ببطء ليكشف عن حديقة سحرية تنمو فيها أزهار متوهجة وفواكه نادرة لا تشبه أي شيء في الغابة المعتادة." },
+    { title: "16. صندوق الكنز العتيق 📦", text: "في منتصف الحديقة السحرية، وجد فارس صندوقاً خشبياً عتيقاً يلمع ببريق ذهبي دافئ ومحاطاً بأوراق شجر براقة." },
+    { title: "17. مفاجأة الكنز الحقيقي 🌱", text: "فتح فارس الصندوق.. ليكتشف أنه لا يحتوي على ذهب، بل على بذور نادرة وكتب زراعة تفيد كل حيوانات الغابة!" },
+    { title: "18. دعوة الأصدقاء للاحتفال 🎉", text: "أدرك فارس أن الكنز الحقيقي هو زراعة الخير، فجمع أصدقاءه سنجوب وبقية حيوانات الغابة للاحتفال والمشاركة." },
+    { title: "19. زراعة الغابة عند الغروب 🌅", text: "عند الغروب، تعاون الجميع على غرس البذور الجديدة في تربة الغابة وتحول المكان تدريجياً إلى جنة خضراء مزهرة." },
+    { title: "20. أحلام سعيدة يا فارس 🌙", text: "عاد فارس إلى عرينه الدافئ تحت ضوء القمر الجميل، أغمض عينيه بابتسامة رضا وقال: العطاء هو أجمل كنز." }
+  ];
+
+  const foxDefs = `
+    <defs>
+      <!-- تدرج احترافي لفراء الثعلب البري الواقعي -->
+      <radialGradient id="foxFur" cx="50%" cy="50%" r="50%">
+        <stop offset="0%" stop-color="#ffb703"/>
+        <stop offset="60%" stop-color="#e85d04"/>
+        <stop offset="90%" stop-color="#dc2f02"/>
+        <stop offset="100%" stop-color="#9d0208"/>
+      </radialGradient>
+      <linearGradient id="foxTailTip" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0%" stop-color="#ffffff"/>
+        <stop offset="100%" stop-color="#d3d3d3"/>
+      </linearGradient>
+      <linearGradient id="riverGrad" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#48cae4"/>
+        <stop offset="50%" stop-color="#0077b6"/>
+        <stop offset="100%" stop-color="#03045e"/>
+      </linearGradient>
+    </defs>
+  `;
+
+  // ثعلب واقعي واحترافي تماماً بتفاصيل دقيقة (جسم انسيابي، ذيل كثيف، أذنان مثلثتان)
+  const realisticFox = (x, y, scale = 1, pose = "sit", flip = 1) => {
+    let tailPos = '';
+    if (pose === "alert") {
+      tailPos = `M-28,15 Q-65,30 -50,-10`;
+    } else {
+      tailPos = `M-28,15 Q-70,45 -60,25`;
+    }
+
+    return `
+      <g transform="translate(${x},${y}) scale(${scale * flip}, ${scale})">
+        <!-- الذيل الكثيف المبرمج مع طرف أبيض واقعي -->
+        <path d="${tailPos} Q-40,10 -25,25 Z" fill="url(#foxFur)" stroke="#6a040f" stroke-width="1.2"/>
+        <path d="${tailPos} Q-58,22 -50,-10 Q-60,10 -45,18 Z" fill="url(#foxTailTip)"/>
+        
+        <!-- الأرجل الخلفية -->
+        <ellipse cx="-15" cy="22" rx="12" ry="9" fill="#dc2f02" stroke="#6a040f" stroke-width="1"/>
+        
+        <!-- الجسم الانسيابي للثعلب -->
+        <ellipse cx="0" cy="12" rx="30" ry="18" fill="url(#foxFur)" stroke="#6a040f" stroke-width="1.5"/>
+        
+        <!-- البطن والرقبة بلون فاتح -->
+        <path d="M-15,18 Q5,26 22,12 Q12,22 -15,18 Z" fill="#fffae5" opacity="0.8"/>
+        
+        <!-- الرأس الواقعي -->
+        <polygon points="12,-5 32,-15 22,8" fill="url(#foxFur)" stroke="#6a040f" stroke-width="1.2"/>
+        
+        <!-- الأذنان المثلثتان الحادتان -->
+        <polygon points="12,-18 5,-35 22,-22" fill="#9d0208" stroke="#6a040f" stroke-width="1.2"/>
+        <polygon points="11,-15 8,-28 17,-18" fill="#ffb703"/>
+        
+        <polygon points="26,-15 28,-32 35,-18" fill="#9d0208" stroke="#6a040f" stroke-width="1.2"/>
+        
+        <!-- العين الذكية اللامعة -->
+        <ellipse cx="20" cy="-6" rx="3" ry="4" fill="#111"/>
+        <circle cx="21" cy="-7.5" r="1.2" fill="#fff"/>
+        
+        <!-- الأنف الأسود الحقيقي -->
+        <circle cx="33" cy="-12" r="2.5" fill="#111"/>
+        
+        <!-- الشاربين الدقيقين -->
+        <path d="M30,-8 L42,-10 M30,-6 L44,-5" stroke="#ffe5ec" stroke-width="0.8" opacity="0.8"/>
+      </g>
+    `;
+  };
+
+  // سنجاب صغير واقعي
+  const realisticSquirrel = (x, y, scale = 1, flip = 1) => `
+    <g transform="translate(${x},${y}) scale(${scale * flip}, ${scale})">
+      <path d="M-10,5 Q-25,-15 -10,-25 Q0,-30 5,-15" fill="none" stroke="#bc6c25" stroke-width="8" stroke-linecap="round"/>
+      <ellipse cx="0" cy="8" rx="10" ry="8" fill="#bc6c25" stroke="#3d2817" stroke-width="1"/>
+      <circle cx="10" cy="2" r="6" fill="#dda15e" stroke="#3d2817" stroke-width="1"/>
+      <circle cx="13" cy="1" r="1" fill="#111"/>
+    </g>
+  `;
+
+  // بومة حكيمة
+  const wiseOwl = (x, y, scale = 1, flip = 1) => `
+    <g transform="translate(${x},${y}) scale(${scale * flip}, ${scale})">
+      <ellipse cx="0" cy="5" rx="16" ry="18" fill="#4a5759" stroke="#1b263b" stroke-width="1.5"/>
+      <circle cx="-6" cy="0" r="6" fill="#fff" stroke="#1b263b" stroke-width="1"/>
+      <circle cx="6" cy="0" r="6" fill="#fff" stroke="#1b263b" stroke-width="1"/>
+      <circle cx="-6" cy="0" r="2" fill="#111"/>
+      <circle cx="6" cy="0" r="2" fill="#111"/>
+      <polygon points="0,3 -3,8 3,8" fill="#e85d04"/>
+    </g>
+  `;
+
+  function generateFoxStorySVG(index) {
+    const sceneNum = index + 1;
+    let sceneContent = "";
+
+    switch(sceneNum) {
+      case 1: // البوصلة السحرية قرب الشجرة العتيقة
+        sceneContent = `
+          <rect width="800" height="500" fill="#90e0ef"/>
+          <circle cx="700" cy="90" r="70" fill="#ffb703" opacity="0.8"/>
+          <path d="M60,500 L150,230 C90,140 70,70 210,45 C370,20 430,130 370,230 L430,500 Z" fill="#2d6a4f"/>
+          <path d="M110,500 C100,340 130,230 150,200" stroke="#3d2817" stroke-width="40" stroke-linecap="round"/>
+          <path d="M0,370 Q400,310 800,370 L800,500 L0,500 Z" fill="#55a630"/>
+          <!-- البوصلة الذهبية -->
+          <g transform="translate(470, 360)">
+            <circle cx="0" cy="0" r="22" fill="#ffd700" stroke="#b8860b" stroke-width="3"/>
+            <polygon points="0,-15 5,0 0,15 -5,0" fill="#dc2f02"/>
+          </g>
+          ${realisticFox(320, 340, 1.2, "alert")}
+        `;
+        break;
+
+      case 2: // الاستعداد والحقيبة الجلدية
+        sceneContent = `
+          <rect width="800" height="500" fill="#fefae0"/>
+          <rect x="100" y="280" width="600" height="220" fill="#dda15e" stroke="#bc6c25" stroke-width="3"/>
+          <rect x="220" y="190" width="130" height="140" rx="15" fill="#582f0e" stroke="#2b2d42" stroke-width="3"/>
+          <rect x="250" y="230" width="70" height="50" rx="5" fill="#bc6c25"/>
+          ${realisticFox(410, 260, 1.25, "alert")}
+        `;
+        break;
+
+      case 3: // بين أشجار الصنوبر
+        sceneContent = `
+          <rect width="800" height="500" fill="#1b4332"/>
+          <path d="M-50,500 L140,40 L300,500 Z" fill="#081c15"/>
+          <path d="M500,500 L660,20 L830,500 Z" fill="#081c15"/>
+          <path d="M0,380 Q400,320 800,380 L800,500 L0,500 Z" fill="#2d6a4f"/>
+          ${realisticFox(380, 350, 1.1, "alert")}
+        `;
+        break;
+
+      case 4: // صوت الأنين خلف الشجرة
+        sceneContent = `
+          <rect width="800" height="500" fill="#2d6a4f"/>
+          <path d="M80,500 L180,100 L280,500 Z" fill="#1b4332"/>
+          <path d="M350,500 C350,260 800,260 800,500 Z" fill="#0b090a"/>
+          ${realisticFox(220, 370, 1.2, "alert")}
+          <text x="510" y="220" font-size="55" fill="#caf0f8" font-family="sans-serif" font-weight="bold">...؟</text>
+        `;
+        break;
+
+      case 5: // لقاء السنجوب الصغير
+        sceneContent = `
+          <rect width="800" height="500" fill="#52b788"/>
+          <path d="M0,410 Q400,360 800,410 L800,500 L0,500 Z" fill="#2d6a4f"/>
+          ${realisticSquirrel(490, 410, 1.5)}
+          ${realisticFox(270, 360, 1.2, "alert")}
+        `;
+        break;
+
+      case 6: // المساعدة وجمع المكسرات
+        sceneContent = `
+          <rect width="800" height="500" fill="#74c69d"/>
+          <path d="M0,390 Q400,330 800,390 L800,500 L0,500 Z" fill="#40916c"/>
+          <circle cx="430" cy="420" r="10" fill="#bc6c25"/>
+          <circle cx="460" cy="430" r="12" fill="#bc6c25"/>
+          ${realisticFox(320, 360, 1.2, "alert")}
+          ${realisticSquirrel(520, 410, 1.2, -1)}
+        `;
+        break;
+
+      case 7: // هدية السنجاب (الريشة)
+        sceneContent = `
+          <rect width="800" height="500" fill="#95d5b2"/>
+          <path d="M0,390 Q400,330 800,390 L800,500 L0,500 Z" fill="#52b788"/>
+          <!-- ريشة لامعة -->
+          <g transform="translate(420, 250) rotate(-20) scale(1.6)">
+            <circle cx="0" cy="0" r="22" fill="#48cae4" opacity="0.4"/>
+            <path d="M0,-28 Q18,-10 0,28 Q-18,-10 0,-28 Z" fill="#0077b6" stroke="#90e0ef" stroke-width="1.5"/>
+          </g>
+          ${realisticFox(250, 350, 1.2, "alert")}
+          ${realisticSquirrel(570, 380, 1.2, -1)}
+        `;
+        break;
+
+      case 8: // وادي الضباب
+        sceneContent = `
+          <rect width="800" height="500" fill="#343a40"/>
+          <path d="M0,250 Q400,200 800,250 L800,500 L0,500 Z" fill="#6c757d" opacity="0.6"/>
+          <path d="M0,320 Q400,280 800,320 L800,500 L0,500 Z" fill="#adb5bd" opacity="0.4"/>
+          ${realisticFox(200, 360, 1.2, "alert")}
+        `;
+        break;
+
+      case 9: // توهج الريشة السحرية بالضباب
+        sceneContent = `
+          <rect width="800" height="500" fill="#212529"/>
+          <circle cx="400" cy="250" r="180" fill="#48cae4" opacity="0.3"/>
+          <g transform="translate(400, 250) scale(2)">
+            <path d="M0,-28 Q18,-10 0,28 Q-18,-10 0,-28 Z" fill="#0077b6" stroke="#90e0ef" stroke-width="1.5"/>
+          </g>
+          ${realisticFox(250, 350, 1.2, "alert")}
+        `;
+        break;
+
+      case 10: // الخروج للتل الذهبي
+        sceneContent = `
+          <rect width="800" height="500" fill="#ffb703"/>
+          <circle cx="700" cy="100" r="60" fill="#fff" opacity="0.8"/>
+          <path d="M0,380 Q400,300 800,380 L800,500 L0,500 Z" fill="#fb8500"/>
+          ${realisticFox(380, 350, 1.2, "alert")}
+        `;
+        break;
+
+      case 11: // لقاء البومة الحكيمة سهر
+        sceneContent = `
+          <rect width="800" height="500" fill="#40916c"/>
+          <path d="M0,370 Q400,310 800,370 L800,500 L0,500 Z" fill="#2d6a4f"/>
+          <path d="M550,500 L550,200 L580,200 L580,500 Z" fill="#3d2817"/>
+          ${wiseOwl(565, 180, 1.8)}
+          ${realisticFox(250, 370, 1.2, "alert")}
+        `;
+        break;
+
+      case 12: // لغز البومة
+        sceneContent = `
+          <rect width="800" height="500" fill="#2d6a4f"/>
+          ${wiseOwl(565, 180, 1.8)}
+          ${realisticFox(250, 370, 1.2, "alert")}
+          <g transform="translate(450, 150)">
+            <rect x="-40" y="-20" width="80" height="40" rx="10" fill="#fff"/>
+            <text x="0" y="5" font-size="20" fill="#000" text-anchor="middle">شبكة صيد؟</text>
+          </g>
+        `;
+        break;
+
+      case 13: // المفتاح الكريستالي
+        sceneContent = `
+          <rect width="800" height="500" fill="#52b788"/>
+          ${realisticFox(250, 370, 1.2, "alert")}
+          <!-- مفتاح كريستالي لامع -->
+          <g transform="translate(420, 260)">
+            <circle cx="0" cy="0" r="16" fill="none" stroke="#48cae4" stroke-width="4"/>
+            <rect x="14" y="-3" width="35" height="6" fill="#48cae4"/>
+          </g>
+        `;
+        break;
+
+      case 14: // باب الحديقة السرية
+        sceneContent = `
+          <rect width="800" height="500" fill="#212529"/>
+          <path d="M150,500 L400,80 L650,500 Z" fill="#343a40"/>
+          <path d="M300,500 L300,330 A100,100 0 0,1 500,330 L500,500 Z" fill="#0b090a"/>
+          ${realisticFox(210, 400, 1.1, "alert")}
+        `;
+        break;
+
+      case 15: // الحديقة السحرية الملونة
+        sceneContent = `
+          <rect width="800" height="500" fill="#3a0ca3"/>
+          <circle cx="200" cy="380" r="40" fill="#f72585"/>
+          <circle cx="600" cy="350" r="50" fill="#4cc9f0"/>
+          <circle cx="400" cy="420" r="45" fill="#7209b7"/>
+          ${realisticFox(380, 380, 1.2, "alert")}
+        `;
+        break;
+
+      case 16: // صندوق الكنز العتيق
+        sceneContent = `
+          <rect width="800" height="500" fill="#240046"/>
+          <g transform="translate(350, 330)">
+            <circle cx="50" cy="0" r="130" fill="#ffb703" opacity="0.2"/>
+            <rect x="-30" y="20" width="160" height="90" rx="10" fill="#582f0e" stroke="#ffb703" stroke-width="4"/>
+            <path d="M-30,20 Q50,-40 130,20 Z" fill="#7f4f24" stroke="#ffb703" stroke-width="4"/>
+          </g>
+          ${realisticFox(190, 400, 1.2, "alert")}
+        `;
+        break;
+
+      case 17: // البذور والكتب الزراعية
+        sceneContent = `
+          <rect width="800" height="500" fill="#3c096c"/>
+          <g transform="translate(350, 280)">
+            <rect x="-20" y="50" width="140" height="70" rx="5" fill="#582f0e" stroke="#ffb703" stroke-width="3"/>
+            <circle cx="30" cy="30" r="12" fill="#38b000"/>
+            <circle cx="70" cy="25" r="10" fill="#38b000"/>
+          </g>
+          ${realisticFox(210, 380, 1.2, "alert")}
+        `;
+        break;
+
+      case 18: // دعوة الأصدقاء للاحتفال
+        sceneContent = `
+          <rect width="800" height="500" fill="#ffb703"/>
+          <path d="M0,390 Q400,330 800,390 L800,500 L0,500 Z" fill="#fb8500"/>
+          ${realisticFox(340, 370, 1.2, "alert")}
+          ${realisticSquirrel(590, 400, 1.5, -1)}
+        `;
+        break;
+
+      case 19: // زراعة الغابة عند الغروب
+        sceneContent = `
+          <rect width="800" height="500" fill="#ae2012"/>
+          <circle cx="400" cy="240" r="95" fill="#ffb703"/>
+          <path d="M0,390 Q400,310 800,390 L800,500 L0,500 Z" fill="#1f2937"/>
+          ${realisticFox(400, 360, 1.2, "alert")}
+        `;
+        break;
+
+      case 20: // أحلام سعيدة يا فارس
+        sceneContent = `
+          <rect width="800" height="500" fill="#111827"/>
+          <circle cx="680" cy="100" r="45" fill="#f8f9fa"/>
+          <rect x="230" y="310" width="340" height="110" rx="15" fill="#1f3a5f"/>
+          <rect x="250" y="270" width="90" height="60" rx="20" fill="#fff"/>
+          ${realisticFox(275, 275, 1, "alert")}
+          <path d="M230,330 Q400,280 570,330 L570,420 L230,420 Z" fill="#9b2226"/>
+          <text x="400" y="220" font-size="28" fill="#90e0ef" font-family="sans-serif">Zzz...</text>
+        `;
+        break;
+    }
+
+    return `<svg viewBox="0 0 800 500" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">${foxDefs}${sceneContent}</svg>`;
+  }
+
+  let currentIndex = 0;
+  const sceneTitle = document.getElementById("sceneTitle");
+  const sceneText = document.getElementById("sceneText");
+  const imageContainer = document.getElementById("imageContainer");
+  const sceneBadge = document.getElementById("sceneBadge");
+  const storyProgress = document.getElementById("storyProgress");
+  const progressText = document.getElementById("progressText");
+  const btnPrev = document.getElementById("btnPrev");
+  const btnNext = document.getElementById("btnNext");
+  const btnRestart = document.getElementById("btnRestart");
+  const btnShare = document.getElementById("btnShare");
+
+  let deferredPrompt = null;
+
+  function renderScene(index) {
+    currentIndex = index;
+    const scene = storyData[currentIndex];
+    
+    sceneTitle.innerText = scene.title;
+    sceneText.innerText = scene.text;
+    imageContainer.innerHTML = generateFoxStorySVG(currentIndex);
+
+    const progressPercent = Math.round(((currentIndex + 1) / storyData.length) * 100);
+    sceneBadge.innerText = `المشهد ${currentIndex + 1} من ${storyData.length}`;
+    storyProgress.style.width = `${progressPercent}%`;
+    progressText.innerText = `${progressPercent}%`;
+
+    btnPrev.disabled = currentIndex === 0;
+    if (currentIndex === storyData.length - 1) {
+      btnNext.innerHTML = 'النهاية 🎉';
+      btnNext.classList.replace('btn-warning', 'btn-success');
+    } else {
+      btnNext.innerHTML = 'التالي <i class="bi bi-arrow-left"></i>';
+      btnNext.classList.replace('btn-success', 'btn-warning');
+    }
+  }
+
+  btnNext.onclick = () => {
+    if (currentIndex < storyData.length - 1) renderScene(currentIndex + 1);
+    else renderScene(0);
+  };
+  btnPrev.onclick = () => { if (currentIndex > 0) renderScene(currentIndex - 1); };
+  btnRestart.onclick = () => renderScene(0);
+
+  btnShare.onclick = async () => {
+    if (navigator.share) {
+      try {
+        await navigator.share({
+          title: 'قصة مغامرة الثعلب فارس',
+          text: 'اقرأ قصة الأطفال التفاعلية الجديدة للثعلب فارس!',
+          url: window.location.href,
+        });
+      } catch (err) {}
+    } else {
+      navigator.clipboard.writeText(window.location.href);
+      alert('تم النسخ بنجاح!');
+    }
+  };
+
+  
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowLeft') btnNext.click();
+    if (e.key === 'ArrowRight') btnPrev.click();
+  });
+
+  window.onload = () => renderScene(0);
+</script>
+</body>
+</html>

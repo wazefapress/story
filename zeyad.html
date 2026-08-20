@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>مغامرة الملك زياد - قصة واقعية تفاعلية</title>
+  
+  <!-- Bootstrap 5 RTL CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.rtl.min.css">
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+  <!-- Google Fonts: Tajawal -->
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@500;700;900&display=swap" rel="stylesheet">
+
+  <style>
+    html, body {
+      height: 100%;
+      height: 100dvh;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      font-family: 'Tajawal', sans-serif;
+      background: linear-gradient(135deg, #432818 0%, #111827 100%);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .app-header {
+      flex: 0 0 auto;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(5px);
+      border-bottom: 2px solid #e9ecef;
+      z-index: 10;
+    }
+
+    .brand-title {
+      font-size: clamp(1rem, 2vh, 1.25rem);
+      font-weight: 800;
+      color: #b5838d;
+    }
+
+    .app-main {
+      flex: 1 1 auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 8px;
+      overflow: hidden;
+    }
+
+    .story-card {
+      width: 100%;
+      max-width: 850px;
+      height: 100%;
+      max-height: 100%;
+      display: flex;
+      flex-direction: column;
+      border-radius: 20px;
+      border: 3px solid #fff;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+      background: rgba(255, 255, 255, 0.98);
+      overflow: hidden;
+    }
+
+    .card-header-compact {
+      flex: 0 0 auto;
+      padding: 8px 12px;
+      background: rgba(255, 255, 255, 0.9);
+      border-bottom: 1px solid #f0f0f0;
+    }
+
+    .progress {
+      height: 8px;
+      border-radius: 10px;
+    }
+
+    .image-container {
+      flex: 1 1 auto;
+      min-height: 120px;
+      position: relative;
+      overflow: hidden;
+      margin: 8px 12px 0 12px;
+      border-radius: 15px;
+      background: #0b0c10;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: inset 0 0 25px rgba(0,0,0,0.6);
+    }
+
+    .image-container svg {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .content-container {
+      flex: 0 1 auto;
+      padding: 10px 15px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .scene-title {
+      font-size: clamp(1.1rem, 2.2vh, 1.5rem);
+      font-weight: 800;
+      color: #9d0208;
+      margin-bottom: 4px;
+    }
+
+    .scene-text {
+      font-size: clamp(0.9rem, 1.9vh, 1.25rem);
+      line-height: 1.5;
+      color: #374151;
+      margin-bottom: 0;
+      font-weight: 500;
+    }
+
+    .card-footer-compact {
+      flex: 0 0 auto;
+      padding: 8px 15px;
+      background: #f8f9fa;
+      border-top: 1px solid #eee;
+    }
+
+    .control-btn {
+      font-size: clamp(0.85rem, 1.6vh, 1.05rem);
+      border-radius: 50px;
+      padding: 6px 18px;
+    }
+
+    .app-footer {
+      flex: 0 0 auto;
+      background: rgba(255, 255, 255, 0.95);
+      border-top: 1px solid #e9ecef;
+      font-size: 0.85rem;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- TOP HEADER -->
+  <header class="app-header py-2 px-3 shadow-sm">
+    <div class="container-fluid d-flex justify-content-between align-items-center p-0">
+      <div class="brand-title d-flex align-items-center gap-2">
+        <span class="fs-4">👑</span>
+<span>مغامرة الملك زياد </span>
+      </div>
+
+      <div class="d-flex align-items-center gap-2">
+        
+        <button id="btnShare" class="btn btn-sm btn-danger rounded-pill px-3 d-flex align-items-center gap-1">
+          <i class="bi bi-share-fill"></i>
+          <span class="d-none d-sm-inline fw-bold">مشاركة</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN STORY VIEWPORT -->
+  <main class="app-main">
+    <div class="card story-card">
+      
+      <div class="card-header-compact">
+        <div class="d-flex justify-content-between align-items-center mb-1">
+          <span id="sceneBadge" class="badge bg-danger px-3 py-1 rounded-pill">المشهد 1 من 20</span>
+          <span id="progressText" class="small fw-bold text-secondary">5%</span>
+        </div>
+        <div class="progress">
+          <div id="storyProgress" class="progress-bar bg-danger progress-bar-striped progress-bar-animated" style="width: 5%;"></div>
+        </div>
+      </div>
+
+      <!-- Vector Professional King Art Container -->
+      <div id="imageContainer" class="image-container"></div>
+
+      <div class="content-container">
+        <h2 id="sceneTitle" class="scene-title">...</h2>
+        <p id="sceneText" class="scene-text">...</p>
+      </div>
+
+      <div class="card-footer-compact d-flex justify-content-between align-items-center gap-2">
+        <button id="btnPrev" class="btn btn-outline-danger control-btn">
+          <i class="bi bi-arrow-right"></i> السابق
+        </button>
+        <button id="btnRestart" class="btn btn-sm btn-light border text-secondary rounded-circle" style="width: 36px; height: 36px;" title="إعادة البدء">
+          <i class="bi bi-arrow-counterclockwise"></i>
+        </button>
+        <button id="btnNext" class="btn btn-danger control-btn">
+          التالي <i class="bi bi-arrow-left"></i>
+        </button>
+      </div>
+
+    </div>
+  </main>
+
+  <footer class="app-footer py-2 px-3">
+    <div class="container-fluid d-flex justify-content-between align-items-center flex-wrap gap-2 p-0">
+      <div class="text-secondary small">
+        تم التصميم والتطوير بواسطة 
+        <a href="https://me.haythamzeidan.workers.dev/" class="text-decoration-none fw-bold text-danger">هيثم زيدان</a>
+      </div>
+    </div>
+  </footer>
+
+<!-- JavaScript Logic & Professional King Engine -->
+<script>
+  const storyData = [
+    { title: "1. المفتاح الملكي الذهبي 🗝️", text: "في صباح هادئ ومشرق، كان الملك العادل زياد يتفقد حدائق قصره العريق، فعثر على مفتاح ذهبي قديم ولامع تحت شجرة الياسمين!" },
+    { title: "2. الاستعداد للرحلة الملكية 🎒", text: "تفحص الملك المفتاح بتركيز، ولاحظ نقشاً لخريطة تقود نحو بوابة الحكمة السرية، فجهز حقيبته الملكية وانطلق لتفقد أحوال مملكته." },
+    { title: "3. جولة في أرجاء المملكة 👑", text: "سار الملك زياد بخطوات واثقة بين أراضي مملكته الخضراء الواسعة، مستمعاً لمطالب شعبه ومطمئناً على راحتهم." },
+    { title: "4. صوت نداء خافت 🐾", text: "بينما كان يسير بالقرب من حقول القمح، سمع الملك صوتاً خافتاً يشبه الاستغاثة يأتي من خلف الطريق." },
+    { title: "5. لقاء المزارع العجوز 🌾", text: "اقترب الملك ليرى مزارعاً عجوزاً تعطلت عربته المحملة بالمؤن ولا يستطيع دفعها لوحده." },
+    { title: "6. مساعدة المزارع بحكمة 🤝", text: "لم يتردد الملك لحظة واحدة؛ بل خلع رداءه الفاخر قليلاً وساعد المزارع حتى أصلح العربة وأعادها لمسارها." },
+    { title: "7. هدية المزارع الوفي 📜", text: "شكر المزارع الملك بحرارة بالغة، وأهداه خريطة أثرية قديمة تقود إلى قلعة الأسرار العتيقة." },
+    { title: "8. الوصول إلى النهر العريض 🌊", text: "تابع الملك زياد مسيره حتى وصل إلى مجرى مائي عريض وواسع، ولم يكن هناك جسر ظاهر للعبور." },
+    { title: "9. عبور الجسر الحجري 🪨", text: "استخدم الملك ذكاءه وعبر عبر الحجارة البارزة وسط الجدول بثبات وشجاعة تامة." },
+    { title: "10. الضفة المزهرة الأخرى 🌸", text: "وصل الملك إلى الضفة المقابلة المغطاة بالورود البرية واستنشق عبيرها المنعش بسعادة." },
+    { title: "11. الحكيم العجوز في البوابة 🦉", text: "التقى هناك بحكيم وقور وقف قرب البوابة وقال له بحكمة: لن تجتاز القلعة حتى تحل لغزي!" },
+    { title: "12. لغز العدل والحكمة 🤔", text: "سأله الحكيم: ما هو السلاح الأقوى الذي يحمي العروش ويدوم للأبد دون أن يجرح أحداً؟ فقال الملك بثقة: إنه العدل والرحمة!" },
+    { title: "13. مفتاح القلعة المخبأة 🔑", text: "ابتسم الحكيم لإجابة الملك النبيلة وسلمه مفتاحاً بللورياً براقاً يفتح باب القلعة." },
+    { title: "14. صعود جبل النور ⛰️", text: "صعد الملك المنحدر حتى وصل إلى البوابة الحجرية الضخمة للقلعة، وأدخل المفتاح فدار بانسيابية تامة." },
+    { title: "15. دخول القلعة المضيئة ✨", text: "انفتح الباب ببطء ليكشف عن قاعة داخلية رائعة مليئة بالكتب الملكية القديمة والمعرفة." },
+    { title: "16. صندوق الكنز العتيق 📦", text: "في وسط القاعة، وجد الملك صندوقاً خشبياً مزخرفاً بالذهب وينبعث منه ضوء دافئ." },
+    { title: "17. مفاجأة الكنز الحقيقي 🌱", text: "فتح الملك الصندوق.. ليكتشف أنه مليء بأجود بذور الزراعة وأدوات المعرفة لتوزيعها على شعبه!" },
+    { title: "18. دعوة الرعية للاحتفال 🎉", text: "أدرك الملك زياد أن الكنز الأسمى هو ازدهار مملكته، فدعا المزارع وأهالي المملكة للاحتفال معاً." },
+    { title: "19. وقت الغروب الهادئ 🌅", text: "قضت المملكة وقتاً ممتعاً بالبهجة والسلام حتى غربت الشمس وصبغت السماء بألوان الأفق الساحرة." },
+    { title: "20. أحلام سعيدة يا زياد 🌙", text: "عاد الملك إلى قصره الدافئ، أغمض عينيه بارتياح وقال: خدمة الشعب هي أعظم أوسمة الملوك." }
+  ];
+
+  const kingDefs = `
+    <defs>
+      <!-- تدرج ملكي لرداء الملك (أحمر قرمزي وذهبي) -->
+      <radialGradient id="kingRobe" cx="50%" cy="50%" r="50%">
+        <stop offset="0%" stop-color="#d90429"/>
+        <stop offset="60%" stop-color="#9d0208"/>
+        <stop offset="100%" stop-color="#370617"/>
+      </radialGradient>
+      <linearGradient id="kingCrown" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#ffd700"/>
+        <stop offset="100%" stop-color="#b8860b"/>
+      </linearGradient>
+    </defs>
+  `;
+
+  // ملك واقعي واحترافي تماماً (رداء ملكي فاخر، تاج ذهبي، لحية وقورة، وقفة حكيمة)
+  const realisticKing = (x, y, scale = 1, pose = "stand", flip = 1) => {
+    return `
+      <g transform="translate(${x},${y}) scale(${scale * flip}, ${scale})">
+        <!-- الرداء الملكي الواسع -->
+        <path d="M-25,15 Q0,45 25,15 L15,0 L-15,0 Z" fill="url(#kingRobe)" stroke="#111" stroke-width="1.5"/>
+        
+        <!-- الذراعان -->
+        <path d="M-15,5 L-25,20 M15,5 L25,20" fill="none" stroke="#ffd700" stroke-width="3.5" stroke-linecap="round"/>
+
+        <!-- الجذع العلوي -->
+        <rect x="-12" y="-8" width="24" height="16" rx="4" fill="#ffd700" stroke="#111" stroke-width="1"/>
+
+        <!-- الرأس واللحية الوقورة -->
+        <circle cx="0" cy="-12" r="8" fill="#fde68a" stroke="#d97706" stroke-width="0.8"/>
+        <path d="M-6,-10 Q0,-2 6,-10 Q4,2 0,6 Q-4,2 -6,-10 Z" fill="#f8f9fa"/>
+        
+        <!-- العينان -->
+        <circle cx="-2.5" cy="-13" r="1.2" fill="#111"/>
+        <circle cx="2.5" cy="-13" r="1.2" fill="#111"/>
+
+        <!-- التاج الملكي الذهبي الفاخر -->
+        <path d="M-8,-20 L-10,-27 L-4,-23 L0,-29 L4,-23 L10,-27 L8,-20 Z" fill="url(#kingCrown)" stroke="#7f4f24" stroke-width="1"/>
+      </g>
+    `;
+  };
+
+  // مزارع عجوز أو شخصية مساعدة
+  const oldFarmer = (x, y, scale = 1, flip = 1) => `
+    <g transform="translate(${x},${y}) scale(${scale * flip}, ${scale})">
+      <ellipse cx="0" cy="15" rx="14" ry="12" fill="#6c757d" stroke="#333" stroke-width="1"/>
+      <circle cx="0" cy="2" r="9" fill="#fde68a" stroke="#333" stroke-width="1"/>
+      <path d="M-6,5 Q0,14 6,5" fill="none" stroke="#fff" stroke-width="2"/>
+      <rect x="-8" y="27" width="4" height="12" rx="2" fill="#495057"/>
+      <rect x="4" y="27" width="4" height="12" rx="2" fill="#495057"/>
+    </g>
+  `;
+
+  function generateKingStorySVG(index) {
+    const sceneNum = index + 1;
+    let sceneContent = "";
+
+    switch(sceneNum) {
+      case 1: // المفتاح الذهبي تحت شجرة الياسمين
+        sceneContent = `
+          <rect width="800" height="500" fill="#90e0ef"/>
+          <circle cx="700" cy="90" r="70" fill="#ffb703" opacity="0.8"/>
+          <path d="M60,500 L150,230 C90,140 70,70 210,45 C370,20 430,130 370,230 L430,500 Z" fill="#2d6a4f"/>
+          <path d="M110,500 C100,340 130,230 150,200" stroke="#3d2817" stroke-width="40" stroke-linecap="round"/>
+          <path d="M0,370 Q400,310 800,370 L800,500 L0,500 Z" fill="#55a630"/>
+          <!-- المفتاح الذهبي -->
+          <g transform="translate(470, 360)">
+            <circle cx="0" cy="0" r="12" fill="none" stroke="#ffd700" stroke-width="4"/>
+            <rect x="10" y="-3" width="25" height="6" fill="#ffd700"/>
+          </g>
+          ${realisticKing(300, 325, 1.2, "stand")}
+        `;
+        break;
+
+      case 2: // الحقيبة الملكية
+        sceneContent = `
+          <rect width="800" height="500" fill="#fefae0"/>
+          <rect x="100" y="280" width="600" height="220" fill="#dda15e" stroke="#bc6c25" stroke-width="3"/>
+          <rect x="220" y="190" width="130" height="140" rx="15" fill="#9d0208" stroke="#370617" stroke-width="3"/>
+          <rect x="250" y="230" width="70" height="50" rx="5" fill="#ffd700"/>
+          ${realisticKing(400, 265, 1.25, "stand")}
+        `;
+        break;
+
+      case 3: // جولة في المملكة
+        sceneContent = `
+          <rect width="800" height="500" fill="#52b788"/>
+          <path d="M0,380 Q400,280 800,380 L800,500 L0,500 Z" fill="#40916c"/>
+          <path d="M0,420 Q400,340 800,420 L800,500 L0,500 Z" fill="#2d6a4f"/>
+          ${realisticKing(380, 330, 1.2, "stand")}
+        `;
+        break;
+
+      case 4: // صوت النداء
+        sceneContent = `
+          <rect width="800" height="500" fill="#40916c"/>
+          <path d="M300,500 C300,280 600,280 600,500 Z" fill="#6c757d"/>
+          ${realisticKing(220, 350, 1.2, "stand")}
+          <text x="510" y="220" font-size="50" fill="#fff" font-weight="bold">مساعدة...!</text>
+        `;
+        break;
+
+      case 5: // لقاء المزارع العجوز
+        sceneContent = `
+          <rect width="800" height="500" fill="#74c69d"/>
+          <path d="M0,390 Q400,330 800,390 L800,500 L0,500 Z" fill="#40916c"/>
+          ${oldFarmer(490, 380, 1.3)}
+          ${realisticKing(260, 340, 1.2, "stand")}
+        `;
+        break;
+
+      case 6: // مساعدة المزارع
+        sceneContent = `
+          <rect width="800" height="500" fill="#95d5b2"/>
+          <path d="M0,390 Q400,330 800,390 L800,500 L0,500 Z" fill="#52b788"/>
+          ${realisticKing(320, 340, 1.2, "stand")}
+          ${oldFarmer(500, 380, 1.2, -1)}
+        `;
+        break;
+
+      case 7: // هدية الخريطة الأثرية
+        sceneContent = `
+          <rect width="800" height="500" fill="#b7e4c7"/>
+          <path d="M0,390 Q400,330 800,390 L800,500 L0,500 Z" fill="#52b788"/>
+          <!-- خريطة -->
+          <rect x="330" y="320" width="30" height="20" fill="#fefae0" stroke="#bc6c25" stroke-width="1.5"/>
+          ${realisticKing(320, 340, 1.2, "stand")}
+          ${oldFarmer(550, 380, 1.2, -1)}
+        `;
+        break;
+
+      case 8: // الوصول للنهر العريض
+        sceneContent = `
+          <rect width="800" height="500" fill="#2d6a4f"/>
+          <path d="M220,0 Q420,250 120,500 L800,500 L800,0 Z" fill="#0077b6"/>
+          ${realisticKing(100, 350, 1.2, "stand")}
+        `;
+        break;
+
+      case 9: // عبور الحجارة
+        sceneContent = `
+          <rect width="800" height="500" fill="#0077b6"/>
+          <ellipse cx="300" cy="350" rx="40" ry="20" fill="#6c757d" stroke="#343a40" stroke-width="2"/>
+          <ellipse cx="500" cy="280" rx="45" ry="22" fill="#6c757d" stroke="#343a40" stroke-width="2"/>
+          ${realisticKing(450, 230, 1.1, "stand")}
+        `;
+        break;
+
+      case 10: // الضفة المزهرة
+        sceneContent = `
+          <rect width="800" height="500" fill="#0096c7"/>
+          <path d="M0,300 Q400,250 800,300 L800,500 L0,500 Z" fill="#55a630"/>
+          <circle cx="200" cy="380" r="18" fill="#ff5964"/>
+          <circle cx="600" cy="400" r="20" fill="#ffb703"/>
+          ${realisticKing(400, 310, 1.3, "stand")}
+        `;
+        break;
+
+      case 11: // الحكيم العجوز
+        sceneContent = `
+          <rect width="800" height="500" fill="#40916c"/>
+          <path d="M0,370 Q400,310 800,370 L800,500 L0,500 Z" fill="#2d6a4f"/>
+          <path d="M550,500 L550,200 L580,200 L580,500 Z" fill="#3d2817"/>
+          <!-- حكيم -->
+          <circle cx="565" cy="180" r="12" fill="#fde68a"/>
+          ${realisticKing(250, 350, 1.2, "stand")}
+        `;
+        break;
+
+      case 12: // حل لغز العدل والرحمة
+        sceneContent = `
+          <rect width="800" height="500" fill="#2d6a4f"/>
+          ${realisticKing(200, 350, 1.2, "stand")}
+          <g transform="translate(400, 180)">
+            <rect x="-100" y="-20" width="200" height="40" rx="10" fill="#fff"/>
+            <text x="0" y="5" font-size="16" fill="#000" text-anchor="middle">العدل والرحمة!</text>
+          </g>
+        `;
+        break;
+
+      case 13: // المفتاح البللوري
+        sceneContent = `
+          <rect width="800" height="500" fill="#52b788"/>
+          ${realisticKing(240, 340, 1.2, "stand")}
+          <g transform="translate(420, 250)">
+            <circle cx="0" cy="0" r="16" fill="none" stroke="#48cae4" stroke-width="4"/>
+            <rect x="14" y="-3" width="35" height="6" fill="#48cae4"/>
+          </g>
+        `;
+        break;
+
+      case 14: // صعود جبل النور
+        sceneContent = `
+          <rect width="800" height="500" fill="#1b4332"/>
+          <path d="M120,500 L400,60 L680,500 Z" fill="#2d6a4f"/>
+          <path d="M300,500 L300,330 A100,100 0 0,1 500,330 L500,500 Z" fill="#0b090a"/>
+          ${realisticKing(210, 400, 1.1, "stand")}
+        `;
+        break;
+
+      case 15: // دخول القلعة المضيئة
+        sceneContent = `
+          <rect width="800" height="500" fill="#3a0ca3"/>
+          <circle cx="200" cy="380" r="45" fill="#4cc9f0"/>
+          <circle cx="600" cy="350" r="55" fill="#f72585"/>
+          ${realisticKing(380, 350, 1.2, "stand")}
+        `;
+        break;
+
+      case 16: // صندوق الكنز العتيق
+        sceneContent = `
+          <rect width="800" height="500" fill="#240046"/>
+          <g transform="translate(350, 330)">
+            <circle cx="50" cy="0" r="130" fill="#ffd700" opacity="0.2"/>
+            <rect x="-30" y="20" width="160" height="90" rx="10" fill="#582f0e" stroke="#ffd700" stroke-width="4"/>
+            <path d="M-30,20 Q50,-40 130,20 Z" fill="#7f4f24" stroke="#ffd700" stroke-width="4"/>
+          </g>
+          ${realisticKing(190, 380, 1.2, "stand")}
+        `;
+        break;
+
+      case 17: // بذور وأدوات المعرفة
+        sceneContent = `
+          <rect width="800" height="500" fill="#3c096c"/>
+          <g transform="translate(350, 280)">
+            <rect x="-20" y="50" width="140" height="70" rx="5" fill="#582f0e" stroke="#ffd700" stroke-width="3"/>
+            <circle cx="30" cy="30" r="10" fill="#55a630"/>
+          </g>
+          ${realisticKing(210, 370, 1.2, "stand")}
+        `;
+        break;
+
+      case 18: // الاحتفال مع الرعية
+        sceneContent = `
+          <rect width="800" height="500" fill="#ffb703"/>
+          <path d="M0,390 Q400,330 800,390 L800,500 L0,500 Z" fill="#fb8500"/>
+          ${realisticKing(340, 350, 1.2, "stand")}
+          ${oldFarmer(580, 380, 1.3, -1)}
+        `;
+        break;
+
+      case 19: // رحلة العودة عند الغروب
+        sceneContent = `
+          <rect width="800" height="500" fill="#e76f51"/>
+          <circle cx="400" cy="240" r="95" fill="#ffb703"/>
+          <path d="M0,390 Q400,310 800,390 L800,500 L0,500 Z" fill="#1f2937"/>
+          ${realisticKing(400, 340, 1.2, "stand")}
+        `;
+        break;
+
+      case 20: // أحلام سعيدة بالقصر
+        sceneContent = `
+          <rect width="800" height="500" fill="#111827"/>
+          <circle cx="680" cy="100" r="45" fill="#f8f9fa"/>
+          <!-- غرفة الملك الدافئة -->
+          <rect x="230" y="310" width="340" height="110" rx="15" fill="#582f0e"/>
+          <path d="M230,330 Q400,280 570,330 L570,420 L230,420 Z" fill="#3a0ca3"/>
+          ${realisticKing(360, 325, 1, "stand")}
+          <text x="400" y="220" font-size="28" fill="#90e0ef" font-family="sans-serif">Zzz...</text>
+        `;
+        break;
+    }
+
+    return `<svg viewBox="0 0 800 500" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">${kingDefs}${sceneContent}</svg>`;
+  }
+
+  let currentIndex = 0;
+  const sceneTitle = document.getElementById("sceneTitle");
+  const sceneText = document.getElementById("sceneText");
+  const imageContainer = document.getElementById("imageContainer");
+  const sceneBadge = document.getElementById("sceneBadge");
+  const storyProgress = document.getElementById("storyProgress");
+  const progressText = document.getElementById("progressText");
+  const btnPrev = document.getElementById("btnPrev");
+  const btnNext = document.getElementById("btnNext");
+  const btnRestart = document.getElementById("btnRestart");
+  const btnShare = document.getElementById("btnShare");
+
+  let deferredPrompt = null;
+
+  function renderScene(index) {
+    currentIndex = index;
+    const scene = storyData[currentIndex];
+    
+    sceneTitle.innerText = scene.title;
+    sceneText.innerText = scene.text;
+    imageContainer.innerHTML = generateKingStorySVG(currentIndex);
+
+    const progressPercent = Math.round(((currentIndex + 1) / storyData.length) * 100);
+    sceneBadge.innerText = `المشهد ${currentIndex + 1} من ${storyData.length}`;
+    storyProgress.style.width = `${progressPercent}%`;
+    progressText.innerText = `${progressPercent}%`;
+
+    btnPrev.disabled = currentIndex === 0;
+    if (currentIndex === storyData.length - 1) {
+      btnNext.innerHTML = 'النهاية 🎉';
+      btnNext.classList.replace('btn-danger', 'btn-success');
+    } else {
+      btnNext.innerHTML = 'التالي <i class="bi bi-arrow-left"></i>';
+      btnNext.classList.replace('btn-success', 'btn-danger');
+    }
+  }
+
+  btnNext.onclick = () => {
+    if (currentIndex < storyData.length - 1) renderScene(currentIndex + 1);
+    else renderScene(0);
+  };
+  btnPrev.onclick = () => { if (currentIndex > 0) renderScene(currentIndex - 1); };
+  btnRestart.onclick = () => renderScene(0);
+
+  btnShare.onclick = async () => {
+    if (navigator.share) {
+      try {
+        await navigator.share({
+          title: 'قصة مغامرة الملك زياد',
+          text: 'اقرأ قصة الأطفال التفاعلية الجديدة للملك زياد!',
+          url: window.location.href,
+        });
+      } catch (err) {}
+    } else {
+      navigator.clipboard.writeText(window.location.href);
+      alert('تم النسخ بنجاح!');
+    }
+  };
+
+  
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowLeft') btnNext.click();
+    if (e.key === 'ArrowRight') btnPrev.click();
+  });
+
+  window.onload = () => renderScene(0);
+</script>
+</body>
+</html>

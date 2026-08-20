@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>مغامرة القطة لولو - قصة واقعية تفاعلية</title>
+  
+  <!-- Bootstrap 5 RTL CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.rtl.min.css">
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+  <!-- Google Fonts: Tajawal -->
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@500;700;900&display=swap" rel="stylesheet">
+
+  <style>
+    html, body {
+      height: 100%;
+      height: 100dvh;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      font-family: 'Tajawal', sans-serif;
+      background: linear-gradient(135deg, #3a0ca3 0%, #111827 100%);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .app-header {
+      flex: 0 0 auto;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(5px);
+      border-bottom: 2px solid #e9ecef;
+      z-index: 10;
+    }
+
+    .brand-title {
+      font-size: clamp(1rem, 2vh, 1.25rem);
+      font-weight: 800;
+      color: #7209b7;
+    }
+
+    .app-main {
+      flex: 1 1 auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 8px;
+      overflow: hidden;
+    }
+
+    .story-card {
+      width: 100%;
+      max-width: 850px;
+      height: 100%;
+      max-height: 100%;
+      display: flex;
+      flex-direction: column;
+      border-radius: 20px;
+      border: 3px solid #fff;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+      background: rgba(255, 255, 255, 0.98);
+      overflow: hidden;
+    }
+
+    .card-header-compact {
+      flex: 0 0 auto;
+      padding: 8px 12px;
+      background: rgba(255, 255, 255, 0.9);
+      border-bottom: 1px solid #f0f0f0;
+    }
+
+    .progress {
+      height: 8px;
+      border-radius: 10px;
+    }
+
+    .image-container {
+      flex: 1 1 auto;
+      min-height: 120px;
+      position: relative;
+      overflow: hidden;
+      margin: 8px 12px 0 12px;
+      border-radius: 15px;
+      background: #0b0c10;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: inset 0 0 25px rgba(0,0,0,0.6);
+    }
+
+    .image-container svg {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .content-container {
+      flex: 0 1 auto;
+      padding: 10px 15px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .scene-title {
+      font-size: clamp(1.1rem, 2.2vh, 1.5rem);
+      font-weight: 800;
+      color: #7209b7;
+      margin-bottom: 4px;
+    }
+
+    .scene-text {
+      font-size: clamp(0.9rem, 1.9vh, 1.25rem);
+      line-height: 1.5;
+      color: #374151;
+      margin-bottom: 0;
+      font-weight: 500;
+    }
+
+    .card-footer-compact {
+      flex: 0 0 auto;
+      padding: 8px 15px;
+      background: #f8f9fa;
+      border-top: 1px solid #eee;
+    }
+
+    .control-btn {
+      font-size: clamp(0.85rem, 1.6vh, 1.05rem);
+      border-radius: 50px;
+      padding: 6px 18px;
+    }
+
+    .app-footer {
+      flex: 0 0 auto;
+      background: rgba(255, 255, 255, 0.95);
+      border-top: 1px solid #e9ecef;
+      font-size: 0.85rem;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- TOP HEADER -->
+  <header class="app-header py-2 px-3 shadow-sm">
+    <div class="container-fluid d-flex justify-content-between align-items-center p-0">
+      <div class="brand-title d-flex align-items-center gap-2">
+        <span class="fs-4">🐱</span>
+
+<span>مغامرة القطة لولو </span>
+      </div>
+
+      <div class="d-flex align-items-center gap-2">
+        
+        <button id="btnShare" class="btn btn-sm btn-primary rounded-pill px-3 d-flex align-items-center gap-1">
+          <i class="bi bi-share-fill"></i>
+          <span class="d-none d-sm-inline fw-bold">مشاركة</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN STORY VIEWPORT -->
+  <main class="app-main">
+    <div class="card story-card">
+      
+      <div class="card-header-compact">
+        <div class="d-flex justify-content-between align-items-center mb-1">
+          <span id="sceneBadge" class="badge bg-secondary px-3 py-1 rounded-pill">المشهد 1 من 20</span>
+          <span id="progressText" class="small fw-bold text-secondary">5%</span>
+        </div>
+        <div class="progress">
+          <div id="storyProgress" class="progress-bar bg-purple progress-bar-striped progress-bar-animated" style="width: 5%; background-color: #7209b7;"></div>
+        </div>
+      </div>
+
+      <!-- Vector Professional Cat Art Container -->
+      <div id="imageContainer" class="image-container"></div>
+
+      <div class="content-container">
+        <h2 id="sceneTitle" class="scene-title">...</h2>
+        <p id="sceneText" class="scene-text">...</p>
+      </div>
+
+      <div class="card-footer-compact d-flex justify-content-between align-items-center gap-2">
+        <button id="btnPrev" class="btn btn-outline-secondary control-btn">
+          <i class="bi bi-arrow-right"></i> السابق
+        </button>
+        <button id="btnRestart" class="btn btn-sm btn-light border text-secondary rounded-circle" style="width: 36px; height: 36px;" title="إعادة البدء">
+          <i class="bi bi-arrow-counterclockwise"></i>
+        </button>
+        <button id="btnNext" class="btn text-white fw-bold control-btn" style="background-color: #7209b7;">
+          التالي <i class="bi bi-arrow-left"></i>
+        </button>
+      </div>
+
+    </div>
+  </main>
+
+  <footer class="app-footer py-2 px-3">
+    <div class="container-fluid d-flex justify-content-between align-items-center flex-wrap gap-2 p-0">
+      <div class="text-secondary small">
+        تم التصميم والتطوير بواسطة 
+        <a href="https://me.haythamzeidan.workers.dev/" class="text-decoration-none fw-bold" style="color: #7209b7;">هيثم زيدان</a>
+      </div>
+    </div>
+  </footer>
+
+<!-- JavaScript Logic & Professional Cat Engine -->
+<script>
+  const storyData = [
+    { title: "1. الجرس الفضي اللامع 🔔", text: "في صباح مشمس، كانت القطة الذكية لولو تلهو تحت شجرة الياسمين، فعثرت على جرس فضي براق مربوط بشريط أزرق جميل!" },
+    { title: "2. الاستعداد للمغامرة 🎒", text: "تفحصت لولو الجرس بفضول، ولاحظت أنه يصدر رنيناً سحرياً يرشدها نحو حديقة الأسرار، فجهزت حقيبتها الصغيرة وانطلقت." },
+    { title: "3. بين أزهار الحديقة 🌸", text: "خطات لولو خطواتها الخفيفة بين الورود المتفتحة والفراشات الملونة، بينما كانت النسائم اللطيفة تداعب خصلاتها." },
+    { title: "4. صوت نداء خافت 🐾", text: "بينما كانت تسير برشاقة، سمعت لولو صوت مواء صغير وحزين يأتي من أعلى جدار حجري مرتفع." },
+    { title: "5. مساعدة الهر الصغير 🐱", text: "اقتربت لولو لتجد هراً صغيرًا عالقاً لا يستطيع النزول بمفرده من أعلى السوار الحجري." },
+    { title: "6. التسلق الرشيق 🧗‍♀️", text: "بمهارة فائقة، تسلقت لولو الجدار بخفة ودعمته بحنان حتى نزل سالماً إلى الأرض بجانب أمه." },
+    { title: "7. الهدية المميزة 🧶", text: "شكرت أم الهر لولو بحرارة، وأهدتها كرة صوف سحرية تضيء في الظلام لمساعدتها في طريقها." },
+    { title: "8. الوصول إلى البركة 🌊", text: "تابعت لولو مسيرها حتى وصلت إلى بركة مياه صافية وجميلة، وكان الماء يعكس ألوان السماء الصافية." },
+    { title: "9. عبور الماء بذكاء 🛶", text: "وضعت لولو كرة الصوف على ورقة شجر كبيرة لتصنع قاربها الخاص، وعبرت البركة بأمان وسلاسة." },
+    { title: "10. ضفة الحديقة الأخرى 🌿", text: "وصلت لولو إلى الضفة المقابلة ونفضت قطرات الماء الخفيفة عن فرائها الناعم مستمتعة بجمال الطبيعة." },
+    { title: "11. الكلب الحارس الذكي 🐕", text: "التقت لولو هناك بالكلب الحارس للحديقة، والذي قال لها بود: لن تجتازي البوابة حتى تحلّي لغزي." },
+    { title: "12. لغز الحارس 🤔", text: "سألها الكلب: ما هو الشيء الذي يملك عيوناً لامعة ليلاً ويمشي بلا صوت تماماً؟ فابتسمت لولو وقالت: إنها القطة!" },
+    { title: "13. مفتاح البوابة الذهبي 🔑", text: "ضحك الكلب بإعجاب وسلمها مفتاحاً ذهبياً لامعاً يفتح بوابة الحديقة السرية الكبرى." },
+    { title: "14. بوابة الحديقة السرية 🚪", text: "وصلت لولو إلى البوابة الحجرية الكبيرة المزخرفة، أدخلفت المفتاح الذهبي ودار القفل بانسيابية تامة." },
+    { title: "15. روعة الداخل السحري ✨", text: "انفتح الباب ليكشف عن جنة خضراء مذهلة، مليئة بالأشجار المثمرة والأزهار البرية النادرة." },
+    { title: "16. صندوق الكنز العتيق 📦", text: "في وسط الحديقة، وجدت لولو صندوقاً خشبياً مزخرفاً ينبعث منه ضوء دافئ وناعم." },
+    { title: "17. مفاجأة الكنز الحقيقي 🐟", text: "فتحته لولو لتجد تشكيلة من أشهى الأطعمة وأسماك الصيد الطازجة وكرات اللعب الممتعة!" },
+    { title: "18. دعوة الأصدقاء للاحتفال 🎉", text: "أدركت لولو أن أجمل ما في الكنز هو مشاركته مع من تحب، فدعت الهر الصغير وأمه وباقي الحيوانات." },
+    { title: "19. وقت الغروب الهادئ 🌅", text: "قضت الحيوانات وقتاً ممتعاً باللعب والمرح حتى غربت الشمس وصبغت السماء بألوان البرتقالي والأرجواني." },
+    { title: "20. أحلام سعيدة يا لولو 🌙", text: "عادت لولو إلى بيتها الدافئ، أغمضت عينيها وهي تقول بابتسامة: أروع مغامرة هي التي تصنعها بمحبة الآخرين." }
+  ];
+
+  const catDefs = `
+    <defs>
+      <!-- تدرج احترافي لفراء القطة (برتقالي مخطط / زنجبيلي دافئ) -->
+      <radialGradient id="catFur" cx="50%" cy="50%" r="50%">
+        <stop offset="0%" stop-color="#ffb703"/>
+        <stop offset="60%" stop-color="#fb8500"/>
+        <stop offset="90%" stop-color="#d48c46"/>
+        <stop offset="100%" stop-color="#b06528"/>
+      </radialGradient>
+      <linearGradient id="catTail" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0%" stop-color="#fb8500"/>
+        <stop offset="100%" stop-color="#fff5cc"/>
+      </linearGradient>
+      <linearGradient id="poolGrad" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#48cae4"/>
+        <stop offset="50%" stop-color="#0077b6"/>
+        <stop offset="100%" stop-color="#03045e"/>
+      </linearGradient>
+    </defs>
+  `;
+
+  // قطة واقعية واحترافية تماماً (جسم انسيابي، أذنان مدببتان، عيون خضراء/ذهبية، ذيل طويل مرفوع)
+  const realisticCat = (x, y, scale = 1, pose = "sit", flip = 1) => {
+    let tailPath = '';
+    if (pose === "alert") {
+      tailPath = `M-22,12 Q-45,-15 -35,-35`;
+    } else {
+      tailPath = `M-22,12 Q-55,40 -40,25`;
+    }
+
+    return `
+      <g transform="translate(${x},${y}) scale(${scale * flip}, ${scale})">
+        <!-- الذيل الطويل الانسيابي للقطة -->
+        <path d="${tailPath}" fill="none" stroke="url(#catTail)" stroke-width="6" stroke-linecap="round"/>
+        
+        <!-- الأرجل الخلفية -->
+        <ellipse cx="-12" cy="20" rx="10" ry="8" fill="#b06528" stroke="#7f4f24" stroke-width="1"/>
+        
+        <!-- الجسم الانسيابي للقطة -->
+        <ellipse cx="0" cy="12" rx="25" ry="16" fill="url(#catFur)" stroke="#7f4f24" stroke-width="1.5"/>
+        
+        <!-- منطقة البطن والصدر بلون أفتح -->
+        <path d="M-12,18 Q3,24 18,12 Q8,20 -12,18 Z" fill="#fff5cc" opacity="0.85"/>
+        
+        <!-- الرأس الواقعي -->
+        <circle cx="12" cy="-2" r="13" fill="url(#catFur)" stroke="#7f4f24" stroke-width="1.5"/>
+        
+        <!-- الأذنان المثلثتان الحادتان مع تفاصيل دقيقة -->
+        <polygon points="5,-12 2,-28 14,-15" fill="#b06528" stroke="#7f4f24" stroke-width="1.2"/>
+        <polygon points="6,-13 4,-24 11,-15" fill="#ffccd5"/>
+
+        <polygon points="17,-12 22,-28 22,-14" fill="#b06528" stroke="#7f4f24" stroke-width="1.2"/>
+        <polygon points="18,-13 20,-24 21,-14" fill="#ffccd5"/>
+        
+        <!-- العينان القطيتان الذكيتان باللون الأخضر المميز -->
+        <ellipse cx="16" cy="-4" rx="3" ry="2" fill="#52b788"/>
+        <ellipse cx="16" cy="-4" rx="1" ry="1.8" fill="#111"/>
+        <circle cx="17" cy="-5" r="0.6" fill="#fff"/>
+        
+        <!-- الأنف الوردي الصغير -->
+        <polygon points="21,2 24,2 22.5,4" fill="#ff758f"/>
+        
+        <!-- الشاربين الدقيقين -->
+        <path d="M21,5 L32,3 M21,7 L33,8" stroke="#fff" stroke-width="0.8" opacity="0.9"/>
+      </g>
+    `;
+  };
+
+  // هر صغير
+  const smallKitten = (x, y, scale = 1, flip = 1) => `
+    <g transform="translate(${x},${y}) scale(${scale * flip}, ${scale})">
+      <ellipse cx="0" cy="8" rx="14" ry="10" fill="url(#catFur)" stroke="#7f4f24" stroke-width="1"/>
+      <circle cx="8" cy="0" r="8" fill="url(#catFur)" stroke="#7f4f24" stroke-width="1"/>
+      <polygon points="3,-5 2,-14 9,-7" fill="#b06528"/>
+      <polygon points="11,-5 15,-14 15,-7" fill="#b06528"/>
+      <circle cx="10" cy="-2" r="1.2" fill="#111"/>
+    </g>
+  `;
+
+  // كلب لطيف حارس
+  const friendlyDog = (x, y, scale = 1, flip = 1) => `
+    <g transform="translate(${x},${y}) scale(${scale * flip}, ${scale})">
+      <ellipse cx="0" cy="10" rx="22" ry="15" fill="#bc6c25" stroke="#3d2817" stroke-width="1.5"/>
+      <circle cx="15" cy="0" r="12" fill="#dda15e" stroke="#3d2817" stroke-width="1.5"/>
+      <path d="M12,-10 Q8,-20 18,-12" fill="#8d5b4c"/>
+      <circle cx="18" cy="-2" r="2" fill="#111"/>
+      <path d="M-22,12 Q-35,25 -25,15" fill="none" stroke="#bc6c25" stroke-width="4"/>
+    </g>
+  `;
+
+  function generateCatStorySVG(index) {
+    const sceneNum = index + 1;
+    let sceneContent = "";
+
+    switch(sceneNum) {
+      case 1: // الجرس الفضي تحت شجرة الياسمين
+        sceneContent = `
+          <rect width="800" height="500" fill="#a0c4ff"/>
+          <circle cx="700" cy="90" r="70" fill="#ffb703" opacity="0.8"/>
+          <path d="M60,500 L150,230 C90,140 70,70 210,45 C370,20 430,130 370,230 L430,500 Z" fill="#2d6a4f"/>
+          <path d="M110,500 C100,340 130,230 150,200" stroke="#3d2817" stroke-width="40" stroke-linecap="round"/>
+          <path d="M0,370 Q400,310 800,370 L800,500 L0,500 Z" fill="#55a630"/>
+          <!-- الجرس الفضي -->
+          <g transform="translate(470, 360)">
+            <circle cx="0" cy="0" r="18" fill="#e0e1dd" stroke="#778da9" stroke-width="3"/>
+            <path d="M-6,-12 Q0,-20 6,-12" fill="none" stroke="#48cae4" stroke-width="3"/>
+          </g>
+          ${realisticCat(320, 340, 1.2, "alert")}
+        `;
+        break;
+
+      case 2: // الاستعداد والحقيبة
+        sceneContent = `
+          <rect width="800" height="500" fill="#fefae0"/>
+          <rect x="100" y="280" width="600" height="220" fill="#dda15e" stroke="#bc6c25" stroke-width="3"/>
+          <rect x="220" y="190" width="130" height="140" rx="15" fill="#7209b7" stroke="#3a0ca3" stroke-width="3"/>
+          <rect x="250" y="230" width="70" height="50" rx="5" fill="#48cae4"/>
+          ${realisticCat(410, 260, 1.25, "alert")}
+        `;
+        break;
+
+      case 3: // بين أزهار الحديقة
+        sceneContent = `
+          <rect width="800" height="500" fill="#70e000"/>
+          <circle cx="150" cy="400" r="25" fill="#ff5964"/>
+          <circle cx="250" cy="420" r="30" fill="#ffb703"/>
+          <circle cx="600" cy="380" r="25" fill="#7209b7"/>
+          <circle cx="700" cy="410" r="28" fill="#ff758f"/>
+          <path d="M0,380 Q400,320 800,380 L800,500 L0,500 Z" fill="#38b000"/>
+          ${realisticCat(380, 350, 1.1, "alert")}
+        `;
+        break;
+
+      case 4: // صوت النداء خلف الجدار
+        sceneContent = `
+          <rect width="800" height="500" fill="#4ea8de"/>
+          <rect x="300" y="200" width="500" height="300" fill="#adb5bd" stroke="#6c757d" stroke-width="4"/>
+          <path d="M0,380 Q200,320 400,380 L800,380 L800,500 L0,500 Z" fill="#38b000"/>
+          ${realisticCat(220, 370, 1.2, "alert")}
+          <text x="510" y="220" font-size="50" fill="#fff" font-weight="bold">مواء...؟</text>
+        `;
+        break;
+
+      case 5: // الهر الصغير العالق
+        sceneContent = `
+          <rect width="800" height="500" fill="#90e0ef"/>
+          <path d="M300,100 L500,100 L500,500 L300,500 Z" fill="#6c757d"/>
+          ${smallKitten(400, 120, 1.3)}
+          ${realisticCat(200, 360, 1.2, "alert")}
+        `;
+        break;
+
+      case 6: // التسلق والإنقاذ
+        sceneContent = `
+          <rect width="800" height="500" fill="#caf0f8"/>
+          <path d="M250,50 L450,50 L450,500 L250,500 Z" fill="#6c757d"/>
+          <g transform="translate(320, 120)">
+            ${realisticCat(0, 0, 1.1, "alert")}
+            ${smallKitten(40, 20, 1, -1)}
+          </g>
+        `;
+        break;
+
+      case 7: // هدية كرة الصوف
+        sceneContent = `
+          <rect width="800" height="500" fill="#b7e4c7"/>
+          <path d="M0,390 Q400,330 800,390 L800,500 L0,500 Z" fill="#52b788"/>
+          <!-- كرة الصوف السحرية المضيئة -->
+          <circle cx="420" cy="380" r="20" fill="#f72585"/>
+          <circle cx="420" cy="380" r="24" fill="#4cc9f0" opacity="0.4"/>
+          ${realisticCat(260, 350, 1.2, "alert")}
+          ${smallKitten(560, 390, 1.1, -1)}
+        `;
+        break;
+
+      case 8: // الوصول إلى البركة الصافية
+        sceneContent = `
+          <rect width="800" height="500" fill="#52b788"/>
+          <path d="M250,0 Q450,250 150,500 L800,500 L800,0 Z" fill="url(#poolGrad)"/>
+          ${realisticCat(120, 360, 1.2, "alert")}
+        `;
+        break;
+
+      case 9: // عبور البركة بقارب الورقة
+        sceneContent = `
+          <rect width="800" height="500" fill="url(#poolGrad)"/>
+          <circle cx="400" cy="250" r="140" fill="#48cae4" opacity="0.2"/>
+          <!-- ورقة شجر قارب -->
+          <path d="M300,320 Q400,280 500,320 Q400,360 300,320 Z" fill="#38b000" stroke="#1b4332" stroke-width="2"/>
+          ${realisticCat(380, 260, 1.1, "alert")}
+        `;
+        break;
+
+      case 10: // الوصول للضفة الأخرى
+        sceneContent = `
+          <rect width="800" height="500" fill="#0077b6"/>
+          <path d="M0,300 Q400,250 800,300 L800,500 L0,500 Z" fill="#2d6a4f"/>
+          ${realisticCat(400, 320, 1.3, "alert")}
+        `;
+        break;
+
+      case 11: // لقاء الكلب الحارس
+        sceneContent = `
+          <rect width="800" height="500" fill="#52b788"/>
+          <path d="M0,370 Q400,310 800,370 L800,500 L0,500 Z" fill="#40916c"/>
+          ${realisticCat(220, 350, 1.2, "alert")}
+          ${friendlyDog(580, 380, 1.5, -1)}
+        `;
+        break;
+
+      case 12: // حل اللغز
+        sceneContent = `
+          <rect width="800" height="500" fill="#40916c"/>
+          ${realisticCat(200, 350, 1.2, "alert")}
+          ${friendlyDog(600, 380, 1.5, -1)}
+          <g transform="translate(400, 180)">
+            <rect x="-60" y="-20" width="120" height="40" rx="10" fill="#fff"/>
+            <text x="0" y="5" font-size="18" fill="#000" text-anchor="middle">إنها القطة!</text>
+          </g>
+        `;
+        break;
+
+      case 13: // المفتاح الذهبي
+        sceneContent = `
+          <rect width="800" height="500" fill="#74c69d"/>
+          ${realisticCat(240, 350, 1.2, "alert")}
+          <!-- مفتاح ذهبي لامع -->
+          <g transform="translate(420, 250)">
+            <circle cx="0" cy="0" r="16" fill="none" stroke="#ffd700" stroke-width="4"/>
+            <rect x="14" y="-3" width="35" height="6" fill="#ffd700"/>
+          </g>
+        `;
+        break;
+
+      case 14: // بوابة الحديقة السرية
+        sceneContent = `
+          <rect width="800" height="500" fill="#1b4332"/>
+          <path d="M120,500 L400,60 L680,500 Z" fill="#2d6a4f"/>
+          <path d="M300,500 L300,330 A100,100 0 0,1 500,330 L500,500 Z" fill="#0b090a"/>
+          <path d="M300,500 L300,330 A100,100 0 0,1 500,330 L500,500 Z" fill="#ffd700" opacity="0.3"/>
+          ${realisticCat(210, 400, 1.1, "alert")}
+        `;
+        break;
+
+      case 15: // داخل الحديقة السحرية
+        sceneContent = `
+          <rect width="800" height="500" fill="#7209b7"/>
+          <circle cx="200" cy="380" r="45" fill="#4cc9f0"/>
+          <circle cx="600" cy="350" r="55" fill="#f72585"/>
+          ${realisticCat(380, 380, 1.2, "alert")}
+        `;
+        break;
+
+      case 16: // صندوق الكنز المضيء
+        sceneContent = `
+          <rect width="800" height="500" fill="#3a0ca3"/>
+          <g transform="translate(350, 330)">
+            <circle cx="50" cy="0" r="130" fill="#ffd700" opacity="0.2"/>
+            <rect x="-30" y="20" width="160" height="90" rx="10" fill="#582f0e" stroke="#ffd700" stroke-width="4"/>
+            <path d="M-30,20 Q50,-40 130,20 Z" fill="#7f4f24" stroke="#ffd700" stroke-width="4"/>
+          </g>
+          ${realisticCat(190, 400, 1.2, "alert")}
+        `;
+        break;
+
+      case 17: // الأسماك وكرات الصوف
+        sceneContent = `
+          <rect width="800" height="500" fill="#48cae4"/>
+          <g transform="translate(350, 280)">
+            <rect x="-20" y="50" width="140" height="70" rx="5" fill="#582f0e" stroke="#ffd700" stroke-width="3"/>
+            <!-- سمكة ذهبية -->
+            <path d="M20,30 Q40,10 60,30 Q40,50 20,30 Z" fill="#ffb703"/>
+            <circle cx="100" cy="20" r="15" fill="#f72585"/>
+          </g>
+          ${realisticCat(210, 380, 1.2, "alert")}
+        `;
+        break;
+
+      case 18: // الاحتفال مع الأصدقاء
+        sceneContent = `
+          <rect width="800" height="500" fill="#ffb703"/>
+          <path d="M0,390 Q400,330 800,390 L800,500 L0,500 Z" fill="#fb8500"/>
+          ${realisticCat(340, 370, 1.2, "alert")}
+          ${smallKitten(580, 400, 1.3, -1)}
+          ${friendlyDog(200, 390, 1.2)}
+        `;
+        break;
+
+      case 19: // رحلة العودة عند الغروب
+        sceneContent = `
+          <rect width="800" height="500" fill="#f72585"/>
+          <circle cx="400" cy="240" r="95" fill="#ffb703"/>
+          <path d="M0,390 Q400,310 800,390 L800,500 L0,500 Z" fill="#1f2937"/>
+          ${realisticCat(400, 360, 1.2, "alert")}
+        `;
+        break;
+
+      case 20: // أحلام سعيدة في السلة الدافئة
+        sceneContent = `
+          <rect width="800" height="500" fill="#111827"/>
+          <circle cx="680" cy="100" r="45" fill="#f8f9fa"/>
+          <!-- سلة القطة الدافئة -->
+          <ellipse cx="400" cy="370" rx="160" ry="60" fill="#582f0e" stroke="#3d2817" stroke-width="3"/>
+          <ellipse cx="400" cy="360" rx="140" ry="45" fill="#dda15e"/>
+          ${realisticCat(370, 330, 1.1, "alert")}
+          <text x="400" y="230" font-size="28" fill="#90e0ef" font-family="sans-serif">Zzz...</text>
+        `;
+        break;
+    }
+
+    return `<svg viewBox="0 0 800 500" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">${catDefs}${sceneContent}</svg>`;
+  }
+
+  let currentIndex = 0;
+  const sceneTitle = document.getElementById("sceneTitle");
+  const sceneText = document.getElementById("sceneText");
+  const imageContainer = document.getElementById("imageContainer");
+  const sceneBadge = document.getElementById("sceneBadge");
+  const storyProgress = document.getElementById("storyProgress");
+  const progressText = document.getElementById("progressText");
+  const btnPrev = document.getElementById("btnPrev");
+  const btnNext = document.getElementById("btnNext");
+  const btnRestart = document.getElementById("btnRestart");
+  const btnShare = document.getElementById("btnShare");
+
+
+  let deferredPrompt = null;
+
+  function renderScene(index) {
+    currentIndex = index;
+    const scene = storyData[currentIndex];
+    
+    sceneTitle.innerText = scene.title;
+    sceneText.innerText = scene.text;
+    imageContainer.innerHTML = generateCatStorySVG(currentIndex);
+
+    const progressPercent = Math.round(((currentIndex + 1) / storyData.length) * 100);
+    sceneBadge.innerText = `المشهد ${currentIndex + 1} من ${storyData.length}`;
+    storyProgress.style.width = `${progressPercent}%`;
+    progressText.innerText = `${progressPercent}%`;
+
+    btnPrev.disabled = currentIndex === 0;
+    if (currentIndex === storyData.length - 1) {
+      btnNext.innerHTML = 'النهاية 🎉';
+      btnNext.classList.replace('text-white', 'btn-success');
+    } else {
+      btnNext.innerHTML = 'التالي <i class="bi bi-arrow-left"></i>';
+      btnNext.classList.remove('btn-success');
+      btnNext.classList.add('text-white');
+    }
+  }
+
+  btnNext.onclick = () => {
+    if (currentIndex < storyData.length - 1) renderScene(currentIndex + 1);
+    else renderScene(0);
+  };
+  btnPrev.onclick = () => { if (currentIndex > 0) renderScene(currentIndex - 1); };
+  btnRestart.onclick = () => renderScene(0);
+
+  btnShare.onclick = async () => {
+    if (navigator.share) {
+      try {
+        await navigator.share({
+          title: 'قصة مغامرة القطة لولو',
+          text: 'اقرأ قصة الأطفال التفاعلية الجديدة للقطة لولو!',
+          url: window.location.href,
+        });
+      } catch (err) {}
+    } else {
+      navigator.clipboard.writeText(window.location.href);
+      alert('تم النسخ بنجاح!');
+    }
+  };
+
+  
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowLeft') btnNext.click();
+    if (e.key === 'ArrowRight') btnPrev.click();
+  });
+
+  window.onload = () => renderScene(0);
+</script>
+</body>
+</html>
